@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6ECECEC"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#33CCCC"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/privacy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:text="@string/privacy_setting"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#33CCCC"
+        android:contentDescription="@android:string/untitled"
+        android:tint="#FFFFFF"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <Switch
+        android:id="@+id/viewableToMyself"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="#FFFFFF"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="@string/viewable_to_myself"
+        android:textColor="#515151"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/three_days_only"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="103dp"
+        android:background="#FFFFFF"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="@string/three_days_only"
+        android:textColor="#515151"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/show_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="156dp"
+        android:background="#FFFFFF"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="@string/show_information"
+        android:textColor="#515151"
+        android:textSize="18sp" />
+
+</FrameLayout>
