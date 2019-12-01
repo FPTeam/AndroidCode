@@ -8,23 +8,22 @@
     android:orientation="vertical"
     tools:context=".RegActivity">
 
-    <ImageView
-        android:id="@+id/arrowRegReturn"
+    <ImageButton
+        android:id="@+id/back_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="top"
+        android:background="#00FFFFFF"
         android:tint="#33CCCC"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="新用户"
-        android:padding="30dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
+        android:text="@string/new_user"
         android:textAlignment="center"
-        android:textSize="35sp" />
+        android:textSize="24sp" />
 
 
     <ImageView
@@ -32,8 +31,9 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        tools:srcCompat="@tools:sample/avatars"
-        />
+        android:layout_marginTop="20dp"
+        android:contentDescription="@android:string/untitled"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/uploadSculp"
@@ -42,58 +42,61 @@
         android:layout_marginStart="250dp"
         android:layout_marginTop="-25dp"
         android:background="#00FFFFFF"
+        android:contentDescription="@android:string/untitled"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="455dp"
+        android:layout_height="350dp"
         android:layout_gravity="center"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/regName"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:background="@drawable/reg_input"
-            android:hint="请输入用户名"
-            android:padding="15dp"
+            android:hint="@string/username_login"
             android:textAlignment="center" />
 
         <EditText
             android:id="@+id/regPwd"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:background="@drawable/reg_input"
-            android:hint="请输入密码"
-            android:padding="15dp"
+            android:hint="@string/password_login"
+            android:inputType="textPassword"
             android:textAlignment="center" />
 
         <EditText
             android:id="@+id/regPwdAgain"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:background="@drawable/reg_input"
-            android:hint="请确认密码"
+            android:hint="@string/password_confirm"
+            android:inputType="textPassword"
             android:padding="15dp"
             android:textAlignment="center" />
 
         <Button
             android:id="@+id/infoConfirm"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:background="@drawable/confirm_button"
-            android:text="@string/infoConfirm"
-            android:textColor="#FFFFFFFF"
             android:padding="15dp"
-            android:textAlignment="center" />
+            android:text="@string/infoConfirm"
+            android:textAlignment="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp" />
 
     </LinearLayout>
+
 </LinearLayout>

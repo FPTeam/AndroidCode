@@ -97,9 +97,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(Build.VERSION.SDK_INT > 28
+        if (Build.VERSION.SDK_INT > 28
                 && getApplicationContext().getApplicationInfo().targetSdkVersion > 28) {
-            needPermissions = new String[] {
+            needPermissions = new String[]{
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -112,32 +112,29 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.login);
         try {
-            db=openDatabase();
+            db = openDatabase();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        login =findViewById(R.id.login_button);
-        logup =findViewById(R.id.cancel);
-        login.setOnClickListener(new OnClickListener(){
+        login = findViewById(R.id.login_button);
+        logup = findViewById(R.id.cancel);
+        login.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText un=findViewById(R.id.username_login);//之前是textview 现在改为EditText
-                EditText pw=findViewById(R.id.password_login);
-                String username=un.getText().toString();
-                String password=pw.getText().toString();
-                Cursor login1 = db.rawQuery("select userid from login where name=?and password=?",new String[]{username,password});
-                if(login1.getCount()==0)
-                {
+                EditText un = findViewById(R.id.username_login);//之前是textview 现在改为EditText
+                EditText pw = findViewById(R.id.password_login);
+                String username = un.getText().toString();
+                String password = pw.getText().toString();
+                Cursor login1 = db.rawQuery("select userid from login where name=?and password=?", new String[]{username, password});
+                if (login1.getCount() == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "用户名/密码错误！", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                }
-                else if(login1.getCount()!=0)
-                {
+                } else if (login1.getCount() != 0) {
                     login1.moveToNext();
-                    userid= login1.getInt(0);
-                    Toast toast = Toast.makeText(getApplicationContext(), "userid="+userid, Toast.LENGTH_SHORT);
+                    userid = login1.getInt(0);
+                    Toast toast = Toast.makeText(getApplicationContext(), "userid=" + userid, Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                     //跳转到mainactivity...
@@ -147,7 +144,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // 跳转到注册界面
+        Button signup = findViewById(R.id.signUp);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 退出程序
+        logup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginActivity.this.finish();
+            }
+        });
     }
+
 
     /**
      * 判断是否需要检测，防止不停的弹框

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class RegActivity extends AppCompatActivity {
@@ -33,5 +34,15 @@ public class RegActivity extends AppCompatActivity {
                 outline.setOval(0,0,view.getWidth(), view.getHeight());
             }
         });
+
+        // 返回至注册界面
+        ImageButton backBtn=findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegActivity.this.finish();
+            }
+        });
+
     }
 }

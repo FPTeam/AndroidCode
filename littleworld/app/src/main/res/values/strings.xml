@@ -20,6 +20,9 @@
     <string name="login">登&#160;&#160;录</string>
     <string name="username_login">请输入用户名</string>
     <string name="password_login">请输入密码</string>
+    <string name="new_user">新&#160;用&#160;户</string>
+    <string name="password_confirm">请确认密码</string>
+    <string name="infoConfirm">确&#160;&#160;认</string>>
 
     <!-- Settings UI -->
     <string name="settings">设&#160;&#160;&#160;&#160;置</string>
@@ -41,6 +44,6 @@
     <string name="copyright">copyright&#160;(C)&#160;2019-2020 WHU</string>
     <string name="ARR">All&#160;Rights&#160;Reserved</string>
 
-    <string name="infoConfirm">确 认</string>>
+
 
 </resources>
