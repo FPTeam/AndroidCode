@@ -1,0 +1,190 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#33CCCC"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#33CCCC"
+        android:contentDescription="@android:string/cancel"
+        android:tint="#FFFFFF"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <TextView
+        android:id="@+id/contactUsHeading"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:text="@string/contact"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/appIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@mipmap/app_icon" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="210dp"
+        android:padding="10dp"
+        android:text="@string/app_name_ui"
+        android:textAlignment="center"
+        android:textColor="#515151"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/contactus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="330dp"
+        android:text="@string/contact_us"
+        android:textAlignment="center"
+        android:textColor="#50000000" />
+
+    <TextView
+        android:id="@+id/appVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:text="@string/app_version"
+        android:textAlignment="center"
+        android:textColor="#515151" />
+
+    <TextView
+        android:id="@+id/QQ"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="395dp"
+        android:breakStrategy="simple"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/contact_num"
+        android:textAlignment="center"
+        android:textColor="#515151"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/WeChat"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="460dp"
+        android:breakStrategy="simple"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/contact_num"
+        android:textAlignment="center"
+        android:textColor="#515151"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="525dp"
+        android:breakStrategy="simple"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/contact_num"
+        android:textAlignment="center"
+        android:textColor="#515151"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/iconQQ"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="400dp"
+        android:contentDescription="@android:string/untitled"
+        app:srcCompat="@mipmap/qq" />
+
+    <ImageView
+        android:id="@+id/iconWeChat"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="465dp"
+        android:contentDescription="@android:string/untitled"
+        app:srcCompat="@mipmap/wechat" />
+
+    <ImageView
+        android:id="@+id/iconTel"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="530dp"
+        android:contentDescription="@android:string/untitled"
+        app:srcCompat="@mipmap/dianhua" />
+
+    <ImageView
+        android:id="@+id/divider1"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="452dp"
+        android:contentDescription="@android:string/untitled"
+        android:foreground="#30000000"
+        app:srcCompat="?attr/dividerHorizontal" />
+
+    <ImageView
+        android:id="@+id/divider2"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="517dp"
+        android:contentDescription="@android:string/untitled"
+        android:foreground="#30000000"
+        app:srcCompat="?attr/dividerHorizontal" />
+
+    <TextView
+        android:id="@+id/copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="75dp"
+        android:text="@string/copyright"
+        android:textAlignment="center"
+        android:textColor="#50000000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/ARR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="50dp"
+        android:text="@string/ARR"
+        android:textAlignment="center"
+        android:textColor="#50000000"
+        android:textSize="12sp" />
+
+</FrameLayout>
