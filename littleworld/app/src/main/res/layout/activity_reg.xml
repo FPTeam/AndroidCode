@@ -59,6 +59,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/reg_input"
             android:hint="@string/username_login"
+            android:inputType="textPersonName"
             android:textAlignment="center" />
 
         <EditText
