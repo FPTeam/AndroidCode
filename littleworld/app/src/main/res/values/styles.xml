@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
+    </style>
+
+    <!-- Login UI theme -->
+    <style name="LoginTheme" parent="AppTheme">
+        <item name="android:statusBarColor">#00FFFFFF</item>
+        <item name="android:clipToPadding">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="colorAccent">#33CCCC</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Setting UI theme -->
+    <style name="SettingTheme" parent="AppTheme">
+        <item name="android:statusBarColor">#33CCCC</item>
+        <item name="android:clipToPadding">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="colorAccent">#33CCCC</item>
+    </style>
+
+</resources>
