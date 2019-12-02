@@ -44,5 +44,7 @@
     <string name="copyright">copyright&#160;(C)&#160;2019-2020 WHU</string>
     <string name="ARR">All&#160;Rights&#160;Reserved</string>
 
-
+<!--    标题和内容字体大小,代码中引用出现闪退....-->
+<!--    <string name="title_size">20sp</string>-->
+<!--    <string name="content_size">18sp</string>-->
 </resources>
