@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MaskActivity" />
         <activity
-            android:name=".ReleaseDynamics"
+            android:name=".LoginActivity"
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
