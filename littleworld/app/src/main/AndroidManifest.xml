@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MaskActivity"></activity>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".MaskActivity" />
+        <activity
+            android:name=".ReleaseDynamics"
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,12 +19,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+<!--        跟拍照相关的内容提供其-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.ReleaseDynamics.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <activity
             android:name=".RegActivity"
-            android:theme="@style/LoginTheme">
-
-        </activity>
-
+            android:theme="@style/LoginTheme"></activity>
     </application>
 
 </manifest>
