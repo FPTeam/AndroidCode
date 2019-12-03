@@ -3,4 +3,4 @@
 <!--    路径设置为空表示将整个SD卡共享-->
 <external-path name="my_images" path="." />
 </paths>
-<!--跟相机拍照相关创建的文件夹，by tang tian long-->
+<!--跟相机拍照相关创建的文件夹-->

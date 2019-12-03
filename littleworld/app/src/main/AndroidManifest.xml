@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.littleworld">
 
+
+<!--相册权限-->
+    <!-- 写sd卡的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 读sd卡权限 -->
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
@@ -11,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MaskActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ReleaseDynamics"
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,16 +28,17 @@
             </intent-filter>
         </activity>
 
-<!--        跟拍照相关的内容提供其-->
+<!--        跟拍照相关的内容提供器-->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.ReleaseDynamics.fileprovider"
+            android:authorities="com.example.ReleaseDynamics.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".RegActivity"
             android:theme="@style/LoginTheme"></activity>

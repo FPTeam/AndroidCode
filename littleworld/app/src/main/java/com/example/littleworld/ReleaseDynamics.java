@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import java.io.File;
 import java.io.IOException;
+
 public class ReleaseDynamics extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
 
@@ -46,7 +47,7 @@ public class ReleaseDynamics extends AppCompatActivity {
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                 创建File对象，用于存储拍照后的图片
+                // 创建File对象，用于存储拍照后的图片
                 File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
                 try {
                     if (outputImage.exists()) {
@@ -59,7 +60,7 @@ public class ReleaseDynamics extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT < 24) {
                     imageUri = Uri.fromFile(outputImage);
                 } else {
-                    imageUri = FileProvider.getUriForFile(ReleaseDynamics.this, "com.example.ReleaseDynamics.fileprovider", outputImage);
+                    imageUri = FileProvider.getUriForFile(ReleaseDynamics.this, "com.example.ReleaseDynamics.FileProvider", outputImage);
                 }
                 // 启动相机程序
                 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
