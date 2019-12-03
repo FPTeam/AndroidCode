@@ -24,6 +24,10 @@
     <string name="password_confirm">请确认密码</string>
     <string name="infoConfirm">确&#160;&#160;认</string>>
 
+    <!-- Post UI -->
+    <string name="take_photo">拍&#160;&#160;&#160;&#160;照</string>
+    <string name="select_from_album">从相册选择</string>
+
     <!-- Settings UI -->
     <string name="settings">设&#160;&#160;&#160;&#160;置</string>
     <string name="accounts_setting">账号管理</string>
@@ -44,7 +48,5 @@
     <string name="copyright">copyright&#160;(C)&#160;2019-2020 WHU</string>
     <string name="ARR">All&#160;Rights&#160;Reserved</string>
 
-<!--    标题和内容字体大小,代码中引用出现闪退....-->
-<!--    <string name="title_size">20sp</string>-->
-<!--    <string name="content_size">18sp</string>-->
+
 </resources>

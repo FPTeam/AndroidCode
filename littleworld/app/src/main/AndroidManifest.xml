@@ -28,7 +28,11 @@
             </intent-filter>
         </activity>
 
+<<<<<<< HEAD
 <!--        跟拍照相关的内容提供器-->
+=======
+        <!--        跟拍照相关的内容提供其-->
+>>>>>>> 28badb98d32af36d22f8fc2b9aef559d47c9c10d
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.ReleaseDynamics.FileProvider"
@@ -42,6 +46,10 @@
         <activity
             android:name=".RegActivity"
             android:theme="@style/LoginTheme"></activity>
+
+        <activity android:name=".ReleaseDynamics"
+            android:theme="@style/LoginTheme"> </activity>
+
     </application>
 
 </manifest>

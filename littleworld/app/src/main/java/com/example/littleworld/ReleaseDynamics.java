@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,6 +60,15 @@ public class ReleaseDynamics extends AppCompatActivity {
                 } else {
                     openAlbum();
                 }
+            }
+        });
+
+        // 返回上一个界面
+        ImageButton backBtn=findViewById(R.id.backButton);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReleaseDynamics.this.finish();
             }
         });
     }

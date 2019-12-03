@@ -35,6 +35,16 @@ public class RegActivity extends AppCompatActivity {
             }
         });
 
+        // 插入头像，跳转至调用摄像头页面
+        ImageButton photoBtn=findViewById(R.id.uploadSculp);
+        photoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegActivity.this, ReleaseDynamics.class);
+                startActivity(intent);
+            }
+        });
+
         // 返回至注册界面
         ImageButton backBtn=findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {
