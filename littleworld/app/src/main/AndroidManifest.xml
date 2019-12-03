@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-<!--        跟拍照相关的内容提供其-->
+        <!--        跟拍照相关的内容提供其-->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.ReleaseDynamics.fileprovider"
@@ -30,9 +30,14 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".RegActivity"
             android:theme="@style/LoginTheme"></activity>
+
+        <activity android:name=".ReleaseDynamics"
+            android:theme="@style/LoginTheme"> </activity>
+
     </application>
 
 </manifest>

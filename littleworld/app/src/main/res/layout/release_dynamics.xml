@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,13 +8,13 @@
 
     <!--    发布动态页面-->
 
-    <TextView
-        android:id="@+id/dynamics_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="编辑动态内容："
-        android:textSize="20sp"
-        />
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:tint="#33cccc"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <EditText
         android:id="@+id/dynamics_prompt"
@@ -33,23 +34,21 @@
         android:id="@+id/take_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="拍照" />
+        android:text="@string/take_photo" />
 
     <!--    从相册选择图片-->
     <Button
         android:id="@+id/choose_from_album"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="从相册选择"
-        />
+        android:text="@string/select_from_album" />
 
     <!--    显示图片-->
     <ImageView
         android:id="@+id/picture"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginLeft="10dp"
 
-        />
+        android:layout_marginStart="10dp" />
 
 </LinearLayout>
