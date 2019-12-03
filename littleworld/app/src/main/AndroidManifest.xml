@@ -43,8 +43,10 @@
             android:name=".RegActivity"
             android:theme="@style/LoginTheme"></activity>
 
-<!--        <activity android:name=".ReleaseDynamics"-->
-<!--            android:theme="@style/LoginTheme"> </activity>-->
+        <activity android:name=".ReleaseDynamics"
+           android:theme="@style/LoginTheme"> </activity>
+
+        <activity android:name=".ProfileActivity"></activity>
 
     </application>
 
