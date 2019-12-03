@@ -69,6 +69,8 @@ public class ReleaseDynamics extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ReleaseDynamics.this.finish();
+//                Intent intent = new Intent(ReleaseDynamics.this,LoginActivity.class);
+//                startActivity(intent);
             }
         });
     }
