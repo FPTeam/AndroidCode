@@ -47,32 +47,15 @@ public class ReleaseDynamics extends AppCompatActivity {
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 创建File对象，用于存储拍照后的图片
-                File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
-                try {
-                    if (outputImage.exists()) {
-                        outputImage.delete();
-                    }
-                    outputImage.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (Build.VERSION.SDK_INT < 24) {
-                    imageUri = Uri.fromFile(outputImage);
-                } else {
-                    imageUri = FileProvider.getUriForFile(ReleaseDynamics.this, "com.example.ReleaseDynamics.FileProvider", outputImage);
-                }
-                // 启动相机程序
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, TAKE_PHOTO);
+                openCamera();
             }
         });
+
         chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(ReleaseDynamics.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(ReleaseDynamics.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
+                    ActivityCompat.requestPermissions(ReleaseDynamics.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, 1);
                 } else {
                     openAlbum();
                 }
@@ -80,7 +63,29 @@ public class ReleaseDynamics extends AppCompatActivity {
         });
     }
 
-    private void openAlbum() {
+    public void openCamera(){
+        // 创建File对象，用于存储拍照后的图片
+        File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
+        try {
+            if (outputImage.exists()) {
+                outputImage.delete();
+            }
+            outputImage.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (Build.VERSION.SDK_INT < 24) {
+            imageUri = Uri.fromFile(outputImage);
+        } else {
+            imageUri = FileProvider.getUriForFile(ReleaseDynamics.this, "com.example.ReleaseDynamics.FileProvider", outputImage);
+        }
+        // 启动相机程序
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent, TAKE_PHOTO);
+    }
+
+    public void openAlbum() {
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
         startActivityForResult(intent, CHOOSE_PHOTO); // 打开相册
