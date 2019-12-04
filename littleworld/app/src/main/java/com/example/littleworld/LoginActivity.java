@@ -62,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public SQLiteDatabase openDatabase() throws IOException {
-        String DATABASE_PATH= this.getApplicationContext().getFilesDir().toString();//上下文？
+        private String opendb() throws IOException {//这个函数必须放在LoginActivity 因为要找路径 不能放到数据库类==！
+        String DATABASE_PATH=this.getApplicationContext().getFilesDir().toString();
         String DATABASE_NAME="lw.db";
         String databaseFilename=DATABASE_PATH+"/"+DATABASE_NAME;
         //配置文件或者文件夹路径参数
@@ -89,9 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             is.close();
             //数据库路径：data/data/< package name >/files/
         }
-        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(
-                databaseFilename, null);
-        return database;
+        return databaseFilename;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +110,9 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.login);
         try {
-            db = openDatabase();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            DbHelper.getInstance().openDatabase(opendb());//以后使用DbHelper务必先调用.getInstance()获取唯一对象
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         login = findViewById(R.id.login_button);
@@ -122,26 +120,25 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText un = findViewById(R.id.username_login);//之前是textview 现在改为EditText
+                EditText un = findViewById(R.id.username_login);
                 EditText pw = findViewById(R.id.password_login);
                 String username = un.getText().toString();
                 String password = pw.getText().toString();
-                Cursor login1 = db.rawQuery("select userid from login where name=?and password=?", new String[]{username, password});
-                if (login1.getCount() == 0) {
+                int i=DbHelper.getInstance().testUser(username,password);
+                if(i==-1)
+                {
                     Toast toast = Toast.makeText(getApplicationContext(), "用户名/密码错误！", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                } else if (login1.getCount() != 0) {
-                    login1.moveToNext();
-                    userid = login1.getInt(0);
-                    Toast toast = Toast.makeText(getApplicationContext(), "userid=" + userid, Toast.LENGTH_SHORT);
+                }
+                else
+                {
+                    userid=i;
+                    Toast toast = Toast.makeText(getApplicationContext(), "userid="+userid, Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    //跳转到mainactivity...
+                    //跳转到主界面，并传递userid过去...
                 }
-                login1.close();
-                //db.close();
-            }
         });
 
         // 跳转到注册界面
