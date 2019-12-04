@@ -5,13 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class RegActivity extends AppCompatActivity {
+    private Button regBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class RegActivity extends AppCompatActivity {
             }
         });
 
-        // 返回至注册界面
+        // 返回至登录界面
         ImageButton backBtn=findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +58,45 @@ public class RegActivity extends AppCompatActivity {
                 RegActivity.this.finish();
             }
         });
+        //注册信息添加至数据库
+        regBtn=(Button)findViewById(R.id.infoConfirm);
+        regBtn.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View view) {
+                EditText un = findViewById(R.id.regName);
+                EditText pw = findViewById(R.id.regPwd);
+                EditText pw1 = findViewById(R.id.regPwdAgain);
+                String username = un.getText().toString();
+                String password = pw.getText().toString();
+                String password1 = pw1.getText().toString();
+                if(!password.equals(password1))
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "密码不一致", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                {
+                    DbHelper.getInstance().insertUser(username,password);
+                    int userid=DbHelper.getInstance().testUser(username,password);
+                    if(userid!=-1)
+                    {
+                        Toast toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        new Handler().postDelayed(new Runnable() {
 
+                            public void run() {
+                                /*Intent  intent=new Intent(RegActivity.this, LoginActivity.class);
+                                startActivity(intent);*/
+                                RegActivity.this.finish();
+                            }
+                        }, 2000);
+                    }
+
+                }
+            }
+        });
     }
+
 }

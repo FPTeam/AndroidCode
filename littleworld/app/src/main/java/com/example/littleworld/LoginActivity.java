@@ -61,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
     public LoginActivity() {
 
     }
-
-        private String opendb() throws IOException {//这个函数必须放在LoginActivity 因为要找路径 不能放到数据库类==！
+    private String opendb() throws IOException
+    {//这个函数必须放在LoginActivity 因为要找路径 不能放到数据库类==！
         String DATABASE_PATH=this.getApplicationContext().getFilesDir().toString();
         String DATABASE_NAME="lw.db";
         String databaseFilename=DATABASE_PATH+"/"+DATABASE_NAME;
@@ -92,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
         return databaseFilename;
     }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         if (Build.VERSION.SDK_INT > 28
@@ -139,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                     toast.show();
                     //跳转到主界面，并传递userid过去...
                 }
-        });
+        }});
 
         // 跳转到注册界面
         Button signup = findViewById(R.id.signUp);
