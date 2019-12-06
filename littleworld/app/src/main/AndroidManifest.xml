@@ -44,7 +44,9 @@
         <activity android:name=".ReleaseDynamics"
            android:theme="@style/LoginTheme"> </activity>
 
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity"
+            android:theme="@style/ProfileTheme"></activity>
+
         <activity android:name=".NewNotes"
                   android:theme="@style/SettingTheme"></activity>
 
