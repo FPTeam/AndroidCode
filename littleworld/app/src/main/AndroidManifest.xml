@@ -45,6 +45,8 @@
            android:theme="@style/LoginTheme"> </activity>
 
         <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".NewNotes"
+                  android:theme="@style/SettingTheme"></activity>
 
     </application>
 

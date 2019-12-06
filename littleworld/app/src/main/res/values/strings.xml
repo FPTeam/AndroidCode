@@ -53,5 +53,12 @@
     <string name="copyright">copyright&#160;(C)&#160;2019-2020 WHU</string>
     <string name="ARR">All&#160;Rights&#160;Reserved</string>
 
-
+    <!--添加笔记-->
+    <string name="new_notes">添加笔记</string>
+    <string name="note_hint">记录旅途生活...</string>
+    <string name="others_to_see">公开发表</string>
+    <string name="add_tag">添加标签</string>
+    <string name="add_place">添加地点</string>
+    <string name="travel_end">结束旅程</string>
+    <string name="send_button">发表</string>
 </resources>
