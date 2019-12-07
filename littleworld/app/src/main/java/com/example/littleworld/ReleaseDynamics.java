@@ -131,19 +131,19 @@ public class ReleaseDynamics extends AppCompatActivity {
             }
         });
 
-//        图片文件路径
-        String DATABASE_PATH=this.getApplicationContext().getFilesDir().toString()+"/IMAGE";
-        fileDir = new File(DATABASE_PATH);//直接copy的LoginActivity里的路径
-        // 如果目录不存在，创建这个目录
-        if (!fileDir.exists())
-            fileDir.mkdir();
-
-//        File sdDir = Environment.getExternalStorageDirectory();
-//        fileDir = new File(sdDir.getPath() + "/IMAGE");
-//        if (!fileDir.exists()) {
-////            路径不存在则创建
+////        图片文件路径
+//        String DATABASE_PATH=this.getApplicationContext().getFilesDir().toString()+"/IMAGE";
+//        fileDir = new File(DATABASE_PATH);//直接copy的LoginActivity里的路径
+//        // 如果目录不存在，创建这个目录
+//        if (!fileDir.exists())
 //            fileDir.mkdir();
-//        }
+
+        File sdDir = Environment.getExternalStorageDirectory();
+        fileDir = new File(sdDir.getPath() + "/IMAGE");
+        if (!fileDir.exists()) {
+//            路径不存在则创建
+            fileDir.mkdir();
+        }
 
         Button noteSend = findViewById(R.id.note_send);
         noteSend.setOnClickListener(new View.OnClickListener() {
@@ -153,9 +153,9 @@ public class ReleaseDynamics extends AppCompatActivity {
                 if (bitmap != null && !bitmap.isRecycled()) {
                     bitmap.recycle();
                 }
-//                EditText input_notes = findViewById(R.id.input_notes);
-//                String inputNotes = input_notes.getText().toString();
-//                DbHelper.getInstance().insertPassage(inputNotes,fileDir + fileName + ".jpg");
+                EditText input_notes = findViewById(R.id.input_notes);
+                String inputNotes = input_notes.getText().toString();
+                DbHelper.getInstance().insertPassage(inputNotes,imgPath);
 //                ReleaseDynamics.this.finish();
             }
         });
