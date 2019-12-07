@@ -45,6 +45,7 @@ public class DbHelper{
     public void insertUser(String name,String password)//注册新用户插login表
     {
         ContentValues cv = new ContentValues();
+        cv.put("userid", 10010);
         cv.put("UserName", name);
         cv.put("Password", password);
         //userid自动生成
@@ -59,7 +60,7 @@ public class DbHelper{
     public void insertPassage(String content,String imgPath)//发布文章
     {
         ContentValues cv = new ContentValues();
-//        cv.put("userid", userid);
+        cv.put("userid", 10010);
         cv.put("Content", content);
         cv.put("ImgPath", imgPath);
         //passageId自动生成
