@@ -2,11 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.littleworld">
 
-
-<!--相册权限-->
-    <!-- 写sd卡的权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+<!--    权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!--    写权限-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<!--    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 声明后台定位权限 -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+<!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
 
     <application
         android:allowBackup="true"
@@ -48,6 +56,7 @@
         <activity android:name=".NewNotes"
                   android:theme="@style/SettingTheme"></activity>
 
+<!--        <service android:name="com.example.littleworld.APSService" />-->
     </application>
 
 </manifest>
