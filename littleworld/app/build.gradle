@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.littleworld"
-        minSdkVersion 26
+        minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -29,4 +29,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.android.support:design:29.0.2'
+    implementation files('libs\\AMap_Location_V4.7.2_20190927.jar')
+    implementation files('libs\\AMap_Search_V7.1.0_20191030.jar')
+    implementation files('libs\\Amap_2DMap_V5.2.0_20170627.jar')
 }

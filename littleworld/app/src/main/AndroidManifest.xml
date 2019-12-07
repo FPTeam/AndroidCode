@@ -58,7 +58,8 @@
         <activity android:name=".NewNotes"
                   android:theme="@style/SettingTheme"></activity>
 
-<!--        <service android:name="com.example.littleworld.APSService" />-->
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService"></service>
     </application>
 
 </manifest>
