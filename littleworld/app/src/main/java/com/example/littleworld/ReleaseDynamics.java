@@ -11,11 +11,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -27,7 +29,10 @@ import androidx.core.content.FileProvider;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import android.widget.TextView;
 
@@ -45,8 +50,11 @@ public class ReleaseDynamics extends AppCompatActivity {
     private ImageView picture;
 
     private Uri imageUri;
-
+//    图片数据
     Bitmap bitmap;
+//    保存的文件路径
+    private File fileDir;
+
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -104,6 +112,7 @@ public class ReleaseDynamics extends AppCompatActivity {
         //显示图片
         picture = findViewById(R.id.picture);
 
+//        点击加号选择照相机或者相册
         add_pictures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +129,62 @@ public class ReleaseDynamics extends AppCompatActivity {
                 ReleaseDynamics.this.finish();
             }
         });
+
+//        图片文件路径
+        String DATABASE_PATH=this.getApplicationContext().getFilesDir().toString()+"/IMAGE";
+        fileDir = new File(DATABASE_PATH);//直接copy的LoginActivity里的路径
+        // 如果目录不存在，创建这个目录
+        if (!fileDir.exists())
+            fileDir.mkdir();
+
+//        File sdDir = Environment.getExternalStorageDirectory();
+//        fileDir = new File(sdDir.getPath() + "/IMAGE");
+//        if (!fileDir.exists()) {
+////            路径不存在则创建
+//            fileDir.mkdir();
+//        }
+
+        Button noteSend = findViewById(R.id.note_send);
+        noteSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveFile(fileDir);
+//                ReleaseDynamics.this.finish();
+            }
+        });
+
     }
+
+    public void saveFile(File file){
+//        mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        SimpleDateFormat time = new SimpleDateFormat("yyyyMMddHHmmss");
+        String fileName = time.format(System.currentTimeMillis());
+        File currentFile = new File(fileDir, fileName + ".jpg");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(currentFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
+//            ToastUtil.showMessage("添加失败：" + fileName);
+        } finally {
+            try {
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
+//            ToastUtil.showMessage("添加成功：" + fileName);
+        }
+    }
+
 
     //初始化定位
     public void initLocation(){

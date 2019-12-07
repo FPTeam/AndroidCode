@@ -139,6 +139,9 @@ public class LoginActivity extends AppCompatActivity {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                     //跳转到主界面，并传递userid过去...
+//                    登陆成功跳转到发布动态界面，暂时是这样
+                    Intent intent = new Intent(LoginActivity.this,ReleaseDynamics.class);
+                    startActivity(intent);
                 }
         }});
 

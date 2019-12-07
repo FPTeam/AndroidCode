@@ -33,7 +33,7 @@ public class DbHelper{
     }
     public int testUser(String username,String password)//验证用户名和密码
     {
-        Cursor login1 = db.rawQuery("select userid from login where name=?and password=?",new String[]{username,password});
+        Cursor login1 = db.rawQuery("select userid from login where UserName=?and Password=?",new String[]{username,password});
         if(login1.getCount()!=0)
         {
             login1.moveToNext();
@@ -45,8 +45,8 @@ public class DbHelper{
     public void insertUser(String name,String password)//注册新用户插login表
     {
         ContentValues cv = new ContentValues();
-        cv.put("name", name);
-        cv.put("password", password);
+        cv.put("UserName", name);
+        cv.put("Password", password);
         //userid自动生成
         long i=db.insert("login",null,cv);
         if(i!=-1)
