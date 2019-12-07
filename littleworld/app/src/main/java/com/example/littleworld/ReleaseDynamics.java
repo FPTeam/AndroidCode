@@ -149,6 +149,9 @@ public class ReleaseDynamics extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveFile(fileDir);
+//                if (bitmap != null && !bitmap.isRecycled()) {
+//                    bitmap.recycle();
+//                }
 //                ReleaseDynamics.this.finish();
             }
         });
