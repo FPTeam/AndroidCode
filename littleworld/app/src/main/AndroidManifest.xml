@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MaskActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ReleaseDynamics"
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,8 +49,8 @@
             android:name=".RegActivity"
             android:theme="@style/LoginTheme"></activity>
 
-        <activity android:name=".ReleaseDynamics"
-           android:theme="@style/LoginTheme"> </activity>
+<!--        <activity android:name=".ReleaseDynamics"-->
+<!--           android:theme="@style/LoginTheme"> </activity>-->
 
         <activity android:name=".ProfileActivity"
             android:theme="@style/ProfileTheme"></activity>

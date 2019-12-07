@@ -33,7 +33,7 @@
 
 
         <ImageButton
-            android:id="@+id/new_note_ret"
+            android:id="@+id/backButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="#33CCCC"
@@ -41,11 +41,12 @@
             android:tint="#FFFFFF"
             app:srcCompat="?attr/actionModeCloseDrawable" />
 
+<!--        android:layout_marginStart="315dp"-->
         <Button
             android:id="@+id/send"
             android:layout_width="72dp"
             android:layout_height="35dp"
-            android:layout_marginStart="315dp"
+            android:layout_marginLeft="315dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/send_botton"
             android:text="@string/send_button"
@@ -77,11 +78,20 @@
         android:layout_marginTop="10dp"
         >
 
+        <!--    显示图片-->
         <ImageView
+            android:id="@+id/picture"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:layout_marginStart="10dp" />
+<!--        android:layout_marginStart="20dp"-->
+        <ImageButton
         android:id="@+id/add_pictures"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="20dp"
+
         android:background="#00FFFFFF"
         app:srcCompat="@mipmap/add_picture" />
     </LinearLayout>

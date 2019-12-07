@@ -14,15 +14,19 @@ import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -39,29 +43,18 @@ public class ReleaseDynamics extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.release_dynamics);
-        Button takePhoto = findViewById(R.id.take_photo);
-        Button chooseFromAlbum = findViewById(R.id.choose_from_album);
+        //复选+按钮
+        final ImageButton add_pictures=findViewById(R.id.add_pictures);
+        //显示图片
         picture = findViewById(R.id.picture);
-//        Button takePhoto = (Button) findViewById(R.id.take_photo);
-//        Button chooseFromAlbum = (Button) findViewById(R.id.choose_from_album);
-//        picture = (ImageView) findViewById(R.id.picture);
-        takePhoto.setOnClickListener(new View.OnClickListener() {
+
+        add_pictures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCamera();
+                showPopupMenu(add_pictures);
             }
         });
 
-        chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(ReleaseDynamics.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(ReleaseDynamics.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, 1);
-                } else {
-                    openAlbum();
-                }
-            }
-        });
 
         // 返回上一个界面
         ImageButton backBtn=findViewById(R.id.backButton);
@@ -71,6 +64,43 @@ public class ReleaseDynamics extends AppCompatActivity {
                 ReleaseDynamics.this.finish();
             }
         });
+    }
+
+    private void showPopupMenu(View view) {
+        // View当前PopupMenu显示的相对View的位置
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        // menu布局
+        popupMenu.getMenuInflater().inflate(R.menu.popupwindow_camera_album, popupMenu.getMenu());
+        // menu的item点击事件
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                switch (item.getItemId()) {
+                    case R.id.takePhoto:
+                        openCamera();
+                        return true;
+                    case R.id.chooseFromAlbum:
+                        if (ContextCompat.checkSelfPermission(ReleaseDynamics.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                             ActivityCompat.requestPermissions(ReleaseDynamics.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, 1);
+                         } else {
+                             openAlbum();
+                            }
+                        return true;
+                    default:
+                        return  false;
+                }
+            }
+        });
+        // PopupMenu关闭事件
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                //退出的时候显示的提示消息
+//                Toast.makeText(getApplicationContext(), "关闭PopupMenu", Toast.LENGTH_SHORT).show();
+            }
+        });
+        popupMenu.show();
     }
 
     public void openCamera(){
@@ -108,7 +138,7 @@ public class ReleaseDynamics extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
                 } else {
-                    Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "你拒绝了权限申请", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:

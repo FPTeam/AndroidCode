@@ -7,12 +7,12 @@
         android:orientation="vertical">
 
     <item
-        android:id="@+id/note_camera"
+        android:id="@+id/takePhoto"
         android:orderInCategory="1"
         android:title="相 机"
         app:showAsAction="never"/>
   <item
-    android:id="@+id/note_album"
+    android:id="@+id/chooseFromAlbum"
     android:orderInCategory="2"
     android:title="相 册"
     app:showAsAction="never"/>
