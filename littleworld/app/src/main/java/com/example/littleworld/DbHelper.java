@@ -55,18 +55,20 @@ public class DbHelper{
         }
     }
 
-    public void insertPassage(int userid,String content,String imgpath)//注册新用户插login表
-    {
-        ContentValues cv = new ContentValues();
-        cv.put("UserName", name);
-        cv.put("Password", password);
-        //userid自动生成
-        long i=db.insert("login",null,cv);
-        if(i!=-1)
-        {
-            Log.d("insertusersuccessfully!","haha");
-        }
-    }
+////    int userid,
+//    public void insertPassage(String content,String imgPath)//发布文章
+//    {
+//        ContentValues cv = new ContentValues();
+////        cv.put("userid", userid);
+//        cv.put("Content", content);
+//        cv.put("ImgPath", imgPath);
+//        //passageId自动生成
+//        long p=db.insert("passage",null,cv);
+//        if(p!=-1)
+//        {
+//            Log.d("insert passage!","haha");
+//        }
+//    }
 
     public void insertUserInfo(){}//注册新用户插info表（包括图片、...）
     //...此处添加表的操作函数

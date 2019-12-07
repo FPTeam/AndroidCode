@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -54,7 +55,8 @@ public class ReleaseDynamics extends AppCompatActivity {
     Bitmap bitmap;
 //    保存的文件路径
     private File fileDir;
-
+//    图片的文件名
+//    String fileName;
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -148,17 +150,21 @@ public class ReleaseDynamics extends AppCompatActivity {
         noteSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveFile(fileDir);
-//                if (bitmap != null && !bitmap.isRecycled()) {
-//                    bitmap.recycle();
-//                }
+                String imgPath = SsaveFile(fileDir);
+//                SsaveFile(fileDir);
+                if (bitmap != null && !bitmap.isRecycled()) {
+                    bitmap.recycle();
+                }
+//                EditText input_notes = findViewById(R.id.input_notes);
+//                String inputNotes = input_notes.getText().toString();
+//                DbHelper.getInstance().insertPassage(inputNotes,fileDir + fileName + ".jpg");
 //                ReleaseDynamics.this.finish();
             }
         });
 
     }
 
-    public void saveFile(File file){
+    public String SsaveFile(File file){
 //        mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
         SimpleDateFormat time = new SimpleDateFormat("yyyyMMddHHmmss");
         String fileName = time.format(System.currentTimeMillis());
@@ -186,6 +192,7 @@ public class ReleaseDynamics extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
 //            ToastUtil.showMessage("添加成功：" + fileName);
         }
+        return fileDir + fileName + ".jpg";
     }
 
 
