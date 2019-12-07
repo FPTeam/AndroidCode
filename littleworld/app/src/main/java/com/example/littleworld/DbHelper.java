@@ -51,7 +51,7 @@ public class DbHelper{
         long i=db.insert("login",null,cv);
         if(i!=-1)
         {
-            Log.d("insert user successfully!","haha");
+            Log.d("insertusersuccessfully!","haha");
         }
     }
     public void insertUserInfo(){}//注册新用户插info表（包括图片、...）
