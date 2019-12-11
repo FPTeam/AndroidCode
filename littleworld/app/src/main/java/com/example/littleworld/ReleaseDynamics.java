@@ -33,7 +33,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import android.widget.TextView;
 
@@ -155,7 +157,14 @@ public class ReleaseDynamics extends AppCompatActivity {
                 }
                 EditText input_notes = findViewById(R.id.input_notes);
                 String inputNotes = input_notes.getText().toString();
-                DbHelper.getInstance().insertPassage(inputNotes,imgPath);
+
+                //***添加时间
+                SimpleDateFormat nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//格式
+                nowtime.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));// 中国北京时间，东八区
+                Date date = new Date(System.currentTimeMillis());//当前设备的时间
+                String timestr = nowtime.format(date);//转换为字符串
+
+                DbHelper.getInstance().insertPassage( 190001,inputNotes,imgPath,timestr,null,"武汉");
 //                ReleaseDynamics.this.finish();
             }
         });
