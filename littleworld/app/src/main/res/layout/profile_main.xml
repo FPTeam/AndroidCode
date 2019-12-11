@@ -73,10 +73,10 @@
 
 
             <ImageView
+                android:id="@+id/imageBackground"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:foreground="#50000000"
-                android:foregroundTint="#50000000"
+                android:foreground="@drawable/gradient_status_bar"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
                 app:srcCompat="@mipmap/default_background" />
@@ -97,8 +97,8 @@
                 android:layout_marginStart="125dp"
                 android:layout_marginTop="175dp"
                 android:shadowColor="#515151"
-                android:shadowDx="10"
-                android:shadowDy="10"
+                android:shadowDx="5"
+                android:shadowDy="5"
                 android:shadowRadius="5"
                 android:text="username"
                 android:textColor="#ffffff"
@@ -112,8 +112,8 @@
                 android:layout_marginStart="125dp"
                 android:layout_marginTop="230dp"
                 android:shadowColor="#515151"
-                android:shadowDx="10"
-                android:shadowDy="10"
+                android:shadowDx="5"
+                android:shadowDy="5"
                 android:shadowRadius="5"
                 android:text="TextView"
                 android:textColor="#ffffff"
@@ -153,15 +153,21 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/item_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/grey_background"
+        android:fadeScrollbars="true"
+        android:fadingEdge="vertical"
         android:fillViewport="true"
+        android:scrollbars="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <com.example.littleworld.ProfileViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/grey_background"
             android:fadeScrollbars="true"
             android:visibility="visible" />
 

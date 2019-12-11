@@ -15,6 +15,6 @@
     <color name="transparent">#00000000</color>
     <color name="itemlist">#f4f4f4</color>
     <color name="watermark_hint">#ccffffff</color>
-    <color name="act_background">#efefef</color>
+    <color name="act_background">#EFEFEF</color>
     <color name="grey_background">#E6ECECEC</color>
 </resources>

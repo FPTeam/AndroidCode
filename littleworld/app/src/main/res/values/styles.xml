@@ -24,31 +24,6 @@
         <item name="colorAccent">#33CCCC</item>
     </style>
 
-    <!-- Toolbar theme -->
-    <style name="ToolbarExpanded" parent="AppTheme">
-        <item name="android:statusBarColor">#00FFFFFF</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:background">#0D000000</item>
-    </style>
-    <style name="ToolbarTitleExpanded">
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:shadowColor">#515151</item>
-        <item name="android:shadowDx">10</item>
-        <item name="android:shadowDy">10</item>
-        <item name="android:shadowRadius">10</item>
-    </style>
-    <style name="ToolbarCollapsed" parent="AppTheme">
-        <item name="android:statusBarColor">#33CCCC</item>
-        <item name="android:clipToPadding">true</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:background">#33cccc</item>
-    </style>
-    <style name="ToolbarTitleCollapsed">
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
     <!-- Setting UI theme -->
     <style name="SettingTheme" parent="AppTheme">
         <item name="android:statusBarColor">#33CCCC</item>

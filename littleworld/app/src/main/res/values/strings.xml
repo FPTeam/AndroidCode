@@ -32,6 +32,11 @@
     <string name="posts">动&#160;&#160;&#160;&#160;态</string>
     <string name="timeline">时&#160;&#160;光&#160;&#160;轴</string>
     <string name="about_me">关&#160;&#160;于&#160;&#160;我</string>
+    <string name="my_map">我的足迹</string>
+    <string name="personal_info">个人信息</string>
+    <string name="profile_id">账&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;号</string>
+    <string name="profile_sex">性&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;别</string>
+    <string name="profile_intro">自我介绍</string>
 
     <!-- Settings UI -->
     <string name="settings">设&#160;&#160;&#160;&#160;置</string>

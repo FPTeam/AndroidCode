@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_background"
+    android:elevation="10dp"
+    tools:context=".ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--添加图片信息-->
+        <ImageView
+            android:id="@+id/iconMyMap"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="fitCenter"
+            android:tint="#33cccc"
+            app:srcCompat="@mipmap/dingwei" />
+
+        <TextView
+            android:id="@+id/detail_info"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="-30dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/my_map"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/mapProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-45dp"
+            android:background="#ffffff"
+            android:elevation="-10dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/map_color" />
+
+        <View
+            android:id="@+id/viewPadding1"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:background="#ffffff" />
+
+        <ImageView
+            android:id="@+id/iconInfo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:src="@mipmap/wode"
+            android:tint="#33cccc" />
+
+        <TextView
+            android:id="@+id/infoProfile"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="-30dp"
+            android:background="#FFFFFF"
+            android:elevation="-10dp"
+            android:paddingStart="50dp"
+            android:paddingLeft="50dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/personal_info"
+            android:textSize="18sp" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#ffffff" />
+
+        <GridLayout
+            android:id="@+id/personalInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:id="@+id/IDProfile"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="bottom"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp"
+                android:text="@string/profile_id"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/profileID"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:paddingTop="10dp"
+                android:text="显示账号" />
+
+            <TextView
+                android:id="@+id/sexProfile"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_gravity="bottom"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp"
+                android:text="@string/profile_sex"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/profileSex"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="显示性别" />
+
+            <TextView
+                android:id="@+id/introProfile"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:layout_gravity="bottom"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/profile_intro"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/profileIntro"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="输入自我介绍" />
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</ScrollView>
