@@ -62,6 +62,12 @@
         <activity android:name=".ProfileActivity"
             android:theme="@style/ProfileTheme"></activity>
 
+        <activity android:name=".map.POI"
+            android:theme="@style/ProfileTheme">
+        </activity>
+        <activity android:name=".map.DriveRouteDetailActivity"
+            android:theme="@style/ProfileTheme"></activity>
+
 <!--        <activity android:name=".NewNotes"-->
 <!--                  android:theme="@style/SettingTheme"></activity>-->
 
