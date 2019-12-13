@@ -39,15 +39,22 @@
             android:text="@string/my_map"
             android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/mapProfile"
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_marginTop="-45dp"
             android:background="#ffffff"
             android:elevation="-10dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@mipmap/map_color" />
+            android:scaleType="fitCenter">
+
+            <ImageView
+                android:id="@+id/mapProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/map" />
+
+        </FrameLayout>
 
         <View
             android:id="@+id/viewPadding1"

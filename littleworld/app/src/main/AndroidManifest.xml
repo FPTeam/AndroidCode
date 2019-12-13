@@ -60,7 +60,9 @@
         </activity>
 
         <activity android:name=".ProfileActivity"
-            android:theme="@style/ProfileTheme"></activity>
+            android:theme="@style/ProfileTheme">
+
+        </activity>
 
         <activity android:name=".map.POI"
             android:theme="@style/ProfileTheme">

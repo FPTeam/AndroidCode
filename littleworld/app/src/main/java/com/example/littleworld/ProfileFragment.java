@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class ProfileFragment extends Fragment {
 
+    private DbHelper dbHelper = DbHelper.getInstance();
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM = "param";
 
@@ -16,9 +21,10 @@ public class ProfileFragment extends Fragment {
 
     private int mParam;//用来表示当前需要展示的是哪一页
     private TextView detail_text;//展示的具体内容，这里为了简单只用一个TextView意思一下
-    private TextView userId; //用户ID
-    private TextView userSex; //用户性别
-    private TextView userIntro; //用户介绍
+    private TextView userId_text; //用户ID
+    private int userId; //用户ID
+    private TextView userSex_text; //用户性别
+    private TextView userIntro_text; //用户介绍
     private View view;
     static ProfileViewPager pvp;
 
@@ -76,19 +82,42 @@ public class ProfileFragment extends Fragment {
                 // 显示关于我部分的fragment layout
                 view=inflater.inflate(R.layout.profile_fragment_aboutme, container, false);
                 pvp.setObjectForPosition(view,2);
-                userId=view.findViewById(R.id.profileID); // 用户ID
-                userSex=view.findViewById(R.id.profileSex); // 用户性别
-                userIntro=view.findViewById(R.id.profileIntro); // 个人介绍
+                userId_text=view.findViewById(R.id.profileID); // 用户ID
+                userSex_text=view.findViewById(R.id.profileSex); // 用户性别
+                userIntro_text=view.findViewById(R.id.profileIntro); // 个人介绍
 
+                DbHelper.getInstance();
                 /*
                     从数据库查询用户信息并显示
                  */
-
+                showMap();//显示点亮的地图
                 break;
             default:break;
 
         }
 
         return view;
+    }
+
+    public void showMap(){
+        ImageView imageView;
+        FrameLayout frame=(FrameLayout)view.findViewById(R.id.frameLayout);
+
+        int[] provinces = new int[32];//32个省市，去过置1，没去过置0
+        provinces = dbHelper.getProvices(userId);
+
+        int[] provinceList= {R.mipmap.zhejiang,R.mipmap.xinjiang,R.mipmap.xizang,R.mipmap.yunnan,R.mipmap.taiwan,R.mipmap.tianjin,R.mipmap.sichuan,R.mipmap.shandong,
+                R.mipmap.shanghai,R.mipmap.qinghai,R.mipmap.shan1xi,R.mipmap.shan3xi,R.mipmap.ningxia,R.mipmap.neimenggu,R.mipmap.liaoning,R.mipmap.jiangxi,
+                R.mipmap.jilin,R.mipmap.jiangsu,R.mipmap.hubei,R.mipmap.hunan,R.mipmap.heilongjiang,R.mipmap.henan,R.mipmap.guizhou,R.mipmap.hainan,
+                R.mipmap.hebei,R.mipmap.guangxi,R.mipmap.gansu,R.mipmap.guangdong,R.mipmap.chongqing,R.mipmap.fujian,R.mipmap.anhui,R.mipmap.beijing};
+
+        for(int i=0;i<32;i++){
+            if(provinces[i]==1){
+                imageView= new ImageView(getContext());
+                imageView.setImageResource(provinceList[i]);
+                frame.addView(imageView);
+            }
+        }
+
     }
 }

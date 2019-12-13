@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+
 //后期对数据库的操作请在此类中添加函数
 public class DbHelper{
     private static SQLiteDatabase db;
@@ -74,6 +76,11 @@ public class DbHelper{
         }
     }
 
+    public int[] getProvices(Integer userid){
+        int[] provinces = new int[32];//32个省市，去过置1，没去过置0
+
+        return provinces;
+    }
     public void insertUserInfo(){}//注册新用户插info表（包括图片、...）
     //...此处添加表的操作函数
     public void closeDb()
