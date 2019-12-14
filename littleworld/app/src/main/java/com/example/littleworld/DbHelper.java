@@ -44,6 +44,19 @@ public class DbHelper{
         login1.close();
         return -1;
     }
+
+    public int repUser(String name)//验证注册时用户名是否重复
+    {
+        Cursor login2 = db.rawQuery("select userid from login where Name=?",new String[]{name});//验证用户名是否重复
+        if(login2.getCount()!=0)
+        {
+            login2.moveToNext();
+            return login2.getInt(0);
+        }
+        login2.close();
+        return -1;
+    }
+
     public void insertUser(String name,String password)//注册新用户插login表
     {
         ContentValues cv = new ContentValues();
@@ -78,7 +91,36 @@ public class DbHelper{
 
     public int[] getProvices(Integer userid){
         int[] provinces = new int[32];//32个省市，去过置1，没去过置0
-
+        String city;
+        //查userid的所有帖子
+        Cursor curcity = db.rawQuery("select * from passage where UserId=?",new String[]{String.valueOf(userid)});
+        while(curcity.moveToNext())
+        {
+            city=curcity.getString(6);
+            Log.d("city success!",city);
+            //for 每一个帖子 get城市city
+            /*{
+                //处理city字符串
+                //switch（city）
+                {
+                case city1:
+                    provinces[0] = 1;
+                    break;
+                case city1:
+                    provinces[0] = 1;
+                    break;
+                case city1:
+                    provinces[0] = 1;
+                    break;
+                case city1:
+                    provinces[0] = 1;
+                    break;
+            ...
+                defalut：；
+                }
+            }*/
+        }
+        curcity.close();
         return provinces;
     }
     public void insertUserInfo(){}//注册新用户插info表（包括图片、...）

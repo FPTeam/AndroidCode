@@ -69,31 +69,34 @@ public class RegActivity extends AppCompatActivity {
                 String username = un.getText().toString();
                 String password = pw.getText().toString();
                 String password1 = pw1.getText().toString();
-                if(!password.equals(password1))
+                int rep=DbHelper.getInstance().repUser(username);
+                if(rep!=-1)
                 {
-                    Toast toast = Toast.makeText(getApplicationContext(), "密码不一致", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "该用户名已被占用", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-                else
-                {
-                    DbHelper.getInstance().insertUser(username,password);
-                    int userid=DbHelper.getInstance().testUser(username,password);
-                    if(userid!=-1)
-                    {
-                        Toast toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
+                else {
+                    if (!password.equals(password1)) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "密码不一致", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
-                        new Handler().postDelayed(new Runnable() {
-
-                            public void run() {
+                    } else {
+                        DbHelper.getInstance().insertUser(username, password);
+                        int userid = DbHelper.getInstance().testUser(username, password);
+                        if (userid != -1) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                            new Handler().postDelayed(new Runnable() {
+                                public void run() {
                                 /*Intent  intent=new Intent(RegActivity.this, LoginActivity.class);
                                 startActivity(intent);*/
-                                RegActivity.this.finish();
-                            }
-                        }, 2000);
+                                    RegActivity.this.finish();
+                                }
+                            }, 2000);
+                        }
                     }
-
                 }
             }
         });

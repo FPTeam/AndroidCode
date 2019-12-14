@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class ProfileFragment extends Fragment {
 
-    private DbHelper dbHelper = DbHelper.getInstance();
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM = "param";
 
@@ -104,7 +103,7 @@ public class ProfileFragment extends Fragment {
         FrameLayout frame=(FrameLayout)view.findViewById(R.id.frameLayout);
 
         int[] provinces = new int[32];//32个省市，去过置1，没去过置0
-        provinces = dbHelper.getProvices(userId);
+        provinces = DbHelper.getInstance().getProvices(userId);
 
         int[] provinceList= {R.mipmap.zhejiang,R.mipmap.xinjiang,R.mipmap.xizang,R.mipmap.yunnan,R.mipmap.taiwan,R.mipmap.tianjin,R.mipmap.sichuan,R.mipmap.shandong,
                 R.mipmap.shanghai,R.mipmap.qinghai,R.mipmap.shan1xi,R.mipmap.shan3xi,R.mipmap.ningxia,R.mipmap.neimenggu,R.mipmap.liaoning,R.mipmap.jiangxi,
