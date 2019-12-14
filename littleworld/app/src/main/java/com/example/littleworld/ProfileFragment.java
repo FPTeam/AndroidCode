@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,32 +51,53 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // 添加按钮事件
+        // 示例：返回按钮，可删除
+        Button button_test = getActivity().findViewById(R.id.backTest);
+        button_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //根据mParam来判断当前展示的是哪一页，根据页数的不同展示不同的信息
+        // 根据mParam来判断当前展示的是哪一页，根据页数的不同展示不同的信息
         switch (mParam){
             case 0:
                 // 显示动态部分的fragment layout
                 view=inflater.inflate(R.layout.profile_fragment_posts, container, false);
                 pvp.setObjectForPosition(view,0);
+
+                // 示例：显示文字，可删除
                 detail_text = view.findViewById(R.id.detail_info);
                 String text0 = "";
                 for (int i = 0; i < 100; i++) {
                     text0 += "动态" + "\n";
                 }
                 detail_text.setText(text0);
+
                 break;
             case 1:
                 // 显示时光轴部分的fragment layout
                 view=inflater.inflate(R.layout.profile_fragment_timeline, container, false);
                 pvp.setObjectForPosition(view,1);
+
+                // 示例：显示文字，可删除
                 detail_text = view.findViewById(R.id.detail_info);
                 String text1 = "";
                 for (int i = 0; i < 100; i++) {
                     text1 += "时光轴" + "\n";
                 }
                 detail_text.setText(text1);
+
                 break;
             case 2:
                 // 显示关于我部分的fragment layout
@@ -87,7 +109,7 @@ public class ProfileFragment extends Fragment {
 
                 DbHelper.getInstance();
                 /*
-                    从数据库查询用户信息并显示
+                 *   从数据库查询用户信息并显示
                  */
                 showMap();//显示点亮的地图
                 break;
@@ -119,4 +141,5 @@ public class ProfileFragment extends Fragment {
         }
 
     }
+
 }
