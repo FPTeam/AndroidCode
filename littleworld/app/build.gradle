@@ -33,4 +33,7 @@ dependencies {
     implementation files('libs\\AMap_Search_V7.1.0_20191030.jar')
     implementation files('libs\\Amap_2DMap_V5.2.0_20170627.jar')
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
