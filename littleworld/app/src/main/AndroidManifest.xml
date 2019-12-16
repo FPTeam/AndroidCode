@@ -67,6 +67,10 @@
             android:name=".SquareActivity"
             android:theme="@style/LoginTheme" />
 
+         <activity
+            android:name=".PassageActivity"
+            android:theme="@style/LoginTheme" />
+        
         <activity android:name=".map.POI"
             android:theme="@style/ProfileTheme">
         </activity>
