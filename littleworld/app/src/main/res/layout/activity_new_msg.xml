@@ -31,4 +31,9 @@
         android:iconifiedByDefault="false"
         android:minHeight="100dp"
         android:queryHint="在通知中搜索" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
