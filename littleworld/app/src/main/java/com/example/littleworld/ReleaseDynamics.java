@@ -101,7 +101,7 @@ public class ReleaseDynamics extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.release_dynamics);
+        setContentView(R.layout.activity_new_notes);
 
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
@@ -125,7 +125,7 @@ public class ReleaseDynamics extends AppCompatActivity {
 
 
         // 返回上一个界面
-        ImageButton backBtn=findViewById(R.id.backButton);
+        ImageButton backBtn=findViewById(R.id.new_note_ret);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +139,7 @@ public class ReleaseDynamics extends AppCompatActivity {
         // 如果目录不存在，创建这个目录
         if (!fileDir.exists())
             fileDir.mkdir();
-
+//          图片文件存SD卡里
 //        File sdDir = Environment.getExternalStorageDirectory();
 //        fileDir = new File(sdDir.getPath() + "/IMAGE");
 //        if (!fileDir.exists()) {
@@ -173,9 +173,10 @@ public class ReleaseDynamics extends AppCompatActivity {
 
     public String SaveFile(File fileDir){
 //        mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-        SimpleDateFormat time = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat time = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String fileName = time.format(System.currentTimeMillis());
-        File currentFile = new File(fileDir, fileName + ".jpg");
+//        使用当前时间为文件(图片)命名
+        File currentFile = new File(fileDir, "IMG_"+fileName + ".jpg");
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(currentFile);
