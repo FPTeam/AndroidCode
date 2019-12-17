@@ -18,7 +18,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,7 +51,6 @@ import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
 import com.example.littleworld.R;
-import com.example.littleworld.ReleaseDynamics;
 import com.example.littleworld.overlay.PoiOverlay;
 import com.example.littleworld.overlay.DrivingRouteOverLay;
 import com.example.littleworld.util.AMapUtil;

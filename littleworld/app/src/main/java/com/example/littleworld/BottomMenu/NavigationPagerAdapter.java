@@ -6,6 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.littleworld.ReleaseDynamicsActivity;
+import com.example.littleworld.SquareActivity;
+
 public class NavigationPagerAdapter extends FragmentPagerAdapter {
     //fragment的数量
     int nNumOfTabs;
@@ -25,16 +28,18 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
      */
     public Fragment getItem(int position) {
         //return NavigationFragment.newInstance(position,pvp);
-        Fragment fragment = new FollowFragment();
+//        Fragment fragment = new FollowFragment();
+        Fragment fragment = new NavigationFragment();
         switch (position)
         {
             case 0: //关注
-//                fragment = new FollowFragment();
+//                fragment = new SquareActivity();
                 break;
             case 1: //广场
-//                fragment = new SquareFragment();
+                fragment = new SquareActivity();
                 break;
             case 2: //编辑
+                fragment = new ReleaseDynamicsActivity();
                 break;
             case 3: //私信
                 break;

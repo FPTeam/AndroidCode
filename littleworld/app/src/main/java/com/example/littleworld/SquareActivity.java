@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,14 +15,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SquareActivity extends AppCompatActivity {
+public class SquareActivity extends Fragment {
     private ViewPager mViewPager;
     private TextView mTvPagerTitle;
 
@@ -43,10 +46,11 @@ public class SquareActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_square);
+        View layout = inflater.inflate(R.layout.activity_new_notes, container, false);
         init();
+        return layout;
     }
 
     /**
@@ -54,20 +58,20 @@ public class SquareActivity extends AppCompatActivity {
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void init() {
-        mViewPager = (ViewPager) findViewById(R.id.img_changer);
-        mTvPagerTitle = (TextView) findViewById(R.id.tv_pager_title);
+        mViewPager = (ViewPager) getActivity().findViewById(R.id.img_changer);
+        mTvPagerTitle = (TextView) getActivity().findViewById(R.id.tv_pager_title);
         initData();//初始化数据
         initView();//初始化View，设置适配器
         autoPlayView();//开启线程，自动播放
 
-        places = (ImageView) findViewById(R.id.places);
-        hotels = (ImageView) findViewById(R.id.hotels);
-        more = (ImageView) findViewById(R.id.more);
+        places = (ImageView) getActivity().findViewById(R.id.places);
+        hotels = (ImageView) getActivity().findViewById(R.id.hotels);
+        more = (ImageView) getActivity().findViewById(R.id.more);
 
         places.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent intent = new Intent(SquareActivity.this, com.example.littleworld.map.Places.class);
+                 Intent intent = new Intent(getActivity(), com.example.littleworld.map.Places.class);
                  startActivity(intent);
             }
         });
@@ -75,7 +79,7 @@ public class SquareActivity extends AppCompatActivity {
         hotels.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SquareActivity.this, com.example.littleworld.map.Hotel.class);
+                Intent intent = new Intent(getActivity(), com.example.littleworld.map.Hotel.class);
                 startActivity(intent);
             }
         });
@@ -83,7 +87,7 @@ public class SquareActivity extends AppCompatActivity {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SquareActivity.this, com.example.littleworld.map.Others.class);
+                Intent intent = new Intent(getActivity(), com.example.littleworld.map.Others.class);
                 startActivity(intent);
             }
         });
@@ -102,7 +106,7 @@ public class SquareActivity extends AppCompatActivity {
         mImageList = new ArrayList<>();
         ImageView iv;
         for (int i = 0; i < 3; i++) {
-            iv = new ImageView(this);
+            iv = new ImageView(getActivity());
             iv.setBackgroundResource(imageRess[i]);//设置图片
             iv.setId(imgae_ids[i]);//顺便给图片设置id
             iv.setOnClickListener(new pagerImageOnClick());//设置图片点击事件
@@ -110,8 +114,8 @@ public class SquareActivity extends AppCompatActivity {
         }
 
         //添加轮播点
-        LinearLayout linearLayoutDots = (LinearLayout) findViewById(R.id.lineLayout_dot);
-        mDots = addDots(linearLayoutDots, fromResToDrawable(this, R.drawable.change_points), mImageList.size());//其中fromResToDrawable()方法是我自定义的，目的是将资源文件转成Drawable
+        LinearLayout linearLayoutDots = (LinearLayout) getActivity().findViewById(R.id.lineLayout_dot);
+        mDots = addDots(linearLayoutDots, fromResToDrawable(getActivity(), R.drawable.change_points), mImageList.size());//其中fromResToDrawable()方法是我自定义的，目的是将资源文件转成Drawable
     }
 
     //图片点击事件
@@ -121,13 +125,13 @@ public class SquareActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.pager_image1:
-                    Toast.makeText(SquareActivity.this, "图片1被点击", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "图片1被点击", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.pager_image2:
-                    Toast.makeText(SquareActivity.this, "图片2被点击", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "图片2被点击", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.pager_image3:
-                    Toast.makeText(SquareActivity.this, "图片3被点击", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "图片3被点击", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -193,7 +197,7 @@ public class SquareActivity extends AppCompatActivity {
             @Override
             public void run() {
                 while (!isStop) {
-                    runOnUiThread(new Runnable() {
+                    getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
@@ -228,7 +232,7 @@ public class SquareActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public int addDot(final LinearLayout linearLayout, Drawable backgount) {
-        final View dot = new View(this);
+        final View dot = new View(getActivity());
         LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         dotParams.width = 16;
@@ -255,7 +259,7 @@ public class SquareActivity extends AppCompatActivity {
         List<View> dots = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             int dotId = addDot(linearLayout, backgount);
-            dots.add(findViewById(dotId));
+            dots.add(getActivity().findViewById(dotId));
         }
         return dots;
     }

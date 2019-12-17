@@ -45,7 +45,7 @@ public class RegActivity extends AppCompatActivity {
         photoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegActivity.this, ReleaseDynamics.class);
+                Intent intent = new Intent(RegActivity.this, ReleaseDynamicsActivity.class);
                 startActivity(intent);
             }
         });
