@@ -124,6 +124,7 @@ public class ProfileFragment extends Fragment {
         ImageView imageView;
         FrameLayout frame=(FrameLayout)view.findViewById(R.id.frameLayout);
 
+        userId = 190001;
         int[] provinces = new int[32];//32个省市，去过置1，没去过置0
         provinces = DbHelper.getInstance().getProvices(userId);
 
