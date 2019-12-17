@@ -15,18 +15,23 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 
 import java.io.File;
@@ -46,7 +51,7 @@ import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
 import com.example.littleworld.util.ToastUtil;
 
-public class ReleaseDynamics extends AppCompatActivity {
+public class ReleaseDynamics extends Fragment {
     public static final int TAKE_PHOTO = 1;
 
     public static final int CHOOSE_PHOTO = 2;
@@ -79,19 +84,19 @@ public class ReleaseDynamics extends AppCompatActivity {
                     String street = new String(amapLocation.getStreet());//街道信息
                     String number = new String(amapLocation.getStreetNum());//街道门牌号信息
 
-                    TextView text1=(TextView)findViewById(R.id.add_place);
+                    TextView text1=(TextView)getActivity().findViewById(R.id.add_place);
                     text1.setText(address);
                     location = address;
                     deactivate();//定位成功就停止定位
                 }else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                     String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
-                    TextView text=(TextView)findViewById(R.id.add_place);
+                    TextView text=(TextView)getActivity().findViewById(R.id.add_place);
                     text.setText("定位错误");
                     Log.e("AmapError","location Error, ErrCode:"
                             + amapLocation.getErrorCode() + ", errInfo:"
                             + amapLocation.getErrorInfo());
-                    ToastUtil.show(ReleaseDynamics.this,  errText);
+                    ToastUtil.show(getActivity(),  errText);
 
                     deactivate();//停止定位
                 }
@@ -102,21 +107,21 @@ public class ReleaseDynamics extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_notes);
+        View layout = inflater.inflate(R.layout.activity_new_notes, container, false);
 
         //初始化定位
-        mLocationClient = new AMapLocationClient(getApplicationContext());
+        mLocationClient = new AMapLocationClient(getActivity().getApplicationContext());
         //设置定位回调监听
         mLocationClient.setLocationListener(mLocationListener);
         //初始化定位
         initLocation();
 
         //复选+按钮
-        final ImageButton add_pictures=findViewById(R.id.add_pictures);
+        final ImageButton add_pictures=layout.findViewById(R.id.add_pictures);
         //显示图片
-        picture = findViewById(R.id.picture);
+        picture = layout.findViewById(R.id.picture);
 
 //        点击加号选择照相机或者相册
         add_pictures.setOnClickListener(new View.OnClickListener() {
@@ -126,18 +131,19 @@ public class ReleaseDynamics extends AppCompatActivity {
             }
         });
 
-
+/*
         // 返回上一个界面
-        ImageButton backBtn=findViewById(R.id.new_note_ret);
+        ImageButton backBtn=layout.findViewById(R.id.new_note_ret);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ReleaseDynamics.this.finish();
             }
         });
+*/
 
 //        图片文件路径
-        String DATABASE_PATH=this.getApplicationContext().getFilesDir().toString()+"/IMAGE";
+        String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString()+"/IMAGE";
         fileDir = new File(DATABASE_PATH);//直接copy的LoginActivity里的路径
         // 如果目录不存在，创建这个目录
         if (!fileDir.exists())
@@ -150,7 +156,9 @@ public class ReleaseDynamics extends AppCompatActivity {
 //            fileDir.mkdir();
 //        }
 
-        Button noteSend = findViewById(R.id.note_send);
+        Button noteSend = layout.findViewById(R.id.note_send);
+        EditText input_notes = layout.findViewById(R.id.input_notes);
+        final String inputNotes = input_notes.getText().toString();
         noteSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,8 +166,6 @@ public class ReleaseDynamics extends AppCompatActivity {
                 if (bitmap != null && !bitmap.isRecycled()) {
                     bitmap.recycle();
                 }
-                EditText input_notes = findViewById(R.id.input_notes);
-                String inputNotes = input_notes.getText().toString();
 
                 //***添加时间
                 SimpleDateFormat nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//格式
@@ -171,7 +177,7 @@ public class ReleaseDynamics extends AppCompatActivity {
 //                ReleaseDynamics.this.finish();
             }
         });
-
+        return layout;
     }
 
     public String SaveFile(File fileDir){
@@ -187,10 +193,10 @@ public class ReleaseDynamics extends AppCompatActivity {
             fos.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 if (fos != null) {
@@ -199,7 +205,7 @@ public class ReleaseDynamics extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
             return fileDir + fileName + ".jpg";
         }
 
@@ -233,7 +239,7 @@ public class ReleaseDynamics extends AppCompatActivity {
 
     private void showPopupMenu(View view) {
         // View当前PopupMenu显示的相对View的位置
-        PopupMenu popupMenu = new PopupMenu(this, view);
+        PopupMenu popupMenu = new PopupMenu(getActivity(), view);
         // menu布局
         popupMenu.getMenuInflater().inflate(R.menu.popupwindow_camera_album, popupMenu.getMenu());
         // menu的item点击事件
@@ -242,13 +248,13 @@ public class ReleaseDynamics extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.takePhoto:
-                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                         openCamera();
                         return true;
                     case R.id.chooseFromAlbum:
-                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                        if (ContextCompat.checkSelfPermission(ReleaseDynamics.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                             ActivityCompat.requestPermissions(ReleaseDynamics.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, 1);
+                        Toast.makeText(getActivity().getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                             ActivityCompat.requestPermissions(getActivity(), new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, 1);
                          } else {
                              openAlbum();
                             }
@@ -271,7 +277,7 @@ public class ReleaseDynamics extends AppCompatActivity {
 
     public void openCamera(){
         // 创建File对象，用于存储拍照后的图片
-        File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
+        File outputImage = new File(getActivity().getExternalCacheDir(), "output_image.jpg");
         try {
             if (outputImage.exists()) {
                 outputImage.delete();
@@ -283,7 +289,7 @@ public class ReleaseDynamics extends AppCompatActivity {
         if (Build.VERSION.SDK_INT < 24) {
             imageUri = Uri.fromFile(outputImage);
         } else {
-            imageUri = FileProvider.getUriForFile(ReleaseDynamics.this, "com.example.ReleaseDynamics.FileProvider", outputImage);
+            imageUri = FileProvider.getUriForFile(getActivity(), "com.example.ReleaseDynamics.FileProvider", outputImage);
         }
         // 启动相机程序
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
@@ -304,7 +310,7 @@ public class ReleaseDynamics extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
                 } else {
-                    Toast.makeText(getApplicationContext(), "你拒绝了权限申请", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "你拒绝了权限申请", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
@@ -312,14 +318,14 @@ public class ReleaseDynamics extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case TAKE_PHOTO:
-                if (resultCode == RESULT_OK) {
+                if (resultCode == getActivity().RESULT_OK) {
                     try {
                         // 将拍摄的照片显示出来
-                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageUri));
                         picture.setImageBitmap(bitmap);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -327,7 +333,7 @@ public class ReleaseDynamics extends AppCompatActivity {
                 }
                 break;
             case CHOOSE_PHOTO:
-                if (resultCode == RESULT_OK) {
+                if (resultCode == getActivity().RESULT_OK) {
                     // 判断手机系统版本号
                     if (Build.VERSION.SDK_INT >= 19) {
                         // 4.4及以上系统使用这个方法处理图片
@@ -348,7 +354,7 @@ public class ReleaseDynamics extends AppCompatActivity {
         String imagePath = null;
         Uri uri = data.getData();
         Log.d("TAG", "handleImageOnKitKat: uri is " + uri);
-        if (DocumentsContract.isDocumentUri(this, uri)) {
+        if (DocumentsContract.isDocumentUri(getActivity(), uri)) {
             // 如果是document类型的Uri，则通过document id处理
             String docId = DocumentsContract.getDocumentId(uri);
             if("com.android.providers.media.documents".equals(uri.getAuthority())) {
@@ -378,7 +384,7 @@ public class ReleaseDynamics extends AppCompatActivity {
     private String getImagePath(Uri uri, String selection) {
         String path = null;
         // 通过Uri和selection来获取真实的图片路径
-        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
+        Cursor cursor = getActivity().getContentResolver().query(uri, null, selection, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
@@ -393,7 +399,7 @@ public class ReleaseDynamics extends AppCompatActivity {
             bitmap = BitmapFactory.decodeFile(imagePath);
             picture.setImageBitmap(bitmap);
         } else {
-            Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "failed to get image", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -401,7 +407,7 @@ public class ReleaseDynamics extends AppCompatActivity {
      * 方法必须重写
      */
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
     }
 
@@ -409,7 +415,7 @@ public class ReleaseDynamics extends AppCompatActivity {
      * 方法必须重写
      */
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         deactivate();
     }
@@ -418,7 +424,7 @@ public class ReleaseDynamics extends AppCompatActivity {
      * 方法必须重写
      */
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
@@ -426,7 +432,7 @@ public class ReleaseDynamics extends AppCompatActivity {
      * 方法必须重写
      */
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
     }
 
