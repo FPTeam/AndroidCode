@@ -17,4 +17,5 @@
     <color name="watermark_hint">#ccffffff</color>
     <color name="act_background">#EFEFEF</color>
     <color name="grey_background">#E6ECECEC</color>
+    <color name="theme">#33cccc</color>
 </resources>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class SettingsPasswordActivity extends AppCompatActivity{
 
@@ -51,7 +52,14 @@ public class SettingsPasswordActivity extends AppCompatActivity{
         intent.putExtra("newPassword", newPassword);
         startActivity(intent);
 
-
+        // 返回至上一界面
+        ImageButton backBtn=findViewById(R.id.imageButton);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingsPasswordActivity.this.finish();
+            }
+        });
     }
 }
 

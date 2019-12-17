@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import com.example.littleworld.R;
@@ -23,11 +24,12 @@ public class NavigationActivity extends AppCompatActivity {
 
         mytabs = (TabLayout)findViewById(R.id.mytab);
 
-        mytabs.addTab(mytabs.newTab().setText("首页").setIcon(R.mipmap.shouye));
-        mytabs.addTab(mytabs.newTab().setText("关注").setIcon(R.mipmap.xihuan));
-        mytabs.addTab(mytabs.newTab().setText("笔记").setIcon(R.mipmap.tianjia1));
-        mytabs.addTab(mytabs.newTab().setText("私信").setIcon(R.mipmap.tongzhi));
-        mytabs.addTab(mytabs.newTab().setText("关于我").setIcon(R.mipmap.wode));
+        mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.shouye));
+        mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.sousuo));
+        mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.tianjia1));
+        mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.tongzhi));
+        mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.shezhi2));
+        mytabs.setTabIconTint(getResources().getColorStateList(R.color.bottom_nevigation));
         mytabs.getTabAt(1).select();
 
         //       给ViewPager创建适配器，将Title和Fragment添加进ViewPager中

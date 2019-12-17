@@ -6,13 +6,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.littleworld.NewMegActivity;
+import com.example.littleworld.PassageActivity;
 import com.example.littleworld.ReleaseDynamicsActivity;
+import com.example.littleworld.SettingsActivity;
 import com.example.littleworld.SquareActivity;
 
 public class NavigationPagerAdapter extends FragmentPagerAdapter {
     //fragment的数量
     int nNumOfTabs;
     private ViewPager pvp;
+    Fragment fragment;
 
     public NavigationPagerAdapter(FragmentManager fm, int nNumOfTabs, ViewPager pvp )
     {
@@ -29,11 +33,11 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         //return NavigationFragment.newInstance(position,pvp);
 //        Fragment fragment = new FollowFragment();
-        Fragment fragment = new NavigationFragment();
+ //       Fragment fragment = new NavigationFragment();
         switch (position)
         {
             case 0: //关注
-//                fragment = new SquareActivity();
+                fragment = new PassageActivity();
                 break;
             case 1: //广场
                 fragment = new SquareActivity();
@@ -42,8 +46,10 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
                 fragment = new ReleaseDynamicsActivity();
                 break;
             case 3: //私信
+                fragment = new NewMegActivity();
                 break;
-            case 4: //关于我
+            case 4: //设置
+                fragment = new SettingsActivity();
                 break;
 
         }

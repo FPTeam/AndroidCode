@@ -14,15 +14,6 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="#33CCCC"
-        android:contentDescription="@android:string/cancel"
-        android:tint="#FFFFFF"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
-
     <TextView
         android:id="@+id/settingsHead"
         android:layout_width="match_parent"

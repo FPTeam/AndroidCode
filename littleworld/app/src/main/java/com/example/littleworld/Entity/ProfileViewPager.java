@@ -1,4 +1,4 @@
-package com.example.littleworld;
+package com.example.littleworld.Entity;
 
 import android.content.Context;
 import android.util.AttributeSet;

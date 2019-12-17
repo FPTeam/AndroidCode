@@ -11,35 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <TextView
+            android:id="@+id/accounts"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#33CCCC"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme">
+            android:padding="10dp"
+            android:text="@string/new_notes"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/accounts"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#33CCCC"
-                android:padding="10dp"
-                android:text="@string/new_notes"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-        </androidx.appcompat.widget.Toolbar>
-
-
-        <ImageButton
-            android:id="@+id/new_note_ret"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="#33CCCC"
-            android:contentDescription="@android:string/cancel"
-            android:tint="#FFFFFF"
-            app:srcCompat="?attr/actionModeCloseDrawable" />
 
         <Button
             android:id="@+id/note_send"
@@ -84,11 +66,11 @@
             android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
             android:layout_marginStart="10dp" />
-        <ImageView
+
+        <ImageButton
             android:id="@+id/add_pictures"
             android:layout_width="120dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
             android:background="#00FFFFFF"
             app:srcCompat="@mipmap/add_picture" />
     </LinearLayout>

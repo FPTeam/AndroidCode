@@ -277,6 +277,7 @@ public class DbHelper{
         db.close();
     }
 
+    /*
     //    传参说明：用户号userid，原用户密码password
     public boolean testPassword(Integer userid,String password)//验证密码
     {
@@ -289,4 +290,6 @@ public class DbHelper{
         login3.close();
         return false;
     }
+
+     */
 }

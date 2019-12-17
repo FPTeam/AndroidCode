@@ -1,12 +1,16 @@
 package com.example.littleworld;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.example.littleworld.Adapter.passageAdapter;
@@ -24,19 +28,17 @@ import java.util.List;
  *
  */
 
-public class PassageActivity extends AppCompatActivity{
+public class PassageActivity extends Fragment {
 
     private List<passage> passageList = new ArrayList<>();
     SearchView searchView;
 
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_msg);
+        View layout = inflater.inflate(R.layout.activity_follow, container, false);
 
-        searchView = (SearchView) findViewById(R.id.searchView_f);
+        searchView = (SearchView) layout.findViewById(R.id.searchView_f);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 当点击搜索按钮时触发该方法
@@ -65,12 +67,14 @@ public class PassageActivity extends AppCompatActivity{
 
         initpassage();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         Log.d("列表", passageList.toString());
-        passageAdapter adapter = new passageAdapter(this,passageList);
+        passageAdapter adapter = new passageAdapter(getActivity(),passageList);
         recyclerView.setAdapter(adapter);
+
+        return layout;
     }
 
 /*

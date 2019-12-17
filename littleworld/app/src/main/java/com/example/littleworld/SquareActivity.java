@@ -1,6 +1,5 @@
 package com.example.littleworld;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -11,15 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+
+import com.example.littleworld.Adapter.SquarePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,8 @@ import java.util.List;
 public class SquareActivity extends Fragment {
     private ViewPager mViewPager;
     private TextView mTvPagerTitle;
+    private SearchView searchView;
+    View layout;
 
     private ImageView places;//景点按钮
     private ImageView hotels;//酒店按钮
@@ -48,7 +50,7 @@ public class SquareActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View layout = inflater.inflate(R.layout.activity_new_notes, container, false);
+        layout = inflater.inflate(R.layout.activity_square, container, false);
         init();
         return layout;
     }
@@ -58,15 +60,16 @@ public class SquareActivity extends Fragment {
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void init() {
-        mViewPager = (ViewPager) getActivity().findViewById(R.id.img_changer);
-        mTvPagerTitle = (TextView) getActivity().findViewById(R.id.tv_pager_title);
+        mViewPager = (ViewPager) layout.findViewById(R.id.img_changer);
+        mTvPagerTitle = (TextView) layout.findViewById(R.id.tv_pager_title);
+
         initData();//初始化数据
         initView();//初始化View，设置适配器
         autoPlayView();//开启线程，自动播放
 
-        places = (ImageView) getActivity().findViewById(R.id.places);
-        hotels = (ImageView) getActivity().findViewById(R.id.hotels);
-        more = (ImageView) getActivity().findViewById(R.id.more);
+        places = (ImageView) layout.findViewById(R.id.places);
+        hotels = (ImageView) layout.findViewById(R.id.hotels);
+        more = (ImageView) layout.findViewById(R.id.more);
 
         places.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +117,8 @@ public class SquareActivity extends Fragment {
         }
 
         //添加轮播点
-        LinearLayout linearLayoutDots = (LinearLayout) getActivity().findViewById(R.id.lineLayout_dot);
-        mDots = addDots(linearLayoutDots, fromResToDrawable(getActivity(), R.drawable.change_points), mImageList.size());//其中fromResToDrawable()方法是我自定义的，目的是将资源文件转成Drawable
+//        LinearLayout linearLayoutDots = (LinearLayout) getActivity().findViewById(R.id.lineLayout_dot);
+//        mDots = addDots(linearLayoutDots, fromResToDrawable(getActivity(), R.drawable.change_points), mImageList.size());//其中fromResToDrawable()方法是我自定义的，目的是将资源文件转成Drawable
     }
 
     //图片点击事件
@@ -155,6 +158,7 @@ public class SquareActivity extends Fragment {
                 int newPosition = position % mImageList.size();
                 // 把当前选中的点给切换了, 还有描述信息也切换
                 mTvPagerTitle.setText(mImageTitles[newPosition]);//图片下面设置显示文本
+                /*
                 //设置轮播点
                 LinearLayout.LayoutParams newDotParams = (LinearLayout.LayoutParams) mDots.get(newPosition).getLayoutParams();
                 newDotParams.width = 24;
@@ -163,7 +167,7 @@ public class SquareActivity extends Fragment {
                 LinearLayout.LayoutParams oldDotParams = (LinearLayout.LayoutParams) mDots.get(previousPosition).getLayoutParams();
                 oldDotParams.width = 16;
                 oldDotParams.height = 16;
-
+                */
                 // 把当前的索引赋值给前一个索引变量, 方便下一次再切换.
                 previousPosition = newPosition;
 
@@ -228,7 +232,7 @@ public class SquareActivity extends Fragment {
      * @param linearLayout 添加到LinearLayout布局
      * @param backgount    设置
      * @return
-     */
+     *
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public int addDot(final LinearLayout linearLayout, Drawable backgount) {
@@ -252,7 +256,7 @@ public class SquareActivity extends Fragment {
      * @param backgount
      * @param number
      * @return
-     */
+     *
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public List<View> addDots(final LinearLayout linearLayout, Drawable backgount, int number) {
@@ -262,5 +266,5 @@ public class SquareActivity extends Fragment {
             dots.add(getActivity().findViewById(dotId));
         }
         return dots;
-    }
+    }*/
 }

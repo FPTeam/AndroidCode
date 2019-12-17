@@ -20,31 +20,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity">
+        <activity android:name=".LoginActivity"
+            android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- Made By BaiYunpeng -->
-        <activity android:name=".SettingsAccountsActivity" />
-        <activity android:name=".SettingsContactusActivity"></activity>
-        <activity android:name=".SettingsPrivacyActivity" />
-        <activity android:name=".SettingsPasswordActivity" /> <!-- Made By BaiYunpeng -->
+        <activity android:name=".SettingsAccountsActivity"
+            android:theme="@style/SettingTheme"/>
+        <activity android:name=".SettingsContactusActivity"
+            android:theme="@style/SettingTheme"></activity>
+        <activity android:name=".SettingsPrivacyActivity"
+            android:theme="@style/SettingTheme"/>
+        <activity android:name=".SettingsPasswordActivity"
+            android:theme="@style/SettingTheme"/> <!-- Made By BaiYunpeng -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c81a9de35e36f1e46e5bd59dbb2ff67c" />
 
         <activity android:name=".MaskActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:theme="@style/LoginTheme">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity> <!-- 跟拍照相关的内容提供器 -->
+        <!-- 跟拍照相关的内容提供器 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.ReleaseDynamics.FileProvider"
@@ -57,10 +54,6 @@
 
         <activity
             android:name=".RegActivity"
-<<<<<<< HEAD
-            android:theme="@style/LoginTheme" />
-        <activity
-            android:name=".ReleaseDynamics"
             android:theme="@style/LoginTheme" />
         <activity
             android:name=".ProfileActivity"
@@ -71,31 +64,6 @@
         <activity
             android:name=".map.DriveRouteDetailActivity"
             android:theme="@style/ProfileTheme" /> <!-- <activity android:name=".NewNotes" -->
-        <!-- android:theme="@style/SettingTheme"></activity> -->
-=======
-            android:theme="@style/LoginTheme"></activity>
-
-        <activity android:name=".ReleaseDynamicsActivity"
-           android:theme="@style/LoginTheme"></activity>
-
-        <activity android:name=".ProfileActivity"
-            android:theme="@style/ProfileTheme">
-        </activity>
-        
-        <activity
-            android:name=".SquareActivity"
-            android:theme="@style/LoginTheme" />
-
-         <activity
-            android:name=".PassageActivity"
-            android:theme="@style/LoginTheme" />
-        
-        <activity android:name=".map.POI"
-            android:theme="@style/ProfileTheme">
-        </activity>
-        
-        <activity android:name=".map.DriveRouteDetailActivity"
-            android:theme="@style/ProfileTheme"></activity>
 
         <activity android:name=".map.Others"
             android:theme="@style/ProfileTheme"></activity>
@@ -107,10 +75,8 @@
             android:theme="@style/ProfileTheme"></activity>
 
         <activity android:name=".BottomMenu.NavigationActivity"
-            android:theme="@style/ProfileTheme"></activity>
+            android:theme="@style/SettingTheme"></activity>
 
-
->>>>>>> 09514ba4d435255ac3941d8162c72856e9b26780
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
     </application>

@@ -9,15 +9,26 @@
     tools:context=".SquareActivity">
 
 
-    <SearchView
-        android:id="@+id/searchView_s"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="#33cccc">
 
-        android:background="@drawable/search_view"
-        android:iconifiedByDefault="false"
-        android:minHeight="100dp"
-        android:queryHint="搜索感兴趣的内容" />
+        <SearchView
+            android:id="@+id/searchView_s"
+            android:layout_width="match_parent"
+
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/search_view"
+            android:baselineAligned="false"
+            android:clipToPadding="false"
+            android:iconifiedByDefault="false"
+            android:minHeight="100dp"
+            android:queryHint="搜索感兴趣的内容"
+            android:queryBackground="@null"
+            android:submitBackground="@null"/>
+    </FrameLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/img_changer"

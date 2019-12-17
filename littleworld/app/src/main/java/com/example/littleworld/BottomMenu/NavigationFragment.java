@@ -41,20 +41,20 @@ public class NavigationFragment extends Fragment {
                              Bundle savedInstanceState) {
         //根据mParam来判断当前展示的是哪一页，根据页数的不同展示不同的信息
         switch (mParam){
-            case 0:
+            case 0: //首页（关注）
+                view = inflater.inflate(R.layout.activity_follow, container, false);
+                break;
+            case 1: //广场
                 view = inflater.inflate(R.layout.activity_square, container, false);
                 break;
-            case 1:
-//                view = inflater.inflate(R.layout.activity_follow, container, false);
-                break;
-            case 2:
+            case 2: //发布动态
                 view = inflater.inflate(R.layout.activity_new_notes, container, false);
                 break;
-            case 3:
+            case 3: //私信
                 view = inflater.inflate(R.layout.activity_new_msg, container, false);
                 break;
-            case 4:
-                view = inflater.inflate(R.layout.profile_main, container, false);
+            case 4: //设置
+                view = inflater.inflate(R.layout.settings_main, container, false);
                 break;
             default:break;
         }

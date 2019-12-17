@@ -1,21 +1,20 @@
 package com.example.littleworld;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.littleworld.Adapter.ProfilePageAdapter;
+import com.example.littleworld.Entity.ProfileViewPager;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
-import android.widget.Toast;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -76,18 +75,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         viewPager.resetHeight(0);
-
-        /*
-        // 跳转至设置页面
-        ImageButton photoBtn=findViewById(R.id.settingsButton);
-        photoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(); // 待补充
-                startActivity(intent);
-            }
-        });
-        */
 
         // 返回至上一界面
         ImageButton backBtn=findViewById(R.id.backButton);

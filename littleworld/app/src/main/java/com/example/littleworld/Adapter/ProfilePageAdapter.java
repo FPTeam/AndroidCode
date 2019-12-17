@@ -1,9 +1,12 @@
-package com.example.littleworld;
+package com.example.littleworld.Adapter;
 
 import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.example.littleworld.ProfileFragment;
+import com.example.littleworld.Entity.ProfileViewPager;
 
 public class ProfilePageAdapter extends FragmentStatePagerAdapter {
 

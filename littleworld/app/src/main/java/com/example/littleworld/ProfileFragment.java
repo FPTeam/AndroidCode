@@ -10,7 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.littleworld.Entity.ProfileViewPager;
 
 public class ProfileFragment extends Fragment {
 
@@ -51,21 +51,6 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        // 添加按钮事件
-        // 示例：返回按钮，可删除
-        Button button_test = getActivity().findViewById(R.id.backTest);
-        button_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -75,6 +60,16 @@ public class ProfileFragment extends Fragment {
                 // 显示动态部分的fragment layout
                 view=inflater.inflate(R.layout.profile_fragment_posts, container, false);
                 pvp.setObjectForPosition(view,0);
+
+                // 添加按钮事件
+                // 示例：返回按钮，可删除
+                Button button_test = view.findViewById(R.id.backTest);
+                button_test.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().finish();
+                    }
+                });
 
                 // 示例：显示文字，可删除
                 detail_text = view.findViewById(R.id.detail_info);
