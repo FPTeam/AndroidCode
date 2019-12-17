@@ -22,7 +22,7 @@ public class ProfileFragment extends Fragment {
     private int mParam;//用来表示当前需要展示的是哪一页
     private TextView detail_text;//展示的具体内容，这里为了简单只用一个TextView意思一下
     private TextView userId_text; //用户ID
-    private int userId; //用户ID
+    private int userId = 190001; //用户ID
     private TextView userSex_text; //用户性别
     private TextView userIntro_text; //用户介绍
     private View view;

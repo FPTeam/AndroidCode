@@ -57,6 +57,7 @@
 
         <activity
             android:name=".RegActivity"
+<<<<<<< HEAD
             android:theme="@style/LoginTheme" />
         <activity
             android:name=".ReleaseDynamics"
@@ -71,6 +72,45 @@
             android:name=".map.DriveRouteDetailActivity"
             android:theme="@style/ProfileTheme" /> <!-- <activity android:name=".NewNotes" -->
         <!-- android:theme="@style/SettingTheme"></activity> -->
+=======
+            android:theme="@style/LoginTheme"></activity>
+
+        <activity android:name=".ReleaseDynamicsActivity"
+           android:theme="@style/LoginTheme"></activity>
+
+        <activity android:name=".ProfileActivity"
+            android:theme="@style/ProfileTheme">
+        </activity>
+        
+        <activity
+            android:name=".SquareActivity"
+            android:theme="@style/LoginTheme" />
+
+         <activity
+            android:name=".PassageActivity"
+            android:theme="@style/LoginTheme" />
+        
+        <activity android:name=".map.POI"
+            android:theme="@style/ProfileTheme">
+        </activity>
+        
+        <activity android:name=".map.DriveRouteDetailActivity"
+            android:theme="@style/ProfileTheme"></activity>
+
+        <activity android:name=".map.Others"
+            android:theme="@style/ProfileTheme"></activity>
+
+        <activity android:name=".map.Places"
+            android:theme="@style/ProfileTheme"></activity>
+
+        <activity android:name=".map.Hotel"
+            android:theme="@style/ProfileTheme"></activity>
+
+        <activity android:name=".BottomMenu.NavigationActivity"
+            android:theme="@style/ProfileTheme"></activity>
+
+
+>>>>>>> 09514ba4d435255ac3941d8162c72856e9b26780
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
     </application>
