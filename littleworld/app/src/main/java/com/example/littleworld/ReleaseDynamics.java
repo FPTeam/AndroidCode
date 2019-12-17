@@ -44,6 +44,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
+import com.example.littleworld.util.ToastUtil;
 
 public class ReleaseDynamics extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
@@ -58,6 +59,7 @@ public class ReleaseDynamics extends AppCompatActivity {
 //    保存的文件路径
     private File fileDir;
 
+    private String location;
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -78,17 +80,18 @@ public class ReleaseDynamics extends AppCompatActivity {
                     String number = new String(amapLocation.getStreetNum());//街道门牌号信息
 
                     TextView text1=(TextView)findViewById(R.id.add_place);
-                    text1.append(address);
-
+                    text1.setText(address);
+                    location = address;
                     deactivate();//定位成功就停止定位
                 }else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                     String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
                     TextView text=(TextView)findViewById(R.id.add_place);
-                    text.append("定位错误");
+                    text.setText("定位错误");
                     Log.e("AmapError","location Error, ErrCode:"
                             + amapLocation.getErrorCode() + ", errInfo:"
                             + amapLocation.getErrorInfo());
+                    ToastUtil.show(ReleaseDynamics.this,  errText);
 
                     deactivate();//停止定位
                 }
@@ -164,7 +167,7 @@ public class ReleaseDynamics extends AppCompatActivity {
                 Date date = new Date(System.currentTimeMillis());//当前设备的时间
                 String timestr = nowtime.format(date);//转换为字符串
 
-                DbHelper.getInstance().insertPassage( 190001,inputNotes,imgPath,timestr,null,"武汉");
+                DbHelper.getInstance().insertPassage( 190001,inputNotes,imgPath,timestr,null,location);
 //                ReleaseDynamics.this.finish();
             }
         });
