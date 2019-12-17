@@ -34,7 +34,7 @@ public class PassageActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_notes);
+        setContentView(R.layout.activity_new_msg);
 
         searchView = (SearchView) findViewById(R.id.searchView_f);
 
