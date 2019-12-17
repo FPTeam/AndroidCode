@@ -54,7 +54,7 @@
             android:name=".RegActivity"
             android:theme="@style/LoginTheme"></activity>
 
-        <activity android:name=".ReleaseDynamics"
+        <activity android:name=".ReleaseDynamicsActivity"
            android:theme="@style/LoginTheme">
 
         </activity>

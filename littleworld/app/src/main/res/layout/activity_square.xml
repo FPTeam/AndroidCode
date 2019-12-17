@@ -19,45 +19,45 @@
         android:minHeight="100dp"
         android:queryHint="搜索感兴趣的内容" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/img_changer"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/img_changer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dip"
+        android:layout_gravity="bottom"
+        android:background="#33515151"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/tv_pager_title"
+            android:layout_width="0dp"
+            android:layout_height="35dip"
+            android:layout_weight="8"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dip"
+            android:text="title"
+            android:textColor="@color/white" />
+        <!--用来动态添加轮播小点-->
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dip"
-            android:layout_gravity="bottom"
-            android:background="#33515151"
-            android:gravity="center_vertical"
+            android:id="@+id/lineLayout_dot"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="2"
+            android:gravity="center|right"
             android:orientation="horizontal"
-            android:weightSum="10">
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"/>
 
-            <TextView
-                android:id="@+id/tv_pager_title"
-                android:layout_width="0dp"
-                android:layout_height="35dip"
-                android:layout_weight="8"
-                android:gravity="center_vertical"
-                android:paddingLeft="8dip"
-                android:text="title"
-                android:textColor="@color/white" />
-            <!--用来动态添加轮播小点-->
-
-            <LinearLayout
-                android:id="@+id/lineLayout_dot"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:layout_weight="2"
-                android:gravity="center|right"
-                android:orientation="horizontal"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"/>
-
-        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
