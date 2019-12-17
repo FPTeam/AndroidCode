@@ -36,7 +36,7 @@ public class PassageActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_notes);
 
-        searchView = (SearchView) findViewById(R.id.searchView_m);
+        searchView = (SearchView) findViewById(R.id.searchView_f);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 当点击搜索按钮时触发该方法
@@ -65,7 +65,7 @@ public class PassageActivity extends AppCompatActivity{
 
         initpassage();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.searchView_f);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         Log.d("列表", passageList.toString());
