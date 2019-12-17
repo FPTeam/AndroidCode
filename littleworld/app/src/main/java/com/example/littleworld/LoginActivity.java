@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LoginActivity.this.finish();
-               // Intent intent = new Intent(LoginActivity.this, ReleaseDynamics.class);
+                //Intent intent = new Intent(LoginActivity.this, SquareActivity.class);
                 //startActivity(intent);
             }
         });

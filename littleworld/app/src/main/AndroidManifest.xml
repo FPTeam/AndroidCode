@@ -78,6 +78,15 @@
         <activity android:name=".map.DriveRouteDetailActivity"
             android:theme="@style/ProfileTheme"></activity>
 
+        <activity android:name=".map.Others"
+            android:theme="@style/ProfileTheme"></activity>
+
+        <activity android:name=".map.Places"
+            android:theme="@style/ProfileTheme"></activity>
+
+        <activity android:name=".map.Hotel"
+            android:theme="@style/ProfileTheme"></activity>
+
 <!--        <activity android:name=".NewNotes"-->
 <!--                  android:theme="@style/SettingTheme"></activity>-->
 

@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,6 +52,7 @@ import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
 import com.example.littleworld.R;
+import com.example.littleworld.ReleaseDynamics;
 import com.example.littleworld.overlay.PoiOverlay;
 import com.example.littleworld.overlay.DrivingRouteOverLay;
 import com.example.littleworld.util.AMapUtil;
@@ -62,12 +64,12 @@ import java.util.List;
 /**
  * poi并在地图上标识,OK
  */
-public class Hotel extends AppCompatActivity implements
+public class Places extends AppCompatActivity implements
         OnMarkerClickListener, InfoWindowAdapter,
         OnPoiSearchListener, OnClickListener, InputtipsListener, RouteSearch.OnRouteSearchListener {
     private AMap aMap;
     private AutoCompleteTextView searchText;// 输入搜索关键字
-    private String keyWord = "酒店";// 要输入的poi搜索关键字
+    private String keyWord = "景点";// 要输入的poi搜索关键字
     private ProgressDialog progDialog = null;// 搜索时进度条
     private String cityCode;// 要输入的城市名字或者城市区号
     private boolean success =false;//定位成功标志
@@ -78,7 +80,7 @@ public class Hotel extends AppCompatActivity implements
     private MapView mapView;
     private ArrayList<Marker> trip_Marker_list = new ArrayList<Marker>();//用户选择希望去的地点
     private ArrayList<Marker> through_marker = new ArrayList<Marker>();//途经点marker
-    private int mode = 1;//选择查询景区mode=0，其他mode=1
+    private int mode = 0;//mode=0时mark信息框上是添加图标，其他情况是导航图标
     private LatLonPoint mStartPoint;//路线起点
     private LatLonPoint mEndPoint;//路线终点
     private DriveRouteResult mDriveRouteResult;//驾车路线查询结果
@@ -116,11 +118,17 @@ public class Hotel extends AppCompatActivity implements
                     startMarker = new Marker(myLocation);
                     deactivate();//定位成功就停止定位
 
+                    LinearLayout list;
                     LinearLayout option;
+                    Button aPlan;
+
+                    list=(LinearLayout)findViewById(R.id.interest_list);
+                    list.setVisibility(View.VISIBLE);
                     option=(LinearLayout)findViewById(R.id.option_list);
                     option.setVisibility(View.VISIBLE);
-
-                    hotelButton();
+                    aPlan = (Button)findViewById(R.id.plan);
+                    aPlan.setVisibility(View.VISIBLE);
+                    interestButton();
 
                 }else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
@@ -128,7 +136,7 @@ public class Hotel extends AppCompatActivity implements
                     Log.e("AmapError","location Error, ErrCode:"
                             + amapLocation.getErrorCode() + ", errInfo:"
                             + amapLocation.getErrorInfo());
-                    ToastUtil.show(Hotel.this,  errText);
+                    ToastUtil.show(Places.this,  errText);
                 }
             }
         }
@@ -137,7 +145,7 @@ public class Hotel extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hotel);
+        setContentView(R.layout.places);
         mContext = this.getApplicationContext();
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
@@ -189,7 +197,8 @@ public class Hotel extends AppCompatActivity implements
 
         Button nextButton = (Button) findViewById(R.id.nextButton);//下一页
         nextButton.setOnClickListener(this);
-
+        Button planButton = (Button) findViewById(R.id.plan);//规划旅途
+        planButton.setOnClickListener(this);
         aMap.setOnMarkerClickListener(this);// 添加点击marker监听事件
         aMap.setInfoWindowAdapter(this);// 添加显示infowindow监听事件
     }
@@ -220,7 +229,7 @@ public class Hotel extends AppCompatActivity implements
                 query.setPageNum(currentPage);// 设置查后一页
                 poiSearch.searchPOIAsyn();
             } else {
-                ToastUtil.show(Hotel.this,
+                ToastUtil.show(Places.this,
                         R.string.no_result);
             }
         }
@@ -231,7 +240,7 @@ public class Hotel extends AppCompatActivity implements
      */
     public void planButton() {
         if(trip_Marker_list.size()<1)
-            ToastUtil.show(Hotel.this, "您未选择任何景点！");
+            ToastUtil.show(Places.this, "您未选择任何景点！");
         else{
             planTrip();
         }
@@ -243,7 +252,7 @@ public class Hotel extends AppCompatActivity implements
     public void planTrip(){
 
         if (mStartPoint == null) {
-            ToastUtil.show(Hotel.this, "定位中，稍后再试...");
+            ToastUtil.show(Places.this, "定位中，稍后再试...");
             return;
         }
 
@@ -591,7 +600,7 @@ public class Hotel extends AppCompatActivity implements
                     + cities.get(i).getCityCode() + "城市编码:"
                     + cities.get(i).getAdCode() + "\n";
         }
-        ToastUtil.show(Hotel.this, infomation);
+        ToastUtil.show(Places.this, infomation);
 
     }
 
@@ -621,16 +630,16 @@ public class Hotel extends AppCompatActivity implements
                             && suggestionCities.size() > 0) {
                         showSuggestCity(suggestionCities);
                     } else {
-                        ToastUtil.show(Hotel.this,
+                        ToastUtil.show(Places.this,
                                 R.string.no_result);
                     }
                 }
             } else {
-                ToastUtil.show(Hotel.this,
+                ToastUtil.show(Places.this,
                         R.string.no_result);
             }
         } else {
-            ToastUtil.showerror(Hotel.this, rCode);
+            ToastUtil.showerror(Places.this, rCode);
         }
 
     }
@@ -650,13 +659,24 @@ public class Hotel extends AppCompatActivity implements
         LinearLayout option;
         Button aPlan;
         switch (v.getId()) {
-
-
             /**
              * 点击下一页按钮
              */
             case R.id.nextButton:
                 nextButton();
+                break;
+            /**
+             * 点击一键规划按钮
+             */
+            case R.id.plan:
+                mode = 1;
+                list=(LinearLayout)findViewById(R.id.interest_list);
+                list.setVisibility(View.VISIBLE);
+                option=(LinearLayout)findViewById(R.id.option_list);
+                option.setVisibility(View.VISIBLE);
+                aPlan = (Button)findViewById(R.id.plan);
+                aPlan.setVisibility(View.VISIBLE);
+                planButton();
                 break;
             default:
                 break;
@@ -678,7 +698,7 @@ public class Hotel extends AppCompatActivity implements
             searchText.setAdapter(aAdapter);
             aAdapter.notifyDataSetChanged();
         } else {
-            ToastUtil.showerror(Hotel.this, rCode);
+            ToastUtil.showerror(Places.this, rCode);
         }
 
 

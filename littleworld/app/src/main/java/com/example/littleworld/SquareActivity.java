@@ -2,6 +2,7 @@ package com.example.littleworld;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,10 @@ import java.util.List;
 public class SquareActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TextView mTvPagerTitle;
+
+    private ImageView places;//景点按钮
+    private ImageView hotels;//酒店按钮
+    private ImageView more;//其他按钮
 
     private List<ImageView> mImageList;//轮播的图片集合
     private String[] mImageTitles;//标题集合
@@ -54,6 +59,34 @@ public class SquareActivity extends AppCompatActivity {
         initData();//初始化数据
         initView();//初始化View，设置适配器
         autoPlayView();//开启线程，自动播放
+
+        places = (ImageView) findViewById(R.id.places);
+        hotels = (ImageView) findViewById(R.id.hotels);
+        more = (ImageView) findViewById(R.id.more);
+
+        places.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 Intent intent = new Intent(SquareActivity.this, com.example.littleworld.map.Places.class);
+                 startActivity(intent);
+            }
+        });
+
+        hotels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SquareActivity.this, com.example.littleworld.map.Hotel.class);
+                startActivity(intent);
+            }
+        });
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SquareActivity.this, com.example.littleworld.map.Others.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
