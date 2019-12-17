@@ -15,23 +15,18 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
 
 
 import java.io.File;
@@ -49,8 +44,9 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
+import com.example.littleworld.util.ToastUtil;
 
-public class ReleaseDynamics extends Fragment {
+public class ReleaseDynamics extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
 
     public static final int CHOOSE_PHOTO = 2;
@@ -63,93 +59,15 @@ public class ReleaseDynamics extends Fragment {
 //    保存的文件路径
     private File fileDir;
 
+    private String location;
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption mLocationOption = null;
     //声明定位回调监听器
-
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        final View layout = inflater.inflate(R.layout.activity_new_notes, container, false);
-
-        //初始化定位
-        mLocationClient = new AMapLocationClient(getActivity().getApplicationContext());
-        //设置定位回调监听
-        mLocationClient.setLocationListener(mLocationListener);
-        //初始化定位
-        initLocation();
-
-        //复选+按钮
-        final ImageButton add_pictures=layout.findViewById(R.id.add_pictures);
-        //显示图片
-        picture = layout.findViewById(R.id.picture);
-
-//        点击加号选择照相机或者相册
-        add_pictures.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupMenu(add_pictures);
-            }
-        });
-
-
-//        // 返回上一个界面
-//        ImageButton backBtn=layout.findViewById(R.id.new_note_ret);
-//        backBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ReleaseDynamics.this.finish();
-//            }
-//        });
-
-//        图片文件路径
-        String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString()+"/IMAGE";
-        fileDir = new File(DATABASE_PATH);//直接copy的LoginActivity里的路径
-        // 如果目录不存在，创建这个目录
-        if (!fileDir.exists())
-            fileDir.mkdir();
-        /*
-          图片文件存SD卡里
-        File sdDir = Environment.getExternalStorageDirectory();
-        fileDir = new File(sdDir.getPath() + "/IMAGE");
-        if (!fileDir.exists()) {
-//            路径不存在则创建
-            fileDir.mkdir();
-        }
-        */
-
-
-        Button noteSend = layout.findViewById(R.id.note_send);
-        noteSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String imgPath = SaveFile(fileDir);
-                if (bitmap != null && !bitmap.isRecycled()) {
-                    bitmap.recycle();
-                }
-                EditText input_notes = layout.findViewById(R.id.input_notes);
-                String inputNotes = input_notes.getText().toString();
-
-                //***添加时间
-                SimpleDateFormat nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//格式
-                nowtime.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));// 中国北京时间，东八区
-                Date date = new Date(System.currentTimeMillis());//当前设备的时间
-                String timestr = nowtime.format(date);//转换为字符串
-
-                DbHelper.getInstance().insertPassage( 190001,inputNotes,imgPath,timestr,null,"武汉");
-//                ReleaseDynamics.this.finish();
-            }
-        });
-        return layout;
-    }
-
     public AMapLocationListener mLocationListener = new AMapLocationListener(){
         @Override
-
         public void onLocationChanged(AMapLocation amapLocation) {
             if (amapLocation != null) {
                 if (amapLocation.getErrorCode() == 0) {
@@ -160,18 +78,20 @@ public class ReleaseDynamics extends Fragment {
                     String block = new String(amapLocation.getDistrict());//城区信息
                     String street = new String(amapLocation.getStreet());//街道信息
                     String number = new String(amapLocation.getStreetNum());//街道门牌号信息
-                    TextView text1=(TextView)getActivity().findViewById(R.id.add_place);
-                    text1.append(address);
 
+                    TextView text1=(TextView)findViewById(R.id.add_place);
+                    text1.setText(address);
+                    location = address;
                     deactivate();//定位成功就停止定位
                 }else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                     String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
-                    TextView text=(TextView)getActivity().findViewById(R.id.add_place);
-                    text.append("定位错误");
+                    TextView text=(TextView)findViewById(R.id.add_place);
+                    text.setText("定位错误");
                     Log.e("AmapError","location Error, ErrCode:"
                             + amapLocation.getErrorCode() + ", errInfo:"
                             + amapLocation.getErrorInfo());
+                    ToastUtil.show(ReleaseDynamics.this,  errText);
 
                     deactivate();//停止定位
                 }
@@ -181,7 +101,78 @@ public class ReleaseDynamics extends Fragment {
 
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_notes);
 
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+        //初始化定位
+        initLocation();
+
+        //复选+按钮
+        final ImageButton add_pictures=findViewById(R.id.add_pictures);
+        //显示图片
+        picture = findViewById(R.id.picture);
+
+//        点击加号选择照相机或者相册
+        add_pictures.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(add_pictures);
+            }
+        });
+
+
+        // 返回上一个界面
+        ImageButton backBtn=findViewById(R.id.new_note_ret);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReleaseDynamics.this.finish();
+            }
+        });
+
+//        图片文件路径
+        String DATABASE_PATH=this.getApplicationContext().getFilesDir().toString()+"/IMAGE";
+        fileDir = new File(DATABASE_PATH);//直接copy的LoginActivity里的路径
+        // 如果目录不存在，创建这个目录
+        if (!fileDir.exists())
+            fileDir.mkdir();
+//          图片文件存SD卡里
+//        File sdDir = Environment.getExternalStorageDirectory();
+//        fileDir = new File(sdDir.getPath() + "/IMAGE");
+//        if (!fileDir.exists()) {
+////            路径不存在则创建
+//            fileDir.mkdir();
+//        }
+
+        Button noteSend = findViewById(R.id.note_send);
+        noteSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String imgPath = SaveFile(fileDir);
+                if (bitmap != null && !bitmap.isRecycled()) {
+                    bitmap.recycle();
+                }
+                EditText input_notes = findViewById(R.id.input_notes);
+                String inputNotes = input_notes.getText().toString();
+
+                //***添加时间
+                SimpleDateFormat nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//格式
+                nowtime.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));// 中国北京时间，东八区
+                Date date = new Date(System.currentTimeMillis());//当前设备的时间
+                String timestr = nowtime.format(date);//转换为字符串
+
+                DbHelper.getInstance().insertPassage( 190001,inputNotes,imgPath,timestr,null,location);
+//                ReleaseDynamics.this.finish();
+            }
+        });
+
+    }
 
     public String SaveFile(File fileDir){
 //        mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
@@ -196,10 +187,10 @@ public class ReleaseDynamics extends Fragment {
             fos.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(getActivity().getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(getActivity().getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 if (fos != null) {
@@ -208,7 +199,7 @@ public class ReleaseDynamics extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(getActivity().getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
             return fileDir + fileName + ".jpg";
         }
 
@@ -242,7 +233,7 @@ public class ReleaseDynamics extends Fragment {
 
     private void showPopupMenu(View view) {
         // View当前PopupMenu显示的相对View的位置
-        PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+        PopupMenu popupMenu = new PopupMenu(this, view);
         // menu布局
         popupMenu.getMenuInflater().inflate(R.menu.popupwindow_camera_album, popupMenu.getMenu());
         // menu的item点击事件
@@ -251,13 +242,13 @@ public class ReleaseDynamics extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.takePhoto:
-                        Toast.makeText(getActivity().getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                         openCamera();
                         return true;
                     case R.id.chooseFromAlbum:
-                        Toast.makeText(getActivity().getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                             ActivityCompat.requestPermissions(getActivity(), new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, 1);
+                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        if (ContextCompat.checkSelfPermission(ReleaseDynamics.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                             ActivityCompat.requestPermissions(ReleaseDynamics.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, 1);
                          } else {
                              openAlbum();
                             }
@@ -280,7 +271,7 @@ public class ReleaseDynamics extends Fragment {
 
     public void openCamera(){
         // 创建File对象，用于存储拍照后的图片
-        File outputImage = new File(getActivity().getExternalCacheDir(), "output_image.jpg");
+        File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
         try {
             if (outputImage.exists()) {
                 outputImage.delete();
@@ -292,7 +283,7 @@ public class ReleaseDynamics extends Fragment {
         if (Build.VERSION.SDK_INT < 24) {
             imageUri = Uri.fromFile(outputImage);
         } else {
-            imageUri = FileProvider.getUriForFile(getActivity(), "com.example.ReleaseDynamics.FileProvider", outputImage);
+            imageUri = FileProvider.getUriForFile(ReleaseDynamics.this, "com.example.ReleaseDynamics.FileProvider", outputImage);
         }
         // 启动相机程序
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
@@ -313,7 +304,7 @@ public class ReleaseDynamics extends Fragment {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "你拒绝了权限申请", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "你拒绝了权限申请", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
@@ -321,14 +312,14 @@ public class ReleaseDynamics extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case TAKE_PHOTO:
-                if (resultCode == getActivity().RESULT_OK) {
+                if (resultCode == RESULT_OK) {
                     try {
                         // 将拍摄的照片显示出来
-                        bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageUri));
+                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                         picture.setImageBitmap(bitmap);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -336,7 +327,7 @@ public class ReleaseDynamics extends Fragment {
                 }
                 break;
             case CHOOSE_PHOTO:
-                if (resultCode == getActivity().RESULT_OK) {
+                if (resultCode == RESULT_OK) {
                     // 判断手机系统版本号
                     if (Build.VERSION.SDK_INT >= 19) {
                         // 4.4及以上系统使用这个方法处理图片
@@ -357,7 +348,7 @@ public class ReleaseDynamics extends Fragment {
         String imagePath = null;
         Uri uri = data.getData();
         Log.d("TAG", "handleImageOnKitKat: uri is " + uri);
-        if (DocumentsContract.isDocumentUri(getActivity(), uri)) {
+        if (DocumentsContract.isDocumentUri(this, uri)) {
             // 如果是document类型的Uri，则通过document id处理
             String docId = DocumentsContract.getDocumentId(uri);
             if("com.android.providers.media.documents".equals(uri.getAuthority())) {
@@ -387,7 +378,7 @@ public class ReleaseDynamics extends Fragment {
     private String getImagePath(Uri uri, String selection) {
         String path = null;
         // 通过Uri和selection来获取真实的图片路径
-        Cursor cursor = getActivity().getContentResolver().query(uri, null, selection, null, null);
+        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
@@ -402,7 +393,7 @@ public class ReleaseDynamics extends Fragment {
             bitmap = BitmapFactory.decodeFile(imagePath);
             picture.setImageBitmap(bitmap);
         } else {
-            Toast.makeText(getActivity(), "failed to get image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -410,8 +401,7 @@ public class ReleaseDynamics extends Fragment {
      * 方法必须重写
      */
     @Override
-//    从protected改为了public,下同
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
     }
 
@@ -419,7 +409,7 @@ public class ReleaseDynamics extends Fragment {
      * 方法必须重写
      */
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
         deactivate();
     }
@@ -428,7 +418,7 @@ public class ReleaseDynamics extends Fragment {
      * 方法必须重写
      */
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
@@ -436,7 +426,7 @@ public class ReleaseDynamics extends Fragment {
      * 方法必须重写
      */
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
     }
 

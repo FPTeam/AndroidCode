@@ -97,28 +97,50 @@ public class DbHelper{
         while(curcity.moveToNext())
         {
             city=curcity.getString(6);
-            Log.d("city success!",city);
-            //for 每一个帖子 get城市city
-            /*{
-                //处理city字符串
-                //switch（city）
-                {
-                case city1:
-                    provinces[0] = 1;
-                    break;
-                case city1:
-                    provinces[0] = 1;
-                    break;
-                case city1:
-                    provinces[0] = 1;
-                    break;
-                case city1:
-                    provinces[0] = 1;
-                    break;
-            ...
-                defalut：；
-                }
-            }*/
+            String prefix = city.substring(0,2);
+            Log.d("city",city);
+            Log.d("prefix",prefix);
+            int[] provinceList= {R.mipmap.zhejiang,R.mipmap.xinjiang,R.mipmap.xizang,R.mipmap.yunnan,R.mipmap.taiwan,R.mipmap.tianjin,R.mipmap.sichuan,R.mipmap.shandong,
+                    R.mipmap.shanghai,R.mipmap.qinghai,R.mipmap.shan1xi,R.mipmap.shan3xi,R.mipmap.ningxia,R.mipmap.neimenggu,R.mipmap.liaoning,R.mipmap.jiangxi,
+                    R.mipmap.jilin,R.mipmap.jiangsu,R.mipmap.hubei,R.mipmap.hunan,R.mipmap.heilongjiang,R.mipmap.henan,R.mipmap.guizhou,R.mipmap.hainan,
+                    R.mipmap.hebei,R.mipmap.guangxi,R.mipmap.gansu,R.mipmap.guangdong,R.mipmap.chongqing,R.mipmap.fujian,R.mipmap.anhui,R.mipmap.beijing};
+
+            switch(prefix)
+            {
+                case "浙江":provinces[0]=1;break;
+                case "新疆":provinces[1]=1;break;
+                case "西藏":provinces[2]=1;break;
+                case "云南":provinces[3]=1;break;
+                case "台湾":provinces[4]=1;break;
+                case "天津":provinces[5]=1;break;
+                case "四川":provinces[6]=1;break;
+                case "山东":provinces[7]=1;break;
+                case "上海":provinces[8]=1;break;
+                case "青海":provinces[9]=1;break;
+                case "山西":provinces[10]=1;break;
+                case "陕西":provinces[11]=1;break;
+                case "宁夏":provinces[12]=1;break;
+                case "内蒙":provinces[13]=1;break;
+                case "辽宁":provinces[14]=1;break;
+                case "江西":provinces[15]=1;break;
+                case "吉林":provinces[16]=1;break;
+                case "江苏":provinces[17]=1;break;
+                case "湖北":provinces[18]=1;break;
+                case "湖南":provinces[19]=1;break;
+                case "黑龙":provinces[20]=1;break;
+                case "河南":provinces[21]=1;break;
+                case "贵州":provinces[22]=1;break;
+                case "海南":provinces[23]=1;break;
+                case "河北":provinces[24]=1;break;
+                case "广西":provinces[25]=1;break;
+                case "甘肃":provinces[26]=1;break;
+                case "广东":provinces[27]=1;break;
+                case "重庆":provinces[28]=1;break;
+                case "福建":provinces[29]=1;break;
+                case "安徽":provinces[30]=1;break;
+                case "北京":provinces[31]=1;break;
+                default:break;
+            }
         }
         curcity.close();
         return provinces;
