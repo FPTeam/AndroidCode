@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,15 +16,22 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -56,6 +64,8 @@ public class ReleaseDynamicsActivity extends Fragment {
 
     public static final int CHOOSE_PHOTO = 2;
 
+    ImageButton add_pictures;
+
     private ImageView picture;
 
     private Uri imageUri;
@@ -63,6 +73,14 @@ public class ReleaseDynamicsActivity extends Fragment {
     Bitmap bitmap;
 //    保存的文件路径
     private File fileDir;
+
+    // 声明PopupWindow
+    private PopupWindow popupWindow;
+    // 声明PopupWindow对应的视图
+    private View popupView;
+    // 声明平移动画
+    private TranslateAnimation animation;
+
 
     private String location;
 
@@ -118,7 +136,7 @@ public class ReleaseDynamicsActivity extends Fragment {
         initLocation();
 
         //复选+按钮
-        final ImageButton add_pictures=layout.findViewById(R.id.add_pictures);
+        add_pictures=layout.findViewById(R.id.add_pictures);
         //显示图片
         picture = layout.findViewById(R.id.picture);
 
@@ -126,7 +144,9 @@ public class ReleaseDynamicsActivity extends Fragment {
         add_pictures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopupMenu(add_pictures);
+//                showPopupMenu(add_pictures);
+                changeIcon();
+                lightoff();
             }
         });
 
@@ -178,6 +198,87 @@ public class ReleaseDynamicsActivity extends Fragment {
         });
         return layout;
     }
+
+    private void changeIcon() {
+        if (popupWindow == null) {
+            popupView = View.inflate(getActivity(), R.layout.camera_album, null);
+            // 参数2,3：指明popupwindow的宽度和高度
+            popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT);
+
+            popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    lighton();
+                }
+            });
+
+            // 设置背景图片， 必须设置，不然动画没作用
+            popupWindow.setBackgroundDrawable(new BitmapDrawable());
+            popupWindow.setFocusable(true);
+
+            // 设置点击popupwindow外屏幕其它地方消失
+            popupWindow.setOutsideTouchable(true);
+
+            // 平移动画相对于手机屏幕的底部开始，X轴不变，Y轴从1变0
+            animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0,
+                    Animation.RELATIVE_TO_PARENT, 1, Animation.RELATIVE_TO_PARENT, 0);
+            animation.setInterpolator(new AccelerateInterpolator());
+            animation.setDuration(200);
+
+            popupView.findViewById(R.id.tvTakePhoto).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 打开系统拍照程
+//                    Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    startActivityForResult(camera, CAMERA);
+                    openCamera();
+                    popupWindow.dismiss();
+                    lighton();
+                }
+            });
+            popupView.findViewById(R.id.tvSelectPhoto).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 打开系统图库选择图片
+//                    Intent picture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                    startActivityForResult(picture, PICTURE);
+                    openAlbum();
+                    popupWindow.dismiss();
+                    lighton();
+                }
+            });
+        }
+
+        // 在点击之后设置popupwindow的销毁
+        if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+            lighton();
+        }
+
+        // 设置popupWindow的显示位置，此处是在手机屏幕底部且水平居中的位置
+        popupWindow.showAtLocation(getActivity().findViewById(R.id.add_pictures), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        popupView.startAnimation(animation);
+    }
+    /**
+     * 设置手机屏幕亮度变暗
+     */
+    private void lightoff() {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = 0.3f;
+        getActivity().getWindow().setAttributes(lp);
+    }
+
+    /**
+     * 设置手机屏幕亮度显示正常
+     */
+    private void lighton() {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = 1f;
+        getActivity().getWindow().setAttributes(lp);
+    }
+
+
 
     public String SaveFile(File fileDir){
 //        mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
@@ -235,6 +336,8 @@ public class ReleaseDynamicsActivity extends Fragment {
         mLocationClient.startLocation();
 
     }
+
+
 
     private void showPopupMenu(View view) {
         // View当前PopupMenu显示的相对View的位置
