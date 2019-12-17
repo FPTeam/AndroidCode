@@ -129,4 +129,17 @@ public class DbHelper{
     {
         db.close();
     }
+
+    //    传参说明：用户号userid，原用户密码password
+    public boolean testPassword(Integer userid,String password)//验证密码
+    {
+        Cursor login3 = db.rawQuery("select userid from login where UserId=?and Password=?",new String[]{String.valueOf(userid),password});
+        if(login3.getCount()!=0)
+        {
+            login3.moveToNext();
+            return true;
+        }
+        login3.close();
+        return false;
+    }
 }

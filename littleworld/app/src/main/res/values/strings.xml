@@ -45,7 +45,7 @@
     <string name="privacy_setting">隐私设置</string>
     <string name="contact">联系我们</string>
     <string name="new_account">&#160;&#160;&#160;&#160;添加新账号</string>
-    <string name="logout">退出登录</string>
+    <string name="logout">确认修改</string>
     <string name="confirm">确&#160;&#160;&#160;&#160;定</string>
     <string name="old_password">请输入旧密码</string>
     <string name="new_password">请输入新密码</string>
