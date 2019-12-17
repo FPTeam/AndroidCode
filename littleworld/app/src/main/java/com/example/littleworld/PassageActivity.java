@@ -65,7 +65,7 @@ public class PassageActivity extends AppCompatActivity{
 
         initpassage();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.searchView_f);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         Log.d("列表", passageList.toString());
