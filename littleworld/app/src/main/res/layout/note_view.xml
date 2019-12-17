@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="clip_vertical"
     android:orientation="vertical">
 
@@ -12,14 +12,13 @@
         android:layout_height="100dp">
 
 
-        <ImageButton
+        <ImageView
             android:id="@+id/sculpture"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_weight="25"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_weight="25"/>
 
         <LinearLayout
             android:layout_width="245dp"
@@ -56,22 +55,23 @@
 
     <TextView
         android:id="@+id/content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_weight="1"
         android:gravity="start|top"
         android:outlineAmbientShadowColor="@color/white" />
 
     <ImageView
         android:id="@+id/note_img"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/img_like"
@@ -87,26 +87,31 @@
             android:layout_height="30dp"
             android:layout_gravity="right"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="80dp"
+            android:layout_marginRight="70dp"
             app:srcCompat="@mipmap/shoucang" />
 
         <TextView
             android:id="@+id/like_num"
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="30dp"
-            android:text="TextView" />
+            android:layout_marginRight="20dp" />
 
         <TextView
             android:id="@+id/star_num"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="110dp"
-            android:text="TextView" />
+            android:layout_marginRight="95dp" />
     </FrameLayout>
+
+    <View
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="#b2b2b2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
 
 </LinearLayout>
