@@ -16,10 +16,10 @@
         android:id="@+id/chooseFromAlbum"
         android:orderInCategory="2"
         android:title="@string/select_from_album"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/note_cancel"
         android:orderInCategory="3"
         android:title="取&#160;&#160;&#160;&#160;消"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
  </menu>
