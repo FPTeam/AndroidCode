@@ -81,10 +81,12 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
         holder.starNum.setText(passage.getCollectNumber());
         holder.likeNum.setText(passage.getLikeNumber());
 
-        Glide
+         Glide
                 .with(this.context)
                 .load(passage.getImgpath())
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
                 .into(holder.headImg);
+       
         Glide
                 .with(this.context)
                 .load(passage.getImgpath())
