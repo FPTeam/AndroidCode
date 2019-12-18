@@ -44,12 +44,10 @@
 
         <activity android:name=".MaskActivity" />
 
-        <activity android:name=".ReleaseDynamicsActivity"
-            android:theme="@style/LoginTheme"/>
         <!-- 跟拍照相关的内容提供器 -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.littleworld.ReleaseDynamicsActivity.FileProvider"
+            android:authorities="com.example.littleworld.BottomMenu.NavigationActivity.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

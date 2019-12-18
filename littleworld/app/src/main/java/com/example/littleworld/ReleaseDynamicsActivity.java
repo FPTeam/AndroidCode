@@ -310,7 +310,7 @@ public class ReleaseDynamicsActivity extends Fragment {
         if (Build.VERSION.SDK_INT < 24) {
             imageUri = Uri.fromFile(outputImage);
         } else {
-            imageUri = FileProvider.getUriForFile(getActivity(), "com.example.ReleaseDynamicsActivity.FileProvider", outputImage);
+            imageUri = FileProvider.getUriForFile(getActivity(), "com.example.littleworld.BottomMenu.NavigationActivity.fileprovider", outputImage);
         }
         // 启动相机程序
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");

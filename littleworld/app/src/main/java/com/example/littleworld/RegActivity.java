@@ -223,13 +223,9 @@ public class RegActivity extends AppCompatActivity {
         getWindow().setAttributes(lp);
     }
 
-    private void openCamera(){
-        SimpleDateFormat time = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        String fileName = time.format(System.currentTimeMillis());
-        // 创建File对象，用于存储拍照后的图片,使用当前时间为文件(图片)命名
-        File outputImage = new File(fileDir, "IMG_"+fileName + ".jpg");
+    public void openCamera(){
         // 创建File对象，用于存储拍照后的图片
-        //File outputImage = new File(getActivity().getExternalCacheDir(), "output_image.jpg");
+        File outputImage = new File(this.getExternalCacheDir(), "output_image.jpg");
         try {
             if (outputImage.exists()) {
                 outputImage.delete();
@@ -241,7 +237,7 @@ public class RegActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT < 24) {
             imageUri = Uri.fromFile(outputImage);
         } else {
-            imageUri = FileProvider.getUriForFile(this, "com.example.ReleaseDynamicsActivity.FileProvider", outputImage);
+            imageUri = FileProvider.getUriForFile(this, "com.example.littleworld.BottomMenu.NavigationActivity.fileprovider", outputImage);
         }
         // 启动相机程序
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
