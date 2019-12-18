@@ -38,6 +38,9 @@
             android:theme="@style/SettingTheme"/>
         <activity android:name=".SettingsPasswordActivity"
             android:theme="@style/SettingTheme"/> <!-- Made By BaiYunpeng -->
+        <activity android:name=".SettingEditInfo"
+            android:theme="@style/SettingTheme"/>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c81a9de35e36f1e46e5bd59dbb2ff67c" />

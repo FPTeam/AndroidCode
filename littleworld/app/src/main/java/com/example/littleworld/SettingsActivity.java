@@ -73,7 +73,7 @@ public class SettingsActivity extends Fragment {
             }
         });
 
-        /* 编辑用户名和密码 */
+        /* 编辑用户名 */
         ImageButton btn_edit = layout.findViewById(R.id.editInfoEnter);
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
