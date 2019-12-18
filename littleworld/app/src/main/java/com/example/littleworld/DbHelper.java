@@ -40,7 +40,7 @@ public class DbHelper{
     /*******登陆时验证用户名和密码*******/
     public int testUser(String username,String password)//验证用户名和密码
     {
-        Cursor login1 = db.rawQuery("select userid from login where Name=?and Password=?",new String[]{username,password});
+        Cursor login1 = db.rawQuery("select UserId from login where Name=?and Password=?",new String[]{username,password});
         if(login1.getCount()!=0)
         {
             login1.moveToNext();
@@ -53,7 +53,7 @@ public class DbHelper{
     /*******验证注册时用户名是否重复*******/
     public int repUser(String name)//验证注册时用户名是否重复
     {
-        Cursor login2 = db.rawQuery("select userid from login where Name=?",new String[]{name});//验证用户名是否重复
+        Cursor login2 = db.rawQuery("select UserId from login where Name=?",new String[]{name});//验证用户名是否重复
         if(login2.getCount()!=0)
         {
             login2.moveToNext();

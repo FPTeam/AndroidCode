@@ -2,26 +2,20 @@ package com.example.littleworld;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.littleworld.BottomMenu.NavigationActivity;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +32,7 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     private SQLiteDatabase db;//方法内对象能否访问？
-    private int userid;//方法内对象能否访问？
+    private int userId;//方法内对象能否访问？
     private Button login,logup;
 
     /**
@@ -136,8 +129,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    userid=i;
-                    Toast toast = Toast.makeText(getApplicationContext(), "userid="+userid, Toast.LENGTH_SHORT);
+                    userId =i;
+                    Toast toast = Toast.makeText(getApplicationContext(), "userId="+ userId, Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                     //跳转到主界面，并传递userid过去...

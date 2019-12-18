@@ -1,6 +1,5 @@
 package com.example.littleworld;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Intent;
@@ -12,13 +11,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
+
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -29,15 +28,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
+
+
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -60,18 +57,18 @@ import com.amap.api.location.AMapLocationListener;
 import com.example.littleworld.util.ToastUtil;
 
 public class ReleaseDynamicsActivity extends Fragment {
-    public static final int TAKE_PHOTO = 1;
+    private static final int TAKE_PHOTO = 1;
 
-    public static final int CHOOSE_PHOTO = 2;
+    private static final int CHOOSE_PHOTO = 2;
 
-    ImageButton add_pictures;
+
 
     private ImageView picture;
 
     private Uri imageUri;
-//    图片数据
-    Bitmap bitmap;
-//    保存的文件路径
+    //图片
+    private Bitmap bitmap;
+    //保存的文件路径
     private File fileDir;
 
     // 声明PopupWindow
@@ -134,18 +131,17 @@ public class ReleaseDynamicsActivity extends Fragment {
         mLocationClient.setLocationListener(mLocationListener);
         //初始化定位
         initLocation();
-
-        //复选+按钮
+        //多个单选按钮
+        ImageButton add_pictures;
         add_pictures=layout.findViewById(R.id.add_pictures);
-        //显示图片
+        //要显示的图片
         picture = layout.findViewById(R.id.picture);
 
-//        点击加号选择照相机或者相册
+        //点击加号选择照相机或者相册
         add_pictures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showPopupMenu(add_pictures);
-                changeIcon();
+                changeIcon(v);
                 lightoff();
             }
         });
@@ -161,19 +157,21 @@ public class ReleaseDynamicsActivity extends Fragment {
         });
 */
 
-//        图片文件路径
+        //创建存放图片的文件
         String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString()+"/IMAGE";
-        fileDir = new File(DATABASE_PATH);//直接copy的LoginActivity里的路径
+        fileDir = new File(DATABASE_PATH);//和LoginActivity里的数据库一个路径
         // 如果目录不存在，创建这个目录
         if (!fileDir.exists())
             fileDir.mkdir();
-//          图片文件存SD卡里
-//        File sdDir = Environment.getExternalStorageDirectory();
-//        fileDir = new File(sdDir.getPath() + "/IMAGE");
-//        if (!fileDir.exists()) {
-////            路径不存在则创建
-//            fileDir.mkdir();
-//        }
+
+        /*
+          图片文件存SD卡里
+        File sdDir = Environment.getExternalStorageDirectory();
+        fileDir = new File(sdDir.getPath() + "/IMAGE");
+        if (!fileDir.exists()) {
+            fileDir.mkdir();
+        }
+         */
 
         Button noteSend = layout.findViewById(R.id.note_send);
         EditText input_notes = layout.findViewById(R.id.input_notes);
@@ -199,9 +197,9 @@ public class ReleaseDynamicsActivity extends Fragment {
         return layout;
     }
 
-    private void changeIcon() {
+    private void changeIcon(View view) {
         if (popupWindow == null) {
-            popupView = View.inflate(getActivity(), R.layout.camera_album, null);
+            popupView = View.inflate(getActivity(), R.layout.bottompopup_camera_album, null);
             // 参数2,3：指明popupwindow的宽度和高度
             popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.WRAP_CONTENT);
@@ -226,23 +224,19 @@ public class ReleaseDynamicsActivity extends Fragment {
             animation.setInterpolator(new AccelerateInterpolator());
             animation.setDuration(200);
 
-            popupView.findViewById(R.id.tvTakePhoto).setOnClickListener(new View.OnClickListener() {
+            popupView.findViewById(R.id.takePhotobottom).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // 打开系统拍照程
-//                    Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    startActivityForResult(camera, CAMERA);
+//                    Toast.makeText(getActivity().getApplicationContext(), "相机", Toast.LENGTH_SHORT).show();
                     openCamera();
                     popupWindow.dismiss();
                     lighton();
                 }
             });
-            popupView.findViewById(R.id.tvSelectPhoto).setOnClickListener(new View.OnClickListener() {
+            popupView.findViewById(R.id.chooseFromAlbumbottom).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // 打开系统图库选择图片
-//                    Intent picture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                    startActivityForResult(picture, PICTURE);
+                    Toast.makeText(getActivity().getApplicationContext(), "相册", Toast.LENGTH_SHORT).show();
                     openAlbum();
                     popupWindow.dismiss();
                     lighton();
@@ -268,7 +262,6 @@ public class ReleaseDynamicsActivity extends Fragment {
         lp.alpha = 0.3f;
         getActivity().getWindow().setAttributes(lp);
     }
-
     /**
      * 设置手机屏幕亮度显示正常
      */
@@ -276,39 +269,6 @@ public class ReleaseDynamicsActivity extends Fragment {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = 1f;
         getActivity().getWindow().setAttributes(lp);
-    }
-
-
-
-    public String SaveFile(File fileDir){
-//        mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-        SimpleDateFormat time = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        String fileName = time.format(System.currentTimeMillis());
-//        使用当前时间为文件(图片)命名
-        File currentFile = new File(fileDir, "IMG_"+fileName + ".jpg");
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(currentFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity().getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity().getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
-        } finally {
-            try {
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Toast.makeText(getActivity().getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
-            return fileDir + fileName + ".jpg";
-        }
-
     }
 
 
@@ -336,47 +296,6 @@ public class ReleaseDynamicsActivity extends Fragment {
         mLocationClient.startLocation();
 
     }
-
-
-
-    private void showPopupMenu(View view) {
-        // View当前PopupMenu显示的相对View的位置
-        PopupMenu popupMenu = new PopupMenu(getActivity(), view);
-        // menu布局
-        popupMenu.getMenuInflater().inflate(R.menu.popupwindow_camera_album, popupMenu.getMenu());
-        // menu的item点击事件
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.takePhoto:
-                        Toast.makeText(getActivity().getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                        openCamera();
-                        return true;
-                    case R.id.chooseFromAlbum:
-                        Toast.makeText(getActivity().getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                             ActivityCompat.requestPermissions(getActivity(), new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, 1);
-                         } else {
-                             openAlbum();
-                            }
-                        return true;
-                    default:
-                        return  false;
-                }
-            }
-        });
-        // PopupMenu关闭事件
-        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
-            @Override
-            public void onDismiss(PopupMenu menu) {
-                //退出的时候显示的提示消息
-//                Toast.makeText(getApplicationContext(), "关闭PopupMenu", Toast.LENGTH_SHORT).show();
-            }
-        });
-        popupMenu.show();
-    }
-
     public void openCamera(){
         // 创建File对象，用于存储拍照后的图片
         File outputImage = new File(getActivity().getExternalCacheDir(), "output_image.jpg");
@@ -399,10 +318,10 @@ public class ReleaseDynamicsActivity extends Fragment {
         startActivityForResult(intent, TAKE_PHOTO);
     }
 
-    public void openAlbum() {
+    private void openAlbum() {
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
-        startActivityForResult(intent, CHOOSE_PHOTO); // 打开相册
+        startActivityForResult(intent, CHOOSE_PHOTO);
     }
 
     @Override
@@ -412,10 +331,40 @@ public class ReleaseDynamicsActivity extends Fragment {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "你拒绝了权限申请", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "你拒绝了权限申请", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
+        }
+    }
+
+    public String SaveFile(File fileDir){
+        //mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        SimpleDateFormat time = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String fileName = time.format(System.currentTimeMillis());
+        //使用当前时间为文件(图片)命名
+        File currentFile = new File(fileDir, "IMG_"+fileName + ".jpg");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(currentFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"添加失败",Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"添加失败",Toast.LENGTH_SHORT).show();
+        } finally {
+            try {
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(getActivity().getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
+            return fileDir + "IMG_"+ fileName + ".jpg";
         }
     }
 

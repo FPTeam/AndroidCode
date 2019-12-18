@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.littleworld">
     <!-- 权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +20,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".LoginActivity"
             android:theme="@style/LoginTheme">
             <intent-filter>
@@ -41,10 +43,13 @@
             android:value="c81a9de35e36f1e46e5bd59dbb2ff67c" />
 
         <activity android:name=".MaskActivity" />
+
+        <activity android:name=".ReleaseDynamicsActivity"
+            android:theme="@style/LoginTheme"/>
         <!-- 跟拍照相关的内容提供器 -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.ReleaseDynamics.FileProvider"
+            android:authorities="com.example.littleworld.ReleaseDynamicsActivity.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -63,9 +68,10 @@
             android:theme="@style/ProfileTheme" />
         <activity
             android:name=".map.DriveRouteDetailActivity"
-            android:theme="@style/ProfileTheme" /> <!-- <activity android:name=".NewNotes" -->
+            android:theme="@style/ProfileTheme" />
 
-        <activity android:name=".map.Others"
+        <activity
+            android:name=".map.Others"
             android:theme="@style/ProfileTheme"></activity>
 
         <activity android:name=".map.Places"
@@ -76,6 +82,10 @@
 
         <activity android:name=".BottomMenu.NavigationActivity"
             android:theme="@style/SettingTheme"></activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/LoginTheme"></activity>
 
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
