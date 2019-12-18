@@ -1,0 +1,96 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#33CCCC"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <ImageButton
+        android:id="@+id/editInfoBackButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#33CCCC"
+        android:contentDescription="@android:string/cancel"
+        android:tint="#FFFFFF"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <Button
+        android:id="@+id/editInfoAffirmBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300dp"
+        android:background="#33CCCC"
+        android:text="@string/logout"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editInfoUserName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120dp"
+        android:autoText="false"
+        android:ems="10"
+        android:hint="新用户名"
+        android:inputType="textPersonName"
+        android:textColor="#80000000"
+        android:textSize="18sp" />
+    <EditText
+        android:id="@+id/editTextIntroduction"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:hint="新介绍"
+        android:inputType="textPersonName"
+        android:textColor="#80000000"
+        android:textSize="18sp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/editInfo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:text="个人信息编辑"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="550dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@mipmap/app_icon" />
+
+    <TextView
+        android:id="@+id/editInfoSex"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="500dp"
+        android:padding="10dp"
+        android:text="性别"
+        android:textAlignment="center"
+        android:textColor="#80000000"
+        android:textSize="20sp" />
+
+</FrameLayout>
+<!--换头像-->
+<!--性别的显示界面-->
+
+<!--created by ttl-->
