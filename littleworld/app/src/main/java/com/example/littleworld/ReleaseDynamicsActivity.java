@@ -498,6 +498,4 @@ public class ReleaseDynamicsActivity extends Fragment {
         }
         mLocationClient = null;
     }
-
-
 }

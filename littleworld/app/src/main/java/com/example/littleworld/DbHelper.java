@@ -136,9 +136,10 @@ public class DbHelper{
     /*******添加和更改用户的性别、头像图片、个人介绍等信息*******/
     //  传参说明：用户号userid，用户信息UserInfo，性别：Sex，头像图片链接：head
     //  注册时用户号和用户名已经插入到user表，所以其余信息都是更新时补充添加进去的
-    public void insertUserInfo(Integer userid,String UserInfo, String Sex, String head)//添加或更改用户信息
+    public void insertUserInfo(Integer userid,String UserName, String UserInfo, String Sex, String head)//添加或更改用户信息
     {
         ContentValues cv = new ContentValues();
+        cv.put("UserInfo", UserName);
         cv.put("UserInfo", UserInfo);
         cv.put("Sex", Sex);
         cv.put("Head",head);

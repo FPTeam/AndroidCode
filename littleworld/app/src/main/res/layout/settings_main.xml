@@ -42,7 +42,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
-        android:id="@+id/edit"
+        android:id="@+id/editInfoEnter"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="right"
