@@ -25,6 +25,8 @@ public class SettingsPrivacyActivity extends AppCompatActivity {
         });
 
 
+
+
     }
 }
 
