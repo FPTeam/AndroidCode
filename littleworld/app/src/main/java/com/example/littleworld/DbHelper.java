@@ -47,12 +47,17 @@ public class DbHelper{
         return userId;
     }
 
-    //获取用户表
+    //获取登录表中指定userId的数据
+    public Cursor getLoginBook(int userId){
+        Cursor cursor = db.query("login",null,"Password=?",new String[]{Integer.toString(userId)},null,null,null);
+        return cursor;
+    }
+
+    //获取用户表中指定userId的数据
     public Cursor getUserBook(int userId){
         Cursor cursor = db.query("user",null,"UserId=?",new String[]{Integer.toString(userId)},null,null,null);
         return cursor;
     }
-
 
     /*******登陆时验证用户名和密码*******/
     public int testUser(String username,String password)//验证用户名和密码

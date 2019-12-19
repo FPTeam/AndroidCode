@@ -1,17 +1,21 @@
 package com.example.littleworld;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class SettingsPasswordActivity extends AppCompatActivity{
 
-    private EditText editText;
+    private EditText editTextOld;//旧密码
+    private EditText editTextNew;//新密码
+    private Button confirmButton;//确认修改按钮
+    private ImageButton backBtn;//返回按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,47 +23,61 @@ public class SettingsPasswordActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_password);
 
-        /* 实现密码修改的功能 */
-        boolean correct = false;
-        final String userId = "";
-        editText = (EditText) findViewById(R.id.oldPassword);
-        final String oldPassword = editText.getText().toString();
-        Button button = (Button) findViewById(R.id.button);
+        editTextOld = findViewById(R.id.oldPassword);
+        editTextNew = findViewById(R.id.newPassword);
+        confirmButton = findViewById(R.id.confirmbutton);
+        backBtn=findViewById(R.id.imageButton);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* 传递userID和旧密码给DbHelper类 */
-                Intent intent = new Intent(SettingsPasswordActivity.this, DbHelper.class);
-                intent.putExtra("userId", userId);
-                intent.putExtra("oldPassword", oldPassword);
-                startActivity(intent);
+                String oldPassword = editTextOld.getText().toString();
+                String newPassword = editTextNew.getText().toString();
+                if(TestPassword(oldPassword,newPassword) == 1){
+                    DbHelper.getInstance().UpdateLogin(DbHelper.getInstance().getUserId(),newPassword);
+                    Toast.makeText(getApplicationContext(), "修改成功!", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                                /*Intent  intent=new Intent(RegActivity.this, LoginActivity.class);
+                                startActivity(intent);*/
+                            SettingsPasswordActivity.this.finish();
+                        }
+                    }, 2000);
+                }else{
+
+                }
+
+
             }
         });
 
 
-        /* 账户名和密码验证成功 */
-        if (correct == true){
-            /* 显示提示信息 */
-        }
-
-
-        /*对旧密码进行修改*/
-        editText = (EditText) findViewById(R.id.newPassword);
-        final String newPassword = editText.getText().toString();
-        Intent intent = new Intent(SettingsPasswordActivity.this, DbHelper.class);
-        intent.putExtra("userId", userId);
-        intent.putExtra("newPassword", newPassword);
-        startActivity(intent);
 
         // 返回至上一界面
-        ImageButton backBtn=findViewById(R.id.imageButton);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SettingsPasswordActivity.this.finish();
             }
         });
+    }
+
+    int TestPassword(String oldPassword,String newPassword){
+        Cursor cursor = DbHelper.getInstance().getLoginBook(DbHelper.getInstance().getUserId());
+        String password = new String();
+        if(cursor.getCount()!=0){
+            cursor.moveToNext();
+            password = cursor.getString(2);
+            if(oldPassword != password){
+                Toast.makeText(getApplicationContext(), "旧密码输入错误!", Toast.LENGTH_SHORT).show();
+                return 0;
+            }else if(password == newPassword){
+                Toast.makeText(getApplicationContext(), "新密码和旧密码相同!", Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+        }
+        cursor.close();
+        return 1;
     }
 }
 

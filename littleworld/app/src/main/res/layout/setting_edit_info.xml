@@ -42,7 +42,7 @@
         android:layout_marginTop="120dp"
         android:autoText="false"
         android:ems="10"
-        android:hint="新用户名"
+        android:hint="禁止修改用户名哦!!!"
         android:inputType="textPersonName"
         android:textColor="#80000000"
         android:textSize="18sp" />

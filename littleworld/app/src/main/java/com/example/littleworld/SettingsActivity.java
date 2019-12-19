@@ -89,6 +89,7 @@ public class SettingsActivity extends Fragment {
         }else{
             name = "null";
         }
+        cursor.close();
 
         TextView userName = layout.findViewById(R.id.username);
         TextView introduction = layout.findViewById(R.id.introduction);
