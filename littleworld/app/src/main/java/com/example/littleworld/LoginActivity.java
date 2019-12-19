@@ -188,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkInitStatus(SharedPreferences sp) {
-        if(getAutoLogin()){
+        if(sp.getString("USERNAME", null) != null){
             un.setText(sp.getString("USERNAME", null));
             pw.setText(sp.getString("PASSWORD", "FUCK!!"));
             //跳转界面
