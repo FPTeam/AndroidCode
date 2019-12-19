@@ -29,7 +29,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Made By BaiYunpeng -->
+        </activity>
+
+        <activity android:name=".LogoActivity"
+            android:theme="@style/SettingTheme"/>
+
+        <!-- Made By BaiYunpeng -->
         <activity android:name=".SettingsAccountsActivity"
             android:theme="@style/SettingTheme"/>
         <activity android:name=".SettingsContactusActivity"

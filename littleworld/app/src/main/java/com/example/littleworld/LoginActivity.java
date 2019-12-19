@@ -3,8 +3,10 @@ package com.example.littleworld;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -34,6 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     private SQLiteDatabase db;//方法内对象能否访问？
     private int userId;//方法内对象能否访问？
     private Button login,logup;
+    EditText un;//用户名
+    EditText pw;//密码
+    String username;//用户名
+    String password;//密码
+    boolean autoLogin;
+    private SharedPreferences sp;
 
     /**
      * 需要进行检测的权限数组
@@ -54,8 +62,100 @@ public class LoginActivity extends AppCompatActivity {
     private static String BACK_LOCATION_PERMISSION = "android.permission.ACCESS_BACKGROUND_LOCATION";
 
     public LoginActivity() {
-
+        setAutoLogin(Boolean.TRUE);
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT > 28
+                && getApplicationContext().getApplicationInfo().targetSdkVersion > 28) {
+            needPermissions = new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_PHONE_STATE,
+                    BACK_LOCATION_PERMISSION
+            };
+            needCheckBackLocation = true;
+        }
+
+        setContentView(R.layout.login);
+        try {
+            DbHelper.getInstance().openDatabase(opendb());//以后使用DbHelper务必先调用.getInstance()获取唯一对象
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        login = findViewById(R.id.login_button);
+        logup = findViewById(R.id.cancel);
+        un = findViewById(R.id.username_login);
+        pw = findViewById(R.id.password_login);
+
+/** 获得实例对象 **/
+        sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        checkInitStatus(sp);
+        login.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                username = un.getText().toString();
+                password = pw.getText().toString();
+                SharedPreferences.Editor editor = null;
+                int i=DbHelper.getInstance().testUser(username,password);
+                if(i==-1)
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "用户名/密码错误！", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    editor.clear();
+                    editor.commit();
+                }
+                else
+                {
+                    userId =i;
+                    //在本地数据库中设置userId
+                    DbHelper.getInstance().setUserId(userId);
+                    //Toast toast = Toast.makeText(getApplicationContext(), "userId="+ userId, Toast.LENGTH_SHORT);
+                    //toast.setGravity(Gravity.CENTER, 0, 0);
+                    //toast.show();
+                    //跳转到主界面，并传递userid过去...
+                    editor = sp.edit();
+                    editor.putString("USERNAME",un.getText().toString());
+                    editor.putString("PASSWORD",pw.getText().toString());
+                    editor.commit();
+                    setAutoLogin(Boolean.TRUE);
+
+                    Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
+                    intent.putExtra("user_id",userId);
+
+                    startActivity(intent);
+                }
+        }});
+
+        // 跳转到注册界面
+        Button signup = findViewById(R.id.signUp);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 退出程序
+        logup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginActivity.this.finish();
+                //Intent intent = new Intent(LoginActivity.this, SquareActivity.class);
+                //startActivity(intent);
+            }
+        });
+    }
+
     private String opendb() throws IOException
     {//这个函数必须放在LoginActivity 因为要找路径 不能放到数据库类==！
         String DATABASE_PATH=this.getApplicationContext().getFilesDir().toString();
@@ -86,84 +186,26 @@ public class LoginActivity extends AppCompatActivity {
         }
         return databaseFilename;
     }
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT > 28
-                && getApplicationContext().getApplicationInfo().targetSdkVersion > 28) {
-            needPermissions = new String[]{
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_PHONE_STATE,
-                    BACK_LOCATION_PERMISSION
-            };
-            needCheckBackLocation = true;
+    private void checkInitStatus(SharedPreferences sp) {
+        if(getAutoLogin()){
+            un.setText(sp.getString("USERNAME", null));
+            pw.setText(sp.getString("PASSWORD", "FUCK!!"));
+            //跳转界面
+            Intent intent = new Intent(LoginActivity.this, LogoActivity.class);
+            intent.putExtra("USERNAME",sp.getString("USERNAME", null));
+            intent.putExtra("PASSWORD",sp.getString("PASSWORD", "FUCK!!"));
+            LoginActivity.this.startActivity(intent);
         }
-
-        setContentView(R.layout.login);
-        try {
-            DbHelper.getInstance().openDatabase(opendb());//以后使用DbHelper务必先调用.getInstance()获取唯一对象
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        login = findViewById(R.id.login_button);
-        logup = findViewById(R.id.cancel);
-        login.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText un = findViewById(R.id.username_login);
-                EditText pw = findViewById(R.id.password_login);
-                String username = un.getText().toString();
-                String password = pw.getText().toString();
-                int i=DbHelper.getInstance().testUser(username,password);
-                if(i==-1)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(), "用户名/密码错误！", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                else
-                {
-                    userId =i;
-                    //在本地数据库中设置userId
-                    DbHelper.getInstance().setUserId(userId);
-                    //Toast toast = Toast.makeText(getApplicationContext(), "userId="+ userId, Toast.LENGTH_SHORT);
-                    //toast.setGravity(Gravity.CENTER, 0, 0);
-                    //toast.show();
-                    //跳转到主界面，并传递userid过去...
-                    Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
-                    intent.putExtra("user_id",userId);
-
-                    startActivity(intent);
-                }
-        }});
-
-        // 跳转到注册界面
-        Button signup = findViewById(R.id.signUp);
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 退出程序
-        logup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginActivity.this.finish();
-                //Intent intent = new Intent(LoginActivity.this, SquareActivity.class);
-                //startActivity(intent);
-            }
-        });
     }
 
+    public void setAutoLogin(Boolean i){
+        this.autoLogin = i;
+    }
+
+    public Boolean getAutoLogin(){
+        return autoLogin;
+    }
 
     /**
      * 判断是否需要检测，防止不停的弹框
