@@ -38,6 +38,35 @@ public class DbHelper{
                 path, null);//获取当前数据库
     }
 
+    public void setUserId(int userId){
+        this.userId = userId;
+    }
+
+    public int getUserId(){
+        return userId;
+    }
+
+    public Cursor getUserBook(int userId){
+//        Cursor cursor = db.rawQuery("select Name from login where Password=?",new String[]{"111111"});
+        Cursor cursor = db.query("user",null,"UserId=?",new String[]{Integer.toString(userId)},null,null,null);
+//        String name = new String();
+//        if(cursor.getCount()!=0){
+//            cursor.moveToNext();
+//            name = cursor.getString(0);
+//        }
+        return cursor;
+    }
+    public String  getUserBookName(String userId){
+        String name = new String();
+        Cursor cursor = db.query("login",null,"UserId=?",new String[]{userId},null,null,null);
+        if(cursor.getCount()!=0){
+            cursor.moveToNext();
+            name = cursor.getString(cursor.getColumnIndex("UserName"));
+        }
+
+        return name;
+    }
+
     /*******登陆时验证用户名和密码*******/
     public int testUser(String username,String password)//验证用户名和密码
     {
@@ -138,7 +167,7 @@ public class DbHelper{
     /*******添加和更改用户的性别、头像图片、个人介绍等信息*******/
     //  传参说明：用户号userid，用户信息UserInfo，性别：Sex，头像图片链接：head
     //  注册时用户号和用户名已经插入到user表，所以其余信息都是更新时补充添加进去的
-    public void insertUserInfo(Integer userid,String UserName, String UserInfo, String Sex, String head)//添加或更改用户信息
+    public void insertUserInfo(Integer userid, String UserName, String UserInfo, String Sex, String head)//添加或更改用户信息
     {
         ContentValues cv = new ContentValues();
         cv.put("UserInfo", UserName);

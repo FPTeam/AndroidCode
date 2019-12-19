@@ -231,7 +231,7 @@ public class ReleaseDynamicsActivity extends Fragment {
             popupView.findViewById(R.id.takePhotobottom).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity().getApplicationContext(), "相机", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "相机", Toast.LENGTH_SHORT).show();
                     openCamera();
                     popupWindow.dismiss();
                     lighton();

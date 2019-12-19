@@ -10,6 +10,7 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -31,6 +32,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -57,17 +59,55 @@ public class SettingsActivity extends Fragment {
     // 声明平移动画
     private TranslateAnimation animation;
     /**    **/
+    private String userName;
+    private String introduction;
+    Cursor cursor;
 
     public SettingsActivity(int userId){
         super();
         this.userId = userId;
     }
 
+
+
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         View layout = inflater.inflate(R.layout.settings_main, container, false);
+
+//        String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString();
+//        String DATABASE_NAME="lw.db";
+//        String databaseFilename=DATABASE_PATH+"/"+DATABASE_NAME;
+//        db = DbHelper.getInstance().openDatabase(databaseFilename);//以后使用DbHelper务必先调用.getInstance()获取唯一对象
+//        setting = DbHelper.getInstance().getUserBook(190001);
+
+        Toast.makeText(getActivity().getApplicationContext(), "Holle World!", Toast.LENGTH_SHORT).show();
+        cursor = DbHelper.getInstance().getUserBook(DbHelper.getInstance().getUserId());
+        String name = new String();
+        if(cursor.getCount()!=0){
+            cursor.moveToNext();
+            name = cursor.getString(1);
+        }else{
+            name = "null";
+        }
+//            String name = DbHelper.getInstance().getUserBook(190001);
+//            String name = setting.getString(setting.getColumnIndex("UserName"));
+        //String intro = cursor.getString(cursor.getColumnIndex("UserInfo"));
+//            setting = DbHelper.getInstance().getUserBook(userId);
+
+        if(name == null){
+            name = ""+"kongdea";
+        }
+
+
+        TextView userName = layout.findViewById(R.id.username);
+        TextView introduction = layout.findViewById(R.id.introduction);
+        userName.setText(name);
+        //          introduction.setText(intro);
+
 
         /* 跳转至个人主页 */
         ImageButton btn_sculpture = layout.findViewById(R.id.sculpture);
@@ -80,7 +120,7 @@ public class SettingsActivity extends Fragment {
             }
         });
 
-        /* 编辑用户名 */
+        /* 编辑用户信息 */
         ImageButton btn_edit = layout.findViewById(R.id.editInfoEnter);
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,8 +169,6 @@ public class SettingsActivity extends Fragment {
                 startActivity(intent);
             }
         });
-
-
         return layout;
     }
 

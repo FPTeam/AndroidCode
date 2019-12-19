@@ -130,6 +130,8 @@ public class LoginActivity extends AppCompatActivity {
                 else
                 {
                     userId =i;
+                    //在本地数据库中设置userId
+                    DbHelper.getInstance().setUserId(userId);
                     //Toast toast = Toast.makeText(getApplicationContext(), "userId="+ userId, Toast.LENGTH_SHORT);
                     //toast.setGravity(Gravity.CENTER, 0, 0);
                     //toast.show();
