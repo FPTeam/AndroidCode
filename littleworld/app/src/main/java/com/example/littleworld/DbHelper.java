@@ -23,6 +23,7 @@ import java.util.List;
 public class DbHelper{
     private static SQLiteDatabase db;
     private static DbHelper dbhelper=null;
+    private int userId;
     private DbHelper(){}
     public static DbHelper getInstance()//单例模式
     {
@@ -44,7 +45,8 @@ public class DbHelper{
         if(login1.getCount()!=0)
         {
             login1.moveToNext();
-            return login1.getInt(0);
+            userId = login1.getInt(0);
+            return userId;
         }
         login1.close();
         return -1;

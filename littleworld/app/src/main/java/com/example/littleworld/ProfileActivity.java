@@ -33,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_main);
-        
+
         Intent intent = getIntent();
         userId = intent.getIntExtra("user_id",-1);
         String s = String.valueOf(userId);
@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         // 设置adapter
-        viewPager.setAdapter(new ProfilePageAdapter(ProfileActivity.this, fm, viewPager));
+        viewPager.setAdapter(new ProfilePageAdapter(ProfileActivity.this, fm, viewPager, userId));
 
         // 关联tabLayout与viewPager
         tabLayout.setupWithViewPager(viewPager);

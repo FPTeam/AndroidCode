@@ -13,17 +13,21 @@ public class ProfilePageAdapter extends FragmentStatePagerAdapter {
     private static int PAGE_COUNT;//表示要展示的页面数量
     private Context mContext;
     private ProfileViewPager pvp;
+    private int userId;
 
-    public ProfilePageAdapter(Context context, FragmentManager fm, ProfileViewPager pvp) {
+    public ProfilePageAdapter(Context context, FragmentManager fm, ProfileViewPager pvp, int userId) {
         super(fm);
         this.mContext = context;
         this.pvp=pvp;
+        this.userId = userId;
         PAGE_COUNT=3;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return ProfileFragment.newInstance(position,this.pvp);
+        ProfileFragment p = ProfileFragment.newInstance(position,this.pvp);
+        p.setUserid(userId);
+        return p;
     }
 
     @Override

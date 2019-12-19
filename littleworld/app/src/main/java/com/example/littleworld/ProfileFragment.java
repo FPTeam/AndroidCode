@@ -42,6 +42,10 @@ public class ProfileFragment extends Fragment {
         return fragment;
     }
 
+    public void setUserid(int userId){
+        this.userId = userId;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

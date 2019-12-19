@@ -133,7 +133,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/add_place"
             android:textColor="#515151"
-            android:textSize="20sp"
+            android:textSize="10sp"
             app:layout_column="0"
             app:layout_row="2" />
 

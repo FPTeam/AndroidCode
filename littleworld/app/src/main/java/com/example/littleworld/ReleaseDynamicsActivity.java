@@ -194,7 +194,7 @@ public class ReleaseDynamicsActivity extends Fragment {
                 Date date = new Date(System.currentTimeMillis());//当前设备的时间
                 String timestr = nowtime.format(date);//转换为字符串
 
-                DbHelper.getInstance().insertPassage( 190001,inputNotes,imgPath,timestr,null,location);
+                DbHelper.getInstance().insertPassage( userId,inputNotes,imgPath,timestr,null,location);
 //                ReleaseDynamicsActivity.this.finish();
             }
         });
