@@ -31,7 +31,7 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
     public class passageAdapterHolder extends RecyclerView.ViewHolder {
 
 
-        public ImageButton headImg;
+        public ImageView headImg;
         public TextView name;
         public TextView content;
         public TextView postTime;
