@@ -8,20 +8,26 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.littleworld.R;
+import com.example.littleworld.util.ToastUtil;
 import com.google.android.material.tabs.TabLayout;
 
 
 public class NavigationActivity extends AppCompatActivity {
     TabLayout mytabs;
     ViewPager mViewPager;
+    int userId;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_menu);
-
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("user_id",-1);
+        String s = String.valueOf(userId);
+        ToastUtil.show(getApplicationContext(),s);
         mytabs = (TabLayout)findViewById(R.id.mytab);
 
         mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.shouye));
