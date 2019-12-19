@@ -22,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LoginActivity"
+        <activity android:name=".NoticeActivity"></activity>
+        <activity
+            android:name=".LoginActivity"
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,29 +32,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".LogoActivity"
-            android:theme="@style/SettingTheme"/>
-
-        <!-- Made By BaiYunpeng -->
-        <activity android:name=".SettingsAccountsActivity"
-            android:theme="@style/SettingTheme"/>
-        <activity android:name=".SettingsContactusActivity"
-            android:theme="@style/SettingTheme"></activity>
-        <activity android:name=".SettingsPrivacyActivity"
-            android:theme="@style/SettingTheme"/>
-        <activity android:name=".SettingsPasswordActivity"
-            android:theme="@style/SettingTheme"/> <!-- Made By BaiYunpeng -->
-        <activity android:name=".SettingEditInfo"
-            android:theme="@style/SettingTheme"/>
+        <activity
+            android:name=".LogoActivity"
+            android:theme="@style/SettingTheme" /> <!-- Made By BaiYunpeng -->
+        <activity
+            android:name=".SettingsAccountsActivity"
+            android:theme="@style/SettingTheme" />
+        <activity
+            android:name=".SettingsContactusActivity"
+            android:theme="@style/SettingTheme" />
+        <activity
+            android:name=".SettingsPrivacyActivity"
+            android:theme="@style/SettingTheme" />
+        <activity
+            android:name=".SettingsPasswordActivity"
+            android:theme="@style/SettingTheme" /> <!-- Made By BaiYunpeng -->
+        <activity
+            android:name=".SettingEditInfo"
+            android:theme="@style/SettingTheme" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c81a9de35e36f1e46e5bd59dbb2ff67c" />
 
-        <activity android:name=".MaskActivity" />
-
-        <!-- 跟拍照相关的内容提供器 -->
+        <activity android:name=".MaskActivity" /> <!-- 跟拍照相关的内容提供器 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.littleworld.BottomMenu.NavigationActivity.fileprovider"
@@ -75,25 +78,21 @@
         <activity
             android:name=".map.DriveRouteDetailActivity"
             android:theme="@style/ProfileTheme" />
-
         <activity
             android:name=".map.Others"
-            android:theme="@style/SettingTheme"></activity>
-
-        <activity android:name=".map.Places"
-            android:theme="@style/SettingTheme"></activity>
-
-        <activity android:name=".map.Hotel"
-            android:theme="@style/SettingTheme"></activity>
-
-        <activity android:name=".BottomMenu.NavigationActivity"
-            android:theme="@style/SettingTheme"></activity>
-
+            android:theme="@style/SettingTheme" />
+        <activity
+            android:name=".map.Places"
+            android:theme="@style/SettingTheme" />
+        <activity
+            android:name=".map.Hotel"
+            android:theme="@style/SettingTheme" />
+        <activity
+            android:name=".BottomMenu.NavigationActivity"
+            android:theme="@style/SettingTheme" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/LoginTheme"></activity>
-
-        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+            android:theme="@style/LoginTheme" /> <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
     </application>
 
