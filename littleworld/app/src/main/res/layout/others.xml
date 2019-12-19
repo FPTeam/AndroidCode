@@ -1,73 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
 
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#33cccc"
+        android:gravity="center"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="@string/places_more"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5.0dip" >
-
-        <AutoCompleteTextView
-            android:id="@+id/keyWord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/text_search"
-            android:completionThreshold="1"
-            android:dropDownVerticalOffset="1.0dip"
-            android:hint="请输入关键字"
-            android:textColorHint="@color/darkgrey"
-            android:imeOptions="actionDone"
-            android:inputType="text|textAutoComplete"
-            android:maxLength="20"
-            android:paddingRight="37.0dip"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:textSize="16.0sp" />
-
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5.0dip"
-            android:hint="请输入城市"
-            android:textColorHint="@color/darkgrey"
-            android:text="北京"
-            android:background="@drawable/text_search"
-            android:imeOptions="actionDone"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:textSize="16.0sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/title_background">
-
-        <Button
-            android:id="@+id/searchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="开始搜索" />
-
-        <Button
-            android:id="@+id/nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="下一页" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00000000"
+        android:tint="#ffffff"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <com.amap.api.maps2d.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="fill_parent"
+        android:elevation="-5dp">
 
-</LinearLayout>
+    </com.amap.api.maps2d.MapView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="50dp"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/map_search_view"
+                android:gravity="center"
+                android:hint="请输入城市"
+                android:imeOptions="actionDone"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="@color/darkgrey"
+                android:textSize="18sp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/keyWord"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/map_search_view"
+                android:completionThreshold="1"
+                android:dropDownVerticalOffset="1.0dip"
+                android:gravity="center"
+                android:hint="请输入关键字"
+                android:imeOptions="actionDone"
+                android:inputType="text|textAutoComplete"
+                android:maxLength="20"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="@color/darkgrey"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/map_button"
+                android:text="开始搜索"
+                android:textColor="@color/changeable_button_text"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/map_button"
+                android:text="下一页"
+                android:textColor="@color/changeable_button_text"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
