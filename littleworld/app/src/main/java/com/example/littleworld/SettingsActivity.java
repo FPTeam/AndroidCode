@@ -75,6 +75,7 @@ public class SettingsActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                intent.putExtra("is_owner",1);//本人跳转至自己主页
                 intent.putExtra("user_id",userId);
                 startActivity(intent);
             }

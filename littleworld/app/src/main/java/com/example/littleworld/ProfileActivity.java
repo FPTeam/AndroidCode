@@ -26,6 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView title; // 页面标题设置为用户名
     private TabLayout tabLayout;
     private int userId;
+    private int isOwner;//1为用户自己主页，0为他人主页
     ArrayList<Fragment> fragments = new ArrayList<>();
     ArrayList<String> titles = new ArrayList<>();
 
@@ -36,8 +37,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         userId = intent.getIntExtra("user_id",-1);
+        isOwner = intent.getIntExtra("is_owner",-1);
         String s = String.valueOf(userId);
-        ToastUtil.show(getApplicationContext(),s);
+        if(isOwner==1)
+            ToastUtil.show(getApplicationContext(),"您正在访问自己的主页");
+        else
+            ToastUtil.show(getApplicationContext(),"您正在访问userid="+s+"的主页");
 
         appbar = findViewById(R.id.appbar);
         viewPager = findViewById(R.id.viewPager);
