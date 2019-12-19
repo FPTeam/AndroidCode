@@ -1,6 +1,7 @@
 package com.example.littleworld.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.littleworld.BottomMenu.NavigationActivity;
 import com.example.littleworld.Entity.passage;
+import com.example.littleworld.LoginActivity;
+import com.example.littleworld.ProfileActivity;
 import com.example.littleworld.R;
 
 import java.util.List;
@@ -81,6 +85,16 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
         holder.postTime.setText(passage.getPostTime());
         holder.starNum.setText(passage.getCollectNumber());
         holder.likeNum.setText(passage.getLikeNumber());
+        holder.headImg.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProfileActivity.class);
+                int userId = 190001;
+                intent.putExtra("user_id",userId);
+                intent.putExtra("is_owner",0);//访问别人主页
+                context.startActivity(intent);
+            }
+        });
 
          Glide
                 .with(this.context)

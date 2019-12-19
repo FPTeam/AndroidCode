@@ -106,10 +106,17 @@ public class ProfileFragment extends Fragment {
                 userSex_text=view.findViewById(R.id.profileSex); // 用户性别
                 userIntro_text=view.findViewById(R.id.profileIntro); // 个人介绍
 
-                DbHelper.getInstance();
                 /*
                  *   从数据库查询用户信息并显示
                  */
+                PersonInfo myInfo = DbHelper.getInstance().getUserInfo(userId);
+                userId_text.setText(String.valueOf(userId));
+                userSex_text.setText(myInfo.sex);
+                if(myInfo.intro == null)
+                    userIntro_text.setText("暂无介绍");
+                else
+                    userIntro_text.setText(myInfo.intro);
+
                 showMap();//显示点亮的地图
                 break;
             default:break;

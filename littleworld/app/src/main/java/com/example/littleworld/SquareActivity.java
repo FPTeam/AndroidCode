@@ -78,8 +78,8 @@ public class SquareActivity extends Fragment {
         places.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent intent = new Intent(getActivity(), com.example.littleworld.map.Places.class);
-                 startActivity(intent);
+                Intent intent = new Intent(getActivity(), com.example.littleworld.map.Places.class);
+                startActivity(intent);
             }
         });
 
@@ -107,7 +107,7 @@ public class SquareActivity extends Fragment {
     public void initData() {
         //初始化标题列表和图片
         mImageTitles = new String[]{"编辑推荐", "热门景点", "日常活动"};
-        int[] imageRess = new int[]{R.mipmap.poster1, R.mipmap.poster2, R.mipmap.poster3};
+        int[] imageRess = new int[]{R.mipmap.poster11, R.mipmap.poster12, R.mipmap.poster13};
 
         //添加图片到图片列表里
         mImageList = new ArrayList<>();
@@ -237,38 +237,38 @@ public class SquareActivity extends Fragment {
      * @param backgount    设置
      * @return
      *
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public int addDot(final LinearLayout linearLayout, Drawable backgount) {
-        final View dot = new View(getActivity());
-        LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        dotParams.width = 16;
-        dotParams.height = 16;
-        dotParams.setMargins(4, 0, 4, 0);
-        dot.setLayoutParams(dotParams);
-        dot.setBackground(backgount);
-        dot.setId(View.generateViewId());
-        linearLayout.addView(dot);
-        return dot.getId();
-    }
+     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+     public int addDot(final LinearLayout linearLayout, Drawable backgount) {
+     final View dot = new View(getActivity());
+     LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+     ViewGroup.LayoutParams.WRAP_CONTENT);
+     dotParams.width = 16;
+     dotParams.height = 16;
+     dotParams.setMargins(4, 0, 4, 0);
+     dot.setLayoutParams(dotParams);
+     dot.setBackground(backgount);
+     dot.setId(View.generateViewId());
+     linearLayout.addView(dot);
+     return dot.getId();
+     }
 
-    /**
-     * 添加多个轮播小点到横向线性布局
-     *
-     * @param linearLayout
+     /**
+      * 添加多个轮播小点到横向线性布局
+      *
+      * @param linearLayout
      * @param backgount
      * @param number
      * @return
      *
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public List<View> addDots(final LinearLayout linearLayout, Drawable backgount, int number) {
-        List<View> dots = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            int dotId = addDot(linearLayout, backgount);
-            dots.add(getActivity().findViewById(dotId));
-        }
-        return dots;
-    }*/
+     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+     public List<View> addDots(final LinearLayout linearLayout, Drawable backgount, int number) {
+     List<View> dots = new ArrayList<>();
+     for (int i = 0; i < number; i++) {
+     int dotId = addDot(linearLayout, backgount);
+     dots.add(getActivity().findViewById(dotId));
+     }
+     return dots;
+     }*/
 }

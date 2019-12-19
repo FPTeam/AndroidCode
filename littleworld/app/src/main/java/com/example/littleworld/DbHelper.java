@@ -302,6 +302,48 @@ public class DbHelper{
         curcity.close();
         return provinces;
     }
+
+    public PersonInfo getUserInfo(int id){//获取用户名、头像、性别、介绍等
+        //id = 190002;
+        PersonInfo info0 = new PersonInfo();
+        Cursor curcity = db.rawQuery("select * from user where UserId=?",new String[]{String.valueOf(id)});
+        while(curcity.moveToNext()) {
+            info0.name = curcity.getString(1);
+            info0.intro = curcity.getString(2);
+            info0.sex = curcity.getString(3);
+            info0.img = curcity.getString(4);
+
+            Log.d("用户名", info0.name);
+            if(info0.intro == null)
+                Log.d("自我介绍", "无");
+            else
+                Log.d("自我介绍", info0.intro);
+            if(info0.sex==null)
+                info0.sex = "保密";
+            Log.d("性别", info0.sex);
+            if(info0.img == null)
+                Log.d("头像链接", "无");
+            else
+                Log.d("头像链接", info0.img);
+        }
+        curcity.close();
+        return info0;
+        /*
+
+        String name = "";
+        //Cursor info = db.rawQuery("select * from user where UserId=?",new String[]{String.valueOf(id)});
+        Cursor info = db.rawQuery("select * from passage where UserId=?",new String[]{String.valueOf(id)});
+        if(info.getCount()!=0)
+        {
+
+            info.getString(1);
+           //Log.d("用户信息",name);
+            Log.d("总列数",String.valueOf(info.getColumnCount()));
+        }
+        info.close();
+        return name;*/
+    }
+
     public void insertUserInfo(){}//注册新用户插info表（包括图片、...）
     //...此处添加表的操作函数
     public void closeDb()

@@ -46,6 +46,7 @@ public class SettingsActivity extends Fragment {
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
     private int userId;
+    View layout;
     private ImageView picture;
     private Uri imageUri;
     //图片
@@ -76,7 +77,9 @@ public class SettingsActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        View layout = inflater.inflate(R.layout.settings_main, container, false);
+        layout = inflater.inflate(R.layout.settings_main, container, false);
+
+        init();//查数据库显示信息
 
 //        String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString();
 //        String DATABASE_NAME="lw.db";
@@ -115,6 +118,7 @@ public class SettingsActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                intent.putExtra("is_owner",1);//本人跳转至自己主页
                 intent.putExtra("user_id",userId);
                 startActivity(intent);
             }
@@ -170,6 +174,19 @@ public class SettingsActivity extends Fragment {
             }
         });
         return layout;
+    }
+
+    public void init(){
+        TextView userName_text = (TextView)layout.findViewById(R.id.username);
+        TextView introduction_text = (TextView)layout.findViewById(R.id.introduction);
+        ImageButton userImg = (ImageButton)layout.findViewById(R.id.sculpture);
+
+        PersonInfo myInfo = DbHelper.getInstance().getUserInfo(userId);
+        userName_text.setText(myInfo.name);
+        if(myInfo.intro == null)
+            introduction_text.setText("暂无介绍");
+        else
+            introduction_text.setText(myInfo.intro);
     }
 
 }
