@@ -70,6 +70,15 @@ public class Others extends AppCompatActivity implements
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         init();
+
+        // 返回至上一界面
+        ImageButton backBtn=findViewById(R.id.backButton);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Others.this.finish();
+            }
+        });
     }
 
     /**

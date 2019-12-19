@@ -7,12 +7,13 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#33cccc">
+        android:background="#00000000">
 
         <Button
             android:id="@+id/interests"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/map_button"
             android:text="景区"
@@ -22,6 +23,7 @@
             android:id="@+id/hotels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/map_button"
             android:text="酒店"
@@ -59,6 +61,7 @@
             android:layout_weight="1"
             android:background="@drawable/map_button"
             android:text="一键规划"
+            android:textColor="@color/changeable_color"
             android:visibility="invisible" />
 
     <Button

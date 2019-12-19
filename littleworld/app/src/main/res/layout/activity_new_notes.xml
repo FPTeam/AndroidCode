@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:padding="10dp"
-            android:text="@string/add_place"
+            android:text="正在定位"
             android:textColor="@color/blue"
             android:textSize="16sp" />
 
