@@ -139,7 +139,8 @@ public class ReleaseDynamicsActivity extends Fragment {
         ImageButton add_pictures;
         add_pictures=layout.findViewById(R.id.add_pictures);
         //要显示的图片
-        picture = layout.findViewById(R.id.picture);
+        //这里改了一下，直接将加号替换成要显示的图片
+        picture = layout.findViewById(R.id.add_pictures);
 
         //点击加号选择照相机或者相册
         add_pictures.setOnClickListener(new View.OnClickListener() {
@@ -194,7 +195,7 @@ public class ReleaseDynamicsActivity extends Fragment {
                 Date date = new Date(System.currentTimeMillis());//当前设备的时间
                 String timestr = nowtime.format(date);//转换为字符串
 
-                DbHelper.getInstance().insertPassage( userId,inputNotes,imgPath,timestr,null,location);
+                DbHelper.getInstance().insertPassage( 190001,inputNotes,imgPath,timestr,null,location);
 //                ReleaseDynamicsActivity.this.finish();
             }
         });

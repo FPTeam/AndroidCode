@@ -26,7 +26,6 @@
         android:id="@+id/searchView_f"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="@drawable/search_view"
         android:iconifiedByDefault="false"
         android:minHeight="100dp"

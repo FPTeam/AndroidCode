@@ -17,17 +17,16 @@
         <SearchView
             android:id="@+id/searchView_s"
             android:layout_width="match_parent"
-
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/search_view"
             android:baselineAligned="false"
             android:clipToPadding="false"
             android:iconifiedByDefault="false"
             android:minHeight="100dp"
-            android:queryHint="搜索感兴趣的内容"
             android:queryBackground="@null"
-            android:submitBackground="@null"/>
+            android:queryHint="搜索感兴趣的内容"
+            android:submitBackground="@null" />
     </FrameLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -41,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="35dip"
         android:layout_gravity="bottom"
-        android:background="#33515151"
+        android:background="#FFFFFFFF"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="10">
@@ -53,8 +52,7 @@
             android:layout_weight="8"
             android:gravity="center_vertical"
             android:paddingLeft="8dip"
-            android:text="title"
-            android:textColor="@color/white" />
+            android:text="title" />
         <!--用来动态添加轮播小点-->
 
         <LinearLayout
@@ -66,7 +64,8 @@
             android:gravity="center|right"
             android:orientation="horizontal"
             android:paddingLeft="3dp"
-            android:paddingRight="3dp"/>
+            android:paddingRight="3dp"
+            />
 
     </LinearLayout>
 
@@ -74,12 +73,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
+        android:background="#FFFFFFFF"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/places"
             android:layout_width="50dp"
-            android:layout_height="45dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@mipmap/places1" />
 
@@ -93,7 +93,7 @@
         <ImageView
             android:id="@+id/more"
             android:layout_width="50dp"
-            android:layout_height="45dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@mipmap/more1" />
     </LinearLayout>
@@ -101,32 +101,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
+        android:background="#FFFFFFFF"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:layout_width="147dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
-            android:text="附近景点" />
+            android:text="附近景点"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="wrap_content"
+            android:layout_width="173dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
-            android:text="附近酒店" />
+            android:text="附近酒店"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="109dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
-            android:layout_marginRight="10dp"
-            android:text="更多" />
+            android:text="更多"
+            android:layout_marginRight="20dp"
+            android:textAlignment="center" />
     </LinearLayout>
 
 </LinearLayout>
