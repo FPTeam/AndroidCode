@@ -110,7 +110,11 @@ public class LoginActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "用户名/密码错误！", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    editor.clear();
+
+                    editor = sp.edit();
+                    editor.putString("USERNAME",null);
+                    editor.putString("PASSWORD",null );
+                    editor.commit();
                     editor.commit();
                 }
                 else
