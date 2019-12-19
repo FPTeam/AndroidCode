@@ -43,7 +43,7 @@ public class NavigationActivity extends AppCompatActivity {
         //        关联mytabs和viewPager
         //自定义的Adapter继承自FragmentPagerAdapter
         FragmentManager fragmentManager = getSupportFragmentManager();
-        mViewPager.setAdapter(new NavigationPagerAdapter(fragmentManager,mytabs.getTabCount(),mViewPager));
+        mViewPager.setAdapter(new NavigationPagerAdapter(fragmentManager,mytabs.getTabCount(),mViewPager,userId));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mytabs));
 
         mytabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

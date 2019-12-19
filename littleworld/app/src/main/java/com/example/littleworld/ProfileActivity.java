@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.littleworld.Adapter.ProfilePageAdapter;
 import com.example.littleworld.Entity.ProfileViewPager;
+import com.example.littleworld.util.ToastUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
@@ -23,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FragmentManager fm;
     private TextView title; // 页面标题设置为用户名
     private TabLayout tabLayout;
+    private int userId;
     ArrayList<Fragment> fragments = new ArrayList<>();
     ArrayList<String> titles = new ArrayList<>();
 
@@ -30,6 +33,11 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_main);
+        
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("user_id",-1);
+        String s = String.valueOf(userId);
+        ToastUtil.show(getApplicationContext(),s);
 
         appbar = findViewById(R.id.appbar);
         viewPager = findViewById(R.id.viewPager);

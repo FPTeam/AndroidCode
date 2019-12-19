@@ -61,7 +61,7 @@ public class ReleaseDynamicsActivity extends Fragment {
 
     private static final int CHOOSE_PHOTO = 2;
 
-
+    private int userId;
 
     private ImageView picture;
 
@@ -79,7 +79,7 @@ public class ReleaseDynamicsActivity extends Fragment {
     private TranslateAnimation animation;
 
 
-    private String location;
+    private String location = "未定义";
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -119,6 +119,10 @@ public class ReleaseDynamicsActivity extends Fragment {
         }
     };
 
+    public ReleaseDynamicsActivity(int userId){
+        super();
+        this.userId = userId;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

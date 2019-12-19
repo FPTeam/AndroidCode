@@ -32,7 +32,12 @@ public class PassageActivity extends Fragment {
 
     private List<passage> passageList = new ArrayList<>();
     SearchView searchView;
+    private int userId;
 
+    public PassageActivity(int userId){
+        super();
+        this.userId = userId;
+    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

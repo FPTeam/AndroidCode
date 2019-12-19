@@ -43,6 +43,7 @@ public class SettingsActivity extends Fragment {
 /**  java tai cai bu hui chong fu diao yong    **/
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
+    private int userId;
     private ImageView picture;
     private Uri imageUri;
     //图片
@@ -57,6 +58,11 @@ public class SettingsActivity extends Fragment {
     private TranslateAnimation animation;
     /**    **/
 
+    public SettingsActivity(int userId){
+        super();
+        this.userId = userId;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -69,6 +75,7 @@ public class SettingsActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                intent.putExtra("user_id",userId);
                 startActivity(intent);
             }
         });

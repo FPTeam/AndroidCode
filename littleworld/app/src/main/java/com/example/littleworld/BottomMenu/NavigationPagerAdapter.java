@@ -17,12 +17,14 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
     int nNumOfTabs;
     private ViewPager pvp;
     Fragment fragment;
+    int userId;
 
-    public NavigationPagerAdapter(FragmentManager fm, int nNumOfTabs, ViewPager pvp )
+    public NavigationPagerAdapter(FragmentManager fm, int nNumOfTabs, ViewPager pvp,int userId )
     {
         super(fm);
         this.pvp=pvp;
         this.nNumOfTabs=nNumOfTabs;
+        this.userId = userId;
     }
 
     /**
@@ -37,19 +39,19 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0: //关注
-                fragment = new PassageActivity();
+                fragment = new PassageActivity(userId);
                 break;
             case 1: //广场
-                fragment = new SquareActivity();
+                fragment = new SquareActivity(userId);
                 break;
             case 2: //编辑
-                fragment = new ReleaseDynamicsActivity();
+                fragment = new ReleaseDynamicsActivity(userId);
                 break;
             case 3: //私信
-                fragment = new NewMegActivity();
+                fragment = new NewMegActivity(userId);
                 break;
             case 4: //设置
-                fragment = new SettingsActivity();
+                fragment = new SettingsActivity(userId);
                 break;
 
         }

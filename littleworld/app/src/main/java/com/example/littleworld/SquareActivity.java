@@ -29,6 +29,7 @@ public class SquareActivity extends Fragment {
     private TextView mTvPagerTitle;
     private SearchView searchView;
     View layout;
+    int userId;
 
     private ImageView places;//景点按钮
     private ImageView hotels;//酒店按钮
@@ -45,7 +46,10 @@ public class SquareActivity extends Fragment {
     // 在values文件假下创建了pager_image_ids.xml文件，并定义了4张轮播图对应的id，用于点击事件
     private int[] imgae_ids = new int[]{R.id.pager_image1, R.id.pager_image2, R.id.pager_image3};
 
-
+    public SquareActivity(int userId){
+        super();
+        this.userId = userId;
+    }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

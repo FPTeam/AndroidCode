@@ -135,8 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                     //toast.show();
                     //跳转到主界面，并传递userid过去...
                     Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
-                    //String s = "hahaha";
-                    //int x = 123;
                     intent.putExtra("user_id",userId);
 
                     startActivity(intent);
