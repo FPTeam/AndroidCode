@@ -89,7 +89,7 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProfileActivity.class);
-                int userId = 12345;
+                int userId = 190001;
                 intent.putExtra("user_id",userId);
                 intent.putExtra("is_owner",0);//访问别人主页
                 context.startActivity(intent);
