@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.littleworld.DbHelper;
 import com.example.littleworld.NewMegActivity;
 import com.example.littleworld.PassageActivity;
 import com.example.littleworld.ReleaseDynamicsActivity;
@@ -51,7 +52,7 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
                 fragment = new NewMegActivity(userId);
                 break;
             case 4: //设置
-                fragment = new SettingsActivity(userId);
+                fragment = new SettingsActivity(DbHelper.getInstance().getUserId());
                 break;
 
         }

@@ -25,9 +25,9 @@ public class SettingEditInfo extends AppCompatActivity {
         affirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inName = newName.getText().toString();
-                String inIntroduction = newIntroduction.getText().toString();
-                int rep=DbHelper.getInstance().repUser(inName);
+                String name = newName.getText().toString();
+                String intro = newIntroduction.getText().toString();
+                int rep=DbHelper.getInstance().repUser(name);
                 if(rep!=-1) {
                     Toast toast = Toast.makeText(getApplicationContext(), "该用户名已被占用", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -36,7 +36,8 @@ public class SettingEditInfo extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "修改成功！", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    DbHelper.getInstance().insertUserInfo(190001,inName,inIntroduction,"男",null);
+
+                    DbHelper.getInstance().insertUserInfo(DbHelper.getInstance().getUserId(),name,intro,null,null);
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                                 /*Intent  intent=new Intent(RegActivity.this, LoginActivity.class);

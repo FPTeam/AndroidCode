@@ -60,8 +60,7 @@ public class SettingsActivity extends Fragment {
     // 声明平移动画
     private TranslateAnimation animation;
     /**    **/
-    private String userName;
-    private String introduction;
+
     Cursor cursor;
 
     public SettingsActivity(int userId){
@@ -70,47 +69,31 @@ public class SettingsActivity extends Fragment {
     }
 
 
-
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         layout = inflater.inflate(R.layout.settings_main, container, false);
-
+/**
         init();//查数据库显示信息
-
-//        String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString();
-//        String DATABASE_NAME="lw.db";
-//        String databaseFilename=DATABASE_PATH+"/"+DATABASE_NAME;
-//        db = DbHelper.getInstance().openDatabase(databaseFilename);//以后使用DbHelper务必先调用.getInstance()获取唯一对象
-//        setting = DbHelper.getInstance().getUserBook(190001);
-
+**/
         Toast.makeText(getActivity().getApplicationContext(), "Holle World!", Toast.LENGTH_SHORT).show();
         cursor = DbHelper.getInstance().getUserBook(DbHelper.getInstance().getUserId());
-        String name = new String();
+        String name = new String();//保存用户名
+        String intro = new String();//保存用户介绍
+
         if(cursor.getCount()!=0){
             cursor.moveToNext();
             name = cursor.getString(1);
+            intro = cursor.getString(2);
         }else{
             name = "null";
         }
-//            String name = DbHelper.getInstance().getUserBook(190001);
-//            String name = setting.getString(setting.getColumnIndex("UserName"));
-        //String intro = cursor.getString(cursor.getColumnIndex("UserInfo"));
-//            setting = DbHelper.getInstance().getUserBook(userId);
-
-        if(name == null){
-            name = ""+"kongdea";
-        }
-
 
         TextView userName = layout.findViewById(R.id.username);
         TextView introduction = layout.findViewById(R.id.introduction);
         userName.setText(name);
-        //          introduction.setText(intro);
-
+        introduction.setText(intro);
 
         /* 跳转至个人主页 */
         ImageButton btn_sculpture = layout.findViewById(R.id.sculpture);
@@ -175,7 +158,7 @@ public class SettingsActivity extends Fragment {
         });
         return layout;
     }
-
+/**
     public void init(){
         TextView userName_text = (TextView)layout.findViewById(R.id.username);
         TextView introduction_text = (TextView)layout.findViewById(R.id.introduction);
@@ -188,6 +171,7 @@ public class SettingsActivity extends Fragment {
         else
             introduction_text.setText(myInfo.intro);
     }
+**/
 
 }
 

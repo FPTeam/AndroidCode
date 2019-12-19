@@ -42,30 +42,17 @@ public class DbHelper{
         this.userId = userId;
     }
 
+    //调用这个函数获取userId,使用方法int i = DbHelper.getInstance().getUserId(); created by tll;
     public int getUserId(){
         return userId;
     }
 
+    //获取用户表
     public Cursor getUserBook(int userId){
-//        Cursor cursor = db.rawQuery("select Name from login where Password=?",new String[]{"111111"});
         Cursor cursor = db.query("user",null,"UserId=?",new String[]{Integer.toString(userId)},null,null,null);
-//        String name = new String();
-//        if(cursor.getCount()!=0){
-//            cursor.moveToNext();
-//            name = cursor.getString(0);
-//        }
         return cursor;
     }
-    public String  getUserBookName(String userId){
-        String name = new String();
-        Cursor cursor = db.query("login",null,"UserId=?",new String[]{userId},null,null,null);
-        if(cursor.getCount()!=0){
-            cursor.moveToNext();
-            name = cursor.getString(cursor.getColumnIndex("UserName"));
-        }
 
-        return name;
-    }
 
     /*******登陆时验证用户名和密码*******/
     public int testUser(String username,String password)//验证用户名和密码

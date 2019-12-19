@@ -131,6 +131,7 @@ public class RegActivity extends AppCompatActivity {
                         DbHelper.getInstance().insertUser(username, password);
                         int userid = DbHelper.getInstance().testUser(username, password);
                         if (userid != -1) {
+                            String ingPath = SaveFile(fileDir);
                             Toast toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
