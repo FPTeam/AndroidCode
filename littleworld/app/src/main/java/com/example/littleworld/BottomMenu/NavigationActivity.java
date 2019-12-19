@@ -6,9 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.littleworld.R;
 import com.example.littleworld.util.ToastUtil;
@@ -35,7 +33,7 @@ public class NavigationActivity extends AppCompatActivity {
         mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.tianjia1));
         mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.tongzhi));
         mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.shezhi2));
-        mytabs.setTabIconTint(getResources().getColorStateList(R.color.bottom_nevigation));
+        mytabs.setTabIconTint(getResources().getColorStateList(R.color.changeable_color));
         mytabs.getTabAt(1).select();
 
         //       给ViewPager创建适配器，将Title和Fragment添加进ViewPager中

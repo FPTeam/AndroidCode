@@ -7,21 +7,25 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/title_background">
+        android:background="#33cccc">
 
         <Button
-        android:id="@+id/interests"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="景区" />
+            android:id="@+id/interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/map_button"
+            android:text="景区"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/hotels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="酒店" />
+            android:background="@drawable/map_button"
+            android:text="酒店"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -33,10 +37,11 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-       <TextView
-           android:layout_width="match_parent"
-           android:text="加入旅程的景点："
-           android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="加入旅程的景点："
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -47,13 +52,14 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-    <Button
-        android:id="@+id/plan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="一键规划"
-        android:visibility="invisible"/>
+        <Button
+            android:id="@+id/plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/map_button"
+            android:text="一键规划"
+            android:visibility="invisible" />
 
     <Button
         android:id="@+id/nextButton"

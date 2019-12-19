@@ -73,13 +73,13 @@
 
         <activity
             android:name=".map.Others"
-            android:theme="@style/ProfileTheme"></activity>
+            android:theme="@style/SettingTheme"></activity>
 
         <activity android:name=".map.Places"
-            android:theme="@style/ProfileTheme"></activity>
+            android:theme="@style/SettingTheme"></activity>
 
         <activity android:name=".map.Hotel"
-            android:theme="@style/ProfileTheme"></activity>
+            android:theme="@style/SettingTheme"></activity>
 
         <activity android:name=".BottomMenu.NavigationActivity"
             android:theme="@style/SettingTheme"></activity>

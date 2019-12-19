@@ -4,6 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#33cccc"
+        android:gravity="center"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="@string/places_nearby"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
     <LinearLayout
         android:id="@+id/interest_list"
         android:layout_width="match_parent"
@@ -14,8 +26,9 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="加入旅程的景点："
-            android:layout_height="wrap_content"/>
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -31,15 +44,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/map_button"
             android:text="一键规划"
-            android:visibility="invisible"/>
+            android:textSize="18sp"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="下一页" />
+            android:background="@drawable/map_button"
+            android:text="下一页"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
