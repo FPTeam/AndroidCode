@@ -134,7 +134,7 @@ public class DbHelper{
     //    传参说明：用户号userid，文章内容content，图片路径：imgPath，文章发表时间：posttime，文章修改时间：changetime，发表地点：postplace
     //    注意userid，content，postplace为非空！
     //    返回文章号
-    public int insertPassage(Integer userid, String content, byte[] imgPath, String posttime, String changetime , String postplace)
+    public int insertPassage(Integer userid, String content, String imgPath, String posttime, String changetime , String postplace)
     {
         ContentValues cv = new ContentValues();
         cv.put("UserId",userid);
@@ -161,7 +161,7 @@ public class DbHelper{
     /*******添加和更改用户的性别、头像图片、个人介绍等信息*******/
     //  传参说明：用户号userid，用户信息UserInfo，性别：Sex，头像图片链接：head
     //  注册时用户号和用户名已经插入到user表，所以其余信息都是更新时补充添加进去的
-    public void insertUserInfo(Integer userid, String UserName, String UserInfo, String Sex, byte[] head)//添加或更改用户信息
+    public void insertUserInfo(Integer userid, String UserName, String UserInfo, String Sex, String head)//添加或更改用户信息
     {
         ContentValues cv = new ContentValues();
         if(UserName!=null)
@@ -204,13 +204,13 @@ public class DbHelper{
         while(curpassage.moveToNext())
         {
             passage passage= new passage();
-            userid=curpassage.getString(1);
+            userid=Integer.toString(curpassage.getInt(1));
             Cursor curuser= db.rawQuery("select * from user where UserId=?",new String[]{userid});
             if(curuser.getCount()!=0)//查找用户名和用户头像并添加
             {
                 curuser.moveToNext();
                 passage.setName(curuser.getString(1));
-                //passage.setHead(curuser.getString(4));
+                passage.setHead(curuser.getString(4));
             }
 
             /*添加文章信息*/
@@ -266,7 +266,7 @@ public class DbHelper{
         while(curpassage.moveToNext())
         {
             passage passage= new passage();
-            userid=curpassage.getString(1);
+            userid=Integer.toString(curpassage.getInt(1));
             Cursor curuser= db.rawQuery("select * from user where UserId=?",new String[]{userid});
             if(curuser.getCount()!=0)//查找用户名和用户头像并添加
             {
@@ -441,7 +441,7 @@ public class DbHelper{
             info0.name = curcity.getString(1);
             info0.intro = curcity.getString(2);
             info0.sex = curcity.getString(3);
-            info0.img = curcity.getBlob(4);
+            info0.img = curcity.getString(4);
 
             Log.d("用户名", info0.name);
             if(info0.intro == null)
