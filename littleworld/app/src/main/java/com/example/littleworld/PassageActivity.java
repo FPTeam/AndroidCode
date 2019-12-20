@@ -70,11 +70,12 @@ public class PassageActivity extends Fragment {
             }
         });
 
-        initpassage();
+        //initpassage();
 
         RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        passageList = DbHelper.getInstance().searchPassage(0, 10, null);
         Log.d("列表", passageList.toString());
         passageAdapter adapter = new passageAdapter(getActivity(),passageList);
         recyclerView.setAdapter(adapter);
@@ -86,7 +87,7 @@ public class PassageActivity extends Fragment {
 * 以下用于个人测试页面，数据库操作加入后，可以删除以下数据
 * */
 
-    private final String names[] = {
+   /* private final String names[] = {
             "张三",
             "李四"
     };
@@ -120,7 +121,7 @@ public class PassageActivity extends Fragment {
             passageList.add(passage);
         }
         return passageList;
-    }
+    }*/
 
 }
 

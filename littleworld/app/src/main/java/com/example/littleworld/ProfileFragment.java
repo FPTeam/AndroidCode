@@ -102,7 +102,7 @@ public class ProfileFragment extends Fragment {
                 // 显示关于我部分的fragment layout
                 view=inflater.inflate(R.layout.profile_fragment_aboutme, container, false);
                 pvp.setObjectForPosition(view,2);
-                userId_text=view.findViewById(R.id.profileID); // 用户ID
+                userId_text=view.findViewById(R.id.profileID); // 用户ID,改为用户账号
                 userSex_text=view.findViewById(R.id.profileSex); // 用户性别
                 userIntro_text=view.findViewById(R.id.profileIntro); // 个人介绍
 
@@ -110,7 +110,7 @@ public class ProfileFragment extends Fragment {
                  *   从数据库查询用户信息并显示
                  */
                 PersonInfo myInfo = DbHelper.getInstance().getUserInfo(userId);
-                userId_text.setText(String.valueOf(userId));
+                userId_text.setText(myInfo.name);
                 userSex_text.setText(myInfo.sex);
                 if(myInfo.intro == null)
                     userIntro_text.setText("暂无介绍");

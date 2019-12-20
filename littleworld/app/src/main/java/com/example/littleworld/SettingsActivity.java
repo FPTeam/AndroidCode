@@ -92,7 +92,11 @@ public class SettingsActivity extends Fragment {
         TextView userName = layout.findViewById(R.id.username);
         TextView introduction = layout.findViewById(R.id.introduction);
         userName.setText(myInfo.name);
-        introduction.setText(myInfo.intro);
+
+        if(myInfo.intro != "")
+            introduction.setText(myInfo.intro);
+        else
+            introduction.setText("暂无介绍");
 
         /* 跳转至个人主页 */
         ImageButton btn_sculpture = layout.findViewById(R.id.sculpture);

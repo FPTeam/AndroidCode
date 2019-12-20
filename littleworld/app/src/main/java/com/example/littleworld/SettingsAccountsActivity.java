@@ -42,7 +42,8 @@ public class SettingsAccountsActivity extends AppCompatActivity {
     public static void deleteToPre(Context context){
         SharedPreferences sharedPreferences=context.getSharedPreferences("userInfo",context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.clear();
+        //editor.clear();
+        editor.putString("PASSWORD","");
         editor.commit();
     }
 

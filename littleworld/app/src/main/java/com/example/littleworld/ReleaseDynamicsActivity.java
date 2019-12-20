@@ -193,9 +193,9 @@ public class ReleaseDynamicsActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 String imgPath = SaveFile(fileDir);
-                if (bitmap != null && !bitmap.isRecycled()) {
-                    bitmap.recycle();
-                }
+//                if (bitmap != null && !bitmap.isRecycled()) {
+//                    bitmap.recycle();
+//                }
 
                 //***添加时间
                 SimpleDateFormat nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//格式
@@ -203,7 +203,7 @@ public class ReleaseDynamicsActivity extends Fragment {
                 Date date = new Date(System.currentTimeMillis());//当前设备的时间
                 String timestr = nowtime.format(date);//转换为字符串
 
-                DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,imgPath,timestr,null,location);
+                int passageId = DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,imgPath,timestr,null,location);
                 input_notes.setText("");
                 Intent intent = new Intent(getActivity(), NavigationActivity.class);
                 startActivity(intent);

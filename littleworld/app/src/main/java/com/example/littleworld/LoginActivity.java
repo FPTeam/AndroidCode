@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     private static String BACK_LOCATION_PERMISSION = "android.permission.ACCESS_BACKGROUND_LOCATION";
 
     public LoginActivity() {
-        setAutoLogin(Boolean.TRUE);
+
     }
 
     @Override
@@ -112,10 +112,9 @@ public class LoginActivity extends AppCompatActivity {
                     toast.show();
 
                     editor = sp.edit();
-                    editor.putString("USERNAME",null);
-                    editor.putString("PASSWORD",null );
-                    editor.commit();
-                    editor.commit();
+                    //editor.putString("USERNAME",null);
+                    editor.putString("PASSWORD","");
+                    editor.apply();
                 }
                 else
                 {
@@ -130,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("USERNAME",un.getText().toString());
                     editor.putString("PASSWORD",pw.getText().toString());
                     editor.commit();
-                    setAutoLogin(Boolean.TRUE);
 
                     Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
                     intent.putExtra("user_id",userId);
@@ -191,24 +189,17 @@ public class LoginActivity extends AppCompatActivity {
         return databaseFilename;
     }
 
+    //有保存账号密码数据则自动登陆
     private void checkInitStatus(SharedPreferences sp) {
-        if(sp.getString("USERNAME", null) != null){
-            un.setText(sp.getString("USERNAME", null));
-            pw.setText(sp.getString("PASSWORD", "FUCK!!"));
+        un.setText(sp.getString("USERNAME", ""));
+        pw.setText(sp.getString("PASSWORD", ""));
+        if((sp.getString("USERNAME", null) != "") && (sp.getString("PASSWORD", null) != "")){
             //跳转界面
             Intent intent = new Intent(LoginActivity.this, LogoActivity.class);
             intent.putExtra("USERNAME",sp.getString("USERNAME", null));
             intent.putExtra("PASSWORD",sp.getString("PASSWORD", "FUCK!!"));
             LoginActivity.this.startActivity(intent);
         }
-    }
-
-    public void setAutoLogin(Boolean i){
-        this.autoLogin = i;
-    }
-
-    public Boolean getAutoLogin(){
-        return autoLogin;
     }
 
     /**
