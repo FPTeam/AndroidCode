@@ -127,8 +127,8 @@ public class RegActivity extends AppCompatActivity {
                 else if(password.length()>30){
                     msg = "密码太长";
                 }else{
-                    int rep=DbHelper.getInstance().repUser(username);
-                    if(rep!=-1) {
+                    boolean rep=DbHelper.getInstance().repUser(username);
+                    if(rep) {
                         msg = "该用户名已经注册过了!";
                     } else {
                         if (!password.equals(password1)) {

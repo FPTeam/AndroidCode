@@ -73,17 +73,18 @@ public class DbHelper{
         return -1;
     }
 
-    /*******验证注册时用户名是否重复*******/
-    public int repUser(String name)//验证注册时用户名是否重复
+    /*******验证注册或者修改时用户名是否重复*******/
+    //重复返回真值，不重复返回假值
+    public boolean repUser(String name)
     {
         Cursor login2 = db.rawQuery("select UserId from login where Name=?",new String[]{name});//验证用户名是否重复
         if(login2.getCount()!=0)
         {
             login2.moveToNext();
-            return login2.getInt(0);
+            return true;
         }
         login2.close();
-        return -1;
+        return false;
     }
 
     /*******注册新用户*******/
@@ -162,10 +163,14 @@ public class DbHelper{
     public void insertUserInfo(Integer userid, String UserName, String UserInfo, String Sex, String head)//添加或更改用户信息
     {
         ContentValues cv = new ContentValues();
-        cv.put("UserInfo", UserName);
-        cv.put("UserInfo", UserInfo);
-        cv.put("Sex", Sex);
-        cv.put("Head",head);
+        if(UserName!=null)
+            cv.put("UserName", UserName);
+        if(UserInfo!=null)
+            cv.put("UserInfo", UserInfo);
+        if(Sex!=null)
+            cv.put("Sex", Sex);
+        if(head!=null)
+            cv.put("Head",head);
         String[] args={String.valueOf(userid)};
         long p=db.update("user",cv,"userid=?",args);
         if(p!=-1)

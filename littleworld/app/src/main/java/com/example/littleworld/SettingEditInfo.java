@@ -27,8 +27,8 @@ public class SettingEditInfo extends AppCompatActivity {
             public void onClick(View v) {
                 String name = newName.getText().toString();
                 String intro = newIntroduction.getText().toString();
-                int rep=DbHelper.getInstance().repUser(name);
-                if(rep!=-1) {
+                boolean rep=DbHelper.getInstance().repUser(name);
+                if(rep) {
                     Toast toast = Toast.makeText(getApplicationContext(), "该用户名已被占用", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
