@@ -6,8 +6,19 @@ public class passage {
     /**
      *
      */
-    private String name,content,imgpath,PostTime,ChangeTime,PostPlace;
-    private int passageid,userid,LikeNumber,CommentNumber,CollectNumber;
+    private String name;//姓名
+    private String content;//说说内容
+    private String imgpath;//说说图片路径
+    private String PostTime;//发布时间
+    private String ChangeTime;//修改时间
+    private String PostPlace;//发布地点
+    private String Headpath;//用户头像
+    private String Tag;//标签
+    private int passageid;//文章标号
+    private int userid;//用户名
+    private int LikeNumber;//喜欢数量
+    private int CommentNumber;//评论数
+    private int CollectNumber;//收藏数
 
     public String getName() {
         return name;
@@ -45,6 +56,22 @@ public class passage {
 
     public void setChangeTime(String changeTime) {
         ChangeTime = changeTime;
+    }
+
+    public String getTag() {
+        return Tag;
+    }
+
+    public void setTag(String Tag) {
+        Tag = Tag;
+    }
+
+    public String getHeadpath() {
+        return Headpath;
+    }
+
+    public void setHeadpath(String postPlace) {
+        Headpath = Headpath;
     }
 
     public String getPostPlace() {
@@ -104,6 +131,8 @@ public class passage {
                 ", PostTime='" + PostTime + '\'' +
                 ", ChangeTime='" + ChangeTime + '\'' +
                 ", PostPlace='" + PostPlace + '\'' +
+                ", Headpath='" + Headpath + '\'' +
+                ", Tag='" + Tag + '\'' +
                 ", passageid=" + passageid +
                 ", userid=" + userid +
                 ", LikeNumber=" + LikeNumber +
