@@ -44,6 +44,7 @@ public class SquareActivity extends Fragment {
     private String[] mImageTitles;//标题集合
     private int previousPosition = 0;//前一个被选中的position
     private List<View> mDots;//小点
+    private List<passage> passageList = new ArrayList<>();
 
     private boolean isStop = false;//线程是否停止
     private static int PAGER_TIOME = 5000;//间隔时间
