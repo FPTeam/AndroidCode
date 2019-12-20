@@ -76,24 +76,23 @@ public class SettingsActivity extends Fragment {
 /**
         init();//查数据库显示信息
 **/
-//        Toast.makeText(getActivity().getApplicationContext(), "Holle World!", Toast.LENGTH_LONG).show();
-        cursor = DbHelper.getInstance().getUserBook(DbHelper.getInstance().getUserId());
+
+        /**   查数据库显示信息,和下面的函数功能一样的
         String name = new String();//保存用户名
         String intro = new String();//保存用户介绍
-
+        cursor = DbHelper.getInstance().getUserBook(DbHelper.getInstance().getUserId());
         if(cursor.getCount()!=0){
             cursor.moveToNext();
             name = cursor.getString(1);
             intro = cursor.getString(2);
-        }else{
-            name = "null";
         }
         cursor.close();
-
+        **/
+        PersonInfo myInfo = DbHelper.getInstance().getUserInfo(DbHelper.getInstance().getUserId());
         TextView userName = layout.findViewById(R.id.username);
         TextView introduction = layout.findViewById(R.id.introduction);
-        userName.setText(name);
-        introduction.setText(intro);
+        userName.setText(myInfo.name);
+        introduction.setText(myInfo.intro);
 
         /* 跳转至个人主页 */
         ImageButton btn_sculpture = layout.findViewById(R.id.sculpture);

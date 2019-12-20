@@ -54,6 +54,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
+import com.example.littleworld.BottomMenu.NavigationActivity;
 import com.example.littleworld.util.ToastUtil;
 
 public class ReleaseDynamicsActivity extends Fragment {
@@ -185,8 +186,8 @@ public class ReleaseDynamicsActivity extends Fragment {
         }
          */
 
-        Button noteSend = layout.findViewById(R.id.note_send);
-        EditText input_notes = layout.findViewById(R.id.input_notes);
+        final Button noteSend = layout.findViewById(R.id.note_send);
+        final EditText input_notes = layout.findViewById(R.id.input_notes);
         final String inputNotes = input_notes.getText().toString();
         noteSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,7 +203,10 @@ public class ReleaseDynamicsActivity extends Fragment {
                 Date date = new Date(System.currentTimeMillis());//当前设备的时间
                 String timestr = nowtime.format(date);//转换为字符串
 
-                DbHelper.getInstance().insertPassage( 190001,inputNotes,imgPath,timestr,null,location);
+                DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,imgPath,timestr,null,location);
+                input_notes.setText("");
+                Intent intent = new Intent(getActivity(), NavigationActivity.class);
+                startActivity(intent);
 //                ReleaseDynamicsActivity.this.finish();
             }
         });
