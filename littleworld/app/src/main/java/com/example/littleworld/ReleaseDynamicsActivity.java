@@ -40,6 +40,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -198,6 +199,11 @@ public class ReleaseDynamicsActivity extends Fragment {
 //                    bitmap.recycle();
 //                }
 
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                Bitmap newBitmap = PictureProcessing.compressScale(bitmap);
+                newBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+                //return os.toByteArray();
+
                 final EditText input_notes = layout.findViewById(R.id.input_notes);
                 final String inputNotes = input_notes.getText().toString();
 
@@ -206,8 +212,10 @@ public class ReleaseDynamicsActivity extends Fragment {
                 nowtime.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));// 中国北京时间，东八区
                 Date date = new Date(System.currentTimeMillis());//当前设备的时间
                 String timestr = nowtime.format(date);//转换为字符串
-
-                int passageId = DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,imgPath,timestr,null,location);
+                String s = Integer.toString(newBitmap.getByteCount());
+                Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_LONG).show();
+//                int passageId = DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,imgPath,timestr,null,location);
+                int passageId = DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,os.toByteArray(),timestr,null,location);
                 input_notes.setText("");
                 Intent intent = new Intent(getActivity(), NavigationActivity.class);
                 startActivity(intent);

@@ -8,7 +8,7 @@ public class passage {
      */
     private String name;//姓名
     private String content;//说说内容
-    private String imgpath;//说说图片路径
+    private byte[] imgpath;//说说图片路径
     private String PostTime;//发布时间
     private String ChangeTime;//修改时间
     private String PostPlace;//发布地点
@@ -36,9 +36,9 @@ public class passage {
         this.content = content;
     }
 
-    public String getImgpath() { return imgpath; }
+    public byte[] getImgpath() { return imgpath; }
 
-    public void setImgpath(String imgpath) {
+    public void setImgpath(byte[] imgpath) {
         this.imgpath = imgpath;
     }
 

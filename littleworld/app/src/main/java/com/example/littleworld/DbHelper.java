@@ -133,7 +133,7 @@ public class DbHelper{
     //    传参说明：用户号userid，文章内容content，图片路径：imgPath，文章发表时间：posttime，文章修改时间：changetime，发表地点：postplace
     //    注意userid，content，postplace为非空！
     //    返回文章号
-    public int insertPassage(Integer userid, String content, String imgPath, String posttime, String changetime , String postplace)
+    public int insertPassage(Integer userid, String content, byte[] imgPath, String posttime, String changetime , String postplace)
     {
         ContentValues cv = new ContentValues();
         cv.put("UserId",userid);
@@ -228,7 +228,7 @@ public class DbHelper{
             passage.setPassageid(curpassage.getInt(0));
             passage.setUserid(curpassage.getInt(1));
             passage.setContent(curpassage.getString(2 ));
-            passage.setImgpath(curpassage.getString(3));
+            passage.setImgpath(curpassage.getBlob(3));
             passage.setPostTime(curpassage.getString(4));
             passage.setChangeTime(curpassage.getString(5));
             passage.setPostPlace(curpassage.getString(6));

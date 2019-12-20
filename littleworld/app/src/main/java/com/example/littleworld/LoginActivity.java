@@ -193,12 +193,15 @@ public class LoginActivity extends AppCompatActivity {
     private void checkInitStatus(SharedPreferences sp) {
         un.setText(sp.getString("USERNAME", ""));
         pw.setText(sp.getString("PASSWORD", ""));
-        if((sp.getString("USERNAME", null) != "") && (sp.getString("PASSWORD", null) != "")){
-            //跳转界面
-            Intent intent = new Intent(LoginActivity.this, LogoActivity.class);
-            intent.putExtra("USERNAME",sp.getString("USERNAME", null));
-            intent.putExtra("PASSWORD",sp.getString("PASSWORD", "FUCK!!"));
-            LoginActivity.this.startActivity(intent);
+        if((sp.getString("USERNAME", null) != null) && (sp.getString("PASSWORD", null) != null)){
+            if((sp.getString("USERNAME", null).length() > 4) && (sp.getString("PASSWORD", null).length() > 4)){
+                //跳转界面
+                Intent intent = new Intent(LoginActivity.this, LogoActivity.class);
+                intent.putExtra("USERNAME",sp.getString("USERNAME", null));
+                intent.putExtra("PASSWORD",sp.getString("PASSWORD", "FUCK!!"));
+                LoginActivity.this.startActivity(intent);
+            }
+
         }
     }
 
