@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -171,22 +172,22 @@ public class ReleaseDynamicsActivity extends Fragment {
             }
         });
 */
-
+        /**
         //创建存放图片的文件
         String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString()+"/IMAGE";
         fileDir = new File(DATABASE_PATH);//和LoginActivity里的数据库一个路径
         // 如果目录不存在，创建这个目录
         if (!fileDir.exists())
             fileDir.mkdir();
+        **/
 
-        /*
-          图片文件存SD卡里
+        //图片文件存SD卡里
         File sdDir = Environment.getExternalStorageDirectory();
         fileDir = new File(sdDir.getPath() + "/IMAGE");
         if (!fileDir.exists()) {
             fileDir.mkdir();
         }
-         */
+
 
         final Button noteSend = layout.findViewById(R.id.note_send);
         noteSend.setOnClickListener(new View.OnClickListener() {
