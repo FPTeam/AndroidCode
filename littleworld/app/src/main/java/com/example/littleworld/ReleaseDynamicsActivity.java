@@ -40,7 +40,6 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -173,22 +172,22 @@ public class ReleaseDynamicsActivity extends Fragment {
             }
         });
 */
-        /**
+
         //创建存放图片的文件
         String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString()+"/IMAGE";
         fileDir = new File(DATABASE_PATH);//和LoginActivity里的数据库一个路径
         // 如果目录不存在，创建这个目录
         if (!fileDir.exists())
             fileDir.mkdir();
-        **/
+
 
         //图片文件存SD卡里
-        File sdDir = Environment.getExternalStorageDirectory();
+       /* File sdDir = Environment.getExternalStorageDirectory();
         fileDir = new File(sdDir.getPath() + "/IMAGE");
         if (!fileDir.exists()) {
             fileDir.mkdir();
         }
-
+*/
 
         final Button noteSend = layout.findViewById(R.id.note_send);
         noteSend.setOnClickListener(new View.OnClickListener() {
@@ -199,11 +198,6 @@ public class ReleaseDynamicsActivity extends Fragment {
 //                    bitmap.recycle();
 //                }
 
-                ByteArrayOutputStream os = new ByteArrayOutputStream();
-                Bitmap newBitmap = PictureProcessing.compressScale(bitmap);
-                newBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
-                //return os.toByteArray();
-
                 final EditText input_notes = layout.findViewById(R.id.input_notes);
                 final String inputNotes = input_notes.getText().toString();
 
@@ -212,10 +206,8 @@ public class ReleaseDynamicsActivity extends Fragment {
                 nowtime.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));// 中国北京时间，东八区
                 Date date = new Date(System.currentTimeMillis());//当前设备的时间
                 String timestr = nowtime.format(date);//转换为字符串
-                String s = Integer.toString(newBitmap.getByteCount());
-                Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_LONG).show();
-//                int passageId = DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,imgPath,timestr,null,location);
-                int passageId = DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,os.toByteArray(),timestr,null,location);
+
+                int passageId = DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,imgPath,timestr,null,location);
                 input_notes.setText("");
                 Intent intent = new Intent(getActivity(), NavigationActivity.class);
                 startActivity(intent);
@@ -392,7 +384,7 @@ public class ReleaseDynamicsActivity extends Fragment {
                 e.printStackTrace();
             }
             Toast.makeText(getActivity().getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
-            return fileDir + "IMG_"+ fileName + ".jpg";
+            return fileDir + "/IMG_"+ fileName + ".jpg";
         }
     }
 
