@@ -2,8 +2,6 @@ package com.example.littleworld.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +31,6 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
 
     private  Context context;
     private  List<passage> passageList;
-    private int userId= DbHelper.getInstance().getUserId();
 
     //绑定控件
     public class passageAdapterHolder extends RecyclerView.ViewHolder {
@@ -116,6 +113,7 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProfileActivity.class);
+                int userId = 190001;
                 intent.putExtra("user_id",userId);
                 intent.putExtra("is_owner",0);//访问别人主页
                 context.startActivity(intent);
@@ -189,7 +187,3 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
         return passageList.size();
     }
 }
-
-
-
-

@@ -90,3 +90,48 @@ public class PassageActivity extends Fragment {
         return layout;
     }
 
+
+/*
+* 以下用于个人测试页面，数据库操作加入后，可以删除以下数据
+* */
+
+ /*   private final String names[] = {
+            "张三",
+            "李四"
+    };
+    private final String postime[] = {
+            "2019-12-13 14:01",
+            "2019-12-11 15:31"
+    };
+    private final String contents[] = {
+            "风急天高猿啸哀 渚清沙白鸟飞回",
+            "无边落木萧萧下 不尽长江滚滚来"
+    };
+    private final String imgpath[] = {
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576351733980&di=f047849190579b5d507a36edfe4f411e&imgtype=0&src=http%3A%2F%2Fcdn.duitang.com%2Fuploads%2Fitem%2F201409%2F26%2F20140926200958_Y8HWs.thumb.700_0.jpeg",
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576354413954&di=a3a688411d7f88b7a3501cda3a43dcbd&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D2478365145%2C1274253168%26fm%3D214%26gp%3D0.jpg"
+    };
+
+    private final int likenum[] = {1,2 };
+
+    private final int collectnum[] = {6,7};
+
+    private List<passage> initpassage(){
+
+        for (int i = 0; i < names.length; i++ ){
+            passage passage= new passage();
+            passage.setName(names[i]);
+            passage.setPostTime(postime[i]);
+            passage.setContent( contents[i] );
+            passage.setImgpath(imgpath[i]);
+            passage.setLikeNumber(likenum[i]);
+            passage.setCollectNumber(collectnum[i]);
+            passageList.add(passage);
+        }
+        return passageList;
+    }
+*/
+}
+
+
+
