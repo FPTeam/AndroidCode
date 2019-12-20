@@ -32,6 +32,7 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
 
     private  Context context;
     private  List<passage> passageList;
+    private int userId= DbHelper.getInstance().getUserId();
 
     //绑定控件
     public class passageAdapterHolder extends RecyclerView.ViewHolder {
@@ -191,3 +192,7 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
         return passageList.size();
     }
 }
+
+
+
+
