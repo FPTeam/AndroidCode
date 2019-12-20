@@ -111,7 +111,7 @@ public class Places extends AppCompatActivity implements
                                     new LatLng(mStartPoint.getLatitude(),mStartPoint.getLongitude()))
                             .visible(true)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.amap_start))
-                            .title("我的位置").snippet(amapLocation.getPoiName());//记录当前位置markOption
+                            .title("我的位置").snippet(amapLocation.getAddress());//记录当前位置markOption
 
                     startMarker = new Marker(myLocation);
                     deactivate();//定位成功就停止定位

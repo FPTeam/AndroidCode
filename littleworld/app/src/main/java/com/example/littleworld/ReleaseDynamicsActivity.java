@@ -79,7 +79,7 @@ public class ReleaseDynamicsActivity extends Fragment {
     private TranslateAnimation animation;
 
 
-    private String location = "未定义";
+    private String location = "未添加";
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -129,12 +129,19 @@ public class ReleaseDynamicsActivity extends Fragment {
         super.onCreate(savedInstanceState);
         View layout = inflater.inflate(R.layout.activity_new_notes, container, false);
 
-        //初始化定位
-        mLocationClient = new AMapLocationClient(getActivity().getApplicationContext());
-        //设置定位回调监听
-        mLocationClient.setLocationListener(mLocationListener);
-        //初始化定位
-        initLocation();
+        if(location.equals("未添加"))
+        {
+            //初始化定位
+            mLocationClient = new AMapLocationClient(getActivity().getApplicationContext());
+            //设置定位回调监听
+            mLocationClient.setLocationListener(mLocationListener);
+            //初始化定位
+            initLocation();
+        }else{
+            TextView text1=(TextView)layout.findViewById(R.id.add_place);
+            text1.setText(location);
+        }
+
         //多个单选按钮
         ImageButton add_pictures;
         add_pictures=layout.findViewById(R.id.add_pictures);
