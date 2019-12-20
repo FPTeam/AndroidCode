@@ -23,9 +23,9 @@ public class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_menu);
         Intent intent = getIntent();
-        userId = intent.getIntExtra("user_id",-1);
-        String s = String.valueOf(userId);
-        ToastUtil.show(getApplicationContext(),s);
+//        userId = intent.getIntExtra("user_id",-1);
+//        String s = String.valueOf(userId);
+//        ToastUtil.show(getApplicationContext(),s);  //如果这里不注释掉,每次发完动态会显示-1
         mytabs = (TabLayout)findViewById(R.id.mytab);
 
         mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.shouye));
