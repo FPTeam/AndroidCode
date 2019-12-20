@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -201,20 +202,25 @@ public class SquareActivity extends Fragment {
      */
     private void autoPlayView() {
         //自动播放图片
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!isStop) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
-                        }
-                    });
-                    SystemClock.sleep(PAGER_TIOME);
+        try{
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (!isStop) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                            }
+                        });
+                        SystemClock.sleep(PAGER_TIOME);
+                    }
                 }
-            }
-        }).start();
+            }).start();
+        }catch (NullPointerException e)
+        {
+
+        }
     }
 
 
