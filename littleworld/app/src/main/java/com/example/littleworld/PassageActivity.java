@@ -24,7 +24,6 @@ import java.util.List;
  * 此页面用于关注的人，显示所有人动态，通过搜索框，可查询到相关用户的动态
  * 同时还可以点赞，收藏
  *
- * 还未连数据库，数据库操作已空出
  *
  */
 
@@ -34,17 +33,27 @@ public class PassageActivity extends Fragment {
     SearchView searchView;
     private int userId;
 
-    public PassageActivity(int userId){
+    public PassageActivity(int userId) {
         super();
         this.userId = userId;
     }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View layout = inflater.inflate(R.layout.activity_follow, container, false);
 
-        searchView = (SearchView) layout.findViewById(R.id.searchView_f);
+        /*起初显示*/
+        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        passageList = DbHelper.getInstance().searchPassage(0, 5, null);
+        Log.d("列表", passageList.toString());
+        passageAdapter adapter = new passageAdapter(getActivity(), passageList);
+        recyclerView.setAdapter(adapter);
 
+       //搜索框
+        searchView = (SearchView) layout.findViewById(R.id.searchView_f);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 当点击搜索按钮时触发该方法
             @Override
@@ -57,37 +66,36 @@ public class PassageActivity extends Fragment {
             public boolean onQueryTextChange(String query) {
                 if (!TextUtils.isEmpty(query)) {
                     /*
-                    *检索搜索的人的动态
-                    *  */
-
+                     *检索搜索的人的动态
+                     *  */
+                    passageList.clear();
+                    passageList = DbHelper.getInstance().searchPassage(0, 5, query);
+                    Log.d("列表", passageList.toString());
+                    passageAdapter adapter = new passageAdapter(getActivity(), passageList);
+                    recyclerView.setAdapter(adapter);
                 } else {
                     /*
-                    * 显示全部动态*/
-
+                     * 显示全部动态*/
+                    passageList.clear();
+                    passageList = DbHelper.getInstance().searchPassage(0, 5, null);
+                    Log.d("列表", passageList.toString());
+                    passageAdapter adapter = new passageAdapter(getActivity(), passageList);
+                    recyclerView.setAdapter(adapter);
                 }
 
                 return false;
             }
         });
 
-        //initpassage();
-
-        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        passageList = DbHelper.getInstance().searchPassage(0, 10, null);
-        Log.d("列表", passageList.toString());
-        passageAdapter adapter = new passageAdapter(getActivity(),passageList);
-        recyclerView.setAdapter(adapter);
-
         return layout;
     }
+
 
 /*
 * 以下用于个人测试页面，数据库操作加入后，可以删除以下数据
 * */
 
-   /* private final String names[] = {
+ /*   private final String names[] = {
             "张三",
             "李四"
     };
@@ -121,8 +129,8 @@ public class PassageActivity extends Fragment {
             passageList.add(passage);
         }
         return passageList;
-    }*/
-
+    }
+*/
 }
 
 
