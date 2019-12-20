@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.littleworld.Adapter.SquarePagerAdapter;
+import com.example.littleworld.Adapter.passageAdapter;
+import com.example.littleworld.Entity.passage;
 
 import java.util.ArrayList;
 import java.util.List;
