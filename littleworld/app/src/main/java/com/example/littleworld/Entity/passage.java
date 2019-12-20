@@ -70,7 +70,7 @@ public class passage {
         return Headpath;
     }
 
-    public void setHeadpath(String postPlace) {
+    public void setHeadpath(String Headpath) {
         Headpath = Headpath;
     }
 
