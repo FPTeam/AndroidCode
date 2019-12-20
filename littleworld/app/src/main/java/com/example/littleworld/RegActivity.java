@@ -115,36 +115,47 @@ public class RegActivity extends AppCompatActivity {
                 String password = pw.getText().toString();
                 String password1 = pw1.getText().toString();
                 String imgPath = SaveFile(fileDir);//头像
-                int rep=DbHelper.getInstance().repUser(username);
-                if(rep!=-1)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(), "该用户名已被占用", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                Toast toast;
+                String msg = "注册成功!";
+                if(username.length()<5){
+                    msg = "登录名太短";
+                }else if(username.length()>30){
+                    msg = "登录名太长";
+                }else if(password.length()<5){
+                    msg = "密码太短";
                 }
-                else {
-                    if (!password.equals(password1)) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "密码不一致", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+                else if(password.length()>30){
+                    msg = "密码太长";
+                }else{
+                    int rep=DbHelper.getInstance().repUser(username);
+                    if(rep!=-1) {
+                        msg = "该用户名已经注册过了!";
                     } else {
-                        DbHelper.getInstance().insertUser(username, password);
-                        int userid = DbHelper.getInstance().testUser(username, password);
-                        if (userid != -1) {
-                            String ingPath = SaveFile(fileDir);
-                            Toast toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            new Handler().postDelayed(new Runnable() {
-                                public void run() {
+                        if (!password.equals(password1)) {
+                            msg = "密码不一致";
+                        } else {
+                            /**注册成功**/
+                            DbHelper.getInstance().insertUser(username, password);
+                            int userid = DbHelper.getInstance().testUser(username, password);
+                            if (userid != -1) {
+                                String ingPath = SaveFile(fileDir);
+                                toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
                                 /*Intent  intent=new Intent(RegActivity.this, LoginActivity.class);
                                 startActivity(intent);*/
-                                    RegActivity.this.finish();
-                                }
-                            }, 2000);
+                                        RegActivity.this.finish();
+                                    }
+                                }, 1000);
+                            }
                         }
                     }
                 }
+                toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }
         });
     }

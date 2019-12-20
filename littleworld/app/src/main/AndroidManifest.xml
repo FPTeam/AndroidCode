@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".NoticeActivity"></activity>
+<!--        添加activity请添加到LoginActivity的后面!-->
         <activity
             android:name=".LoginActivity"
             android:theme="@style/LoginTheme">
@@ -34,7 +34,11 @@
         </activity>
         <activity
             android:name=".LogoActivity"
-            android:theme="@style/SettingTheme" /> <!-- Made By BaiYunpeng -->
+            android:theme="@style/SettingTheme" />
+
+        <activity android:name=".NoticeActivity"></activity>
+
+        <!-- Made By BaiYunpeng -->
         <activity
             android:name=".SettingsAccountsActivity"
             android:theme="@style/SettingTheme" />

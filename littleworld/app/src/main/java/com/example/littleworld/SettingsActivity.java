@@ -77,7 +77,7 @@ public class SettingsActivity extends Fragment {
 /**
         init();//查数据库显示信息
 **/
-//        Toast.makeText(getActivity().getApplicationContext(), "Holle World!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity().getApplicationContext(), "Holle World!", Toast.LENGTH_LONG).show();
         cursor = DbHelper.getInstance().getUserBook(DbHelper.getInstance().getUserId());
         String name = new String();//保存用户名
         String intro = new String();//保存用户介绍
