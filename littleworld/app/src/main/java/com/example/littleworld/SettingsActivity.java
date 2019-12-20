@@ -68,7 +68,6 @@ public class SettingsActivity extends Fragment {
         this.userId = userId;
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
