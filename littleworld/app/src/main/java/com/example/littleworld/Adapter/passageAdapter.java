@@ -34,7 +34,7 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
     //绑定控件
     public class passageAdapterHolder extends RecyclerView.ViewHolder {
 
-
+        public ImageButton setting_bnt;
         public ImageView headImg;
         public TextView name;
         public TextView content;
@@ -44,18 +44,25 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
         public TextView likeNum;
         public ImageView img_like;
         public ImageView img_collect;
+        public TextView tag;
+        public TextView location_info;
+
 
         public passageAdapterHolder(View view) {
             super(view);
-            headImg = view.findViewById(R.id.sculpture);
-            name = view.findViewById(R.id.name);
-            content = view.findViewById(R.id.content);
-            postTime = view.findViewById(R.id.PostTime);
-            note_img = view.findViewById(R.id.note_img);
-            starNum = view.findViewById(R.id.star_num);
-            likeNum = view.findViewById(R.id.like_num);
+            setting_bnt = view.findViewById(R.id.setting_bnt);//设置按钮
+            headImg = view.findViewById(R.id.sculpture);//头像图片
+            name = view.findViewById(R.id.name);//姓名
+            content = view.findViewById(R.id.content);//说说内容
+            postTime = view.findViewById(R.id.PostTime);//发布时间
+            note_img = view.findViewById(R.id.note_img);//说说图片
+            starNum = view.findViewById(R.id.star_num);//收藏个数
+            likeNum = view.findViewById(R.id.like_num);//点赞个数
             img_like= view.findViewById(R.id.img_like);//点赞图片
             img_collect = view.findViewById(R.id.img_collect);//收藏图片
+            tag = view.findViewById(R.id.tag);//标签
+            location_info = view.findViewById(R.id.location_info);//地点信息
+
         }
     }
 
@@ -80,11 +87,27 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
 
         final passage passage =passageList.get(position);
 
-        holder.name.setText(passage.getName());
-        holder.content.setText(passage.getContent());
-        holder.postTime.setText(passage.getPostTime());
-        holder.starNum.setText(passage.getCollectNumber());
-        holder.likeNum.setText(passage.getLikeNumber());
+        holder.name.setText(passage.getName());//取出姓名
+        holder.postTime.setText(passage.getPostTime());//取出时间
+        holder.content.setText(passage.getContent());//取出说说内容
+        holder.starNum.setText(passage.getCollectNumber());//取出收藏个数
+        holder.likeNum.setText(passage.getLikeNumber());//取出点赞个数
+        holder.tag.setText(passage.getTag());//取出标签
+        holder.location_info.setText(passage.getPostPlace());//取出地点信息
+
+         Glide
+                .with(this.context)
+                .load(passage.getHeadpath())//加载头像路径
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
+                .into(holder.headImg);
+       
+        Glide
+                .with(this.context)
+                .load(passage.getImgpath())//加载说说路径
+                .into(holder.note_img);
+
+
+        //点击头像事件
         holder.headImg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -96,25 +119,25 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
             }
         });
 
-         Glide
-                .with(this.context)
-                .load(passage.getImgpath())
-                .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
-                .into(holder.headImg);
-       
-        Glide
-                .with(this.context)
-                .load(passage.getImgpath())
-                .into(holder.note_img);
+        //点击设置图片事件
+        holder.setting_bnt.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+               //弹出一个小菜单
+
+                //showPopupMenu(imageVie);
+            }
+        });
 
 
+        // 喜爱点击事件
         holder.img_like.setOnClickListener(new View.OnClickListener() {
 
 
 
             @Override
             public void onClick(View arg0) {
-                // 喜爱点击事件
+
                 //变数
                 int likeNumber =Integer.valueOf(passage.getLikeNumber());
                passage.setLikeNumber(++likeNumber);
@@ -130,11 +153,13 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
             }
         });
 
+
+        // 收藏点击事件
         holder.img_collect.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                // 收藏点击事件
+
                 //变数
                 int collectNumber =Integer.valueOf(passage.getCollectNumber());
                 passage.setCollectNumber(++collectNumber);
