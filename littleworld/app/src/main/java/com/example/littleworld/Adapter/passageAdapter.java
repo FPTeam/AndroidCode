@@ -21,6 +21,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.littleworld.BottomMenu.NavigationActivity;
+import com.example.littleworld.DbHelper;
 import com.example.littleworld.Entity.passage;
 import com.example.littleworld.LoginActivity;
 import com.example.littleworld.ProfileActivity;
