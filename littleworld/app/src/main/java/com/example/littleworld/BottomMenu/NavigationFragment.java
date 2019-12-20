@@ -51,7 +51,8 @@ public class NavigationFragment extends Fragment {
                 view = inflater.inflate(R.layout.activity_new_notes, container, false);
                 break;
             case 3: //私信
-                view = inflater.inflate(R.layout.activity_new_msg, container, false);
+//                view = inflater.inflate(R.layout.activity_new_msg, container, false);
+                view = inflater.inflate(R.layout.activity_notice, container, false);
                 break;
             case 4: //设置
                 view = inflater.inflate(R.layout.settings_main, container, false);
