@@ -72,6 +72,8 @@ public class ReleaseDynamicsActivity extends Fragment {
     //保存的文件路径
     private File fileDir;
 
+    private View layout;
+
     // 声明PopupWindow
     private PopupWindow popupWindow;
     // 声明PopupWindow对应的视图
@@ -128,7 +130,7 @@ public class ReleaseDynamicsActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        View layout = inflater.inflate(R.layout.activity_new_notes, container, false);
+        layout = inflater.inflate(R.layout.activity_new_notes, container, false);
 
         if(location.equals("未添加"))
         {
@@ -187,8 +189,6 @@ public class ReleaseDynamicsActivity extends Fragment {
          */
 
         final Button noteSend = layout.findViewById(R.id.note_send);
-        final EditText input_notes = layout.findViewById(R.id.input_notes);
-        final String inputNotes = input_notes.getText().toString();
         noteSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,6 +196,9 @@ public class ReleaseDynamicsActivity extends Fragment {
 //                if (bitmap != null && !bitmap.isRecycled()) {
 //                    bitmap.recycle();
 //                }
+
+                final EditText input_notes = layout.findViewById(R.id.input_notes);
+                final String inputNotes = input_notes.getText().toString();
 
                 //***添加时间
                 SimpleDateFormat nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//格式
