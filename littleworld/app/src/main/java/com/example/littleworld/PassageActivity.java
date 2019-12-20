@@ -47,7 +47,7 @@ public class PassageActivity extends Fragment {
         final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        passageList = DbHelper.getInstance().searchPassage(0, 5, null);
+        passageList = DbHelper.getInstance().searchPassage(0, 15, null);
         Log.d("列表", passageList.toString());
         passageAdapter adapter = new passageAdapter(getActivity(), passageList);
         recyclerView.setAdapter(adapter);
@@ -69,7 +69,7 @@ public class PassageActivity extends Fragment {
                      *检索搜索的人的动态
                      *  */
                     passageList.clear();
-                    passageList = DbHelper.getInstance().searchPassage(0, 5, query);
+                    passageList = DbHelper.getInstance().searchPassage(0, 15, query);
                     Log.d("列表", passageList.toString());
                     passageAdapter adapter = new passageAdapter(getActivity(), passageList);
                     recyclerView.setAdapter(adapter);
@@ -77,7 +77,7 @@ public class PassageActivity extends Fragment {
                     /*
                      * 显示全部动态*/
                     passageList.clear();
-                    passageList = DbHelper.getInstance().searchPassage(0, 5, null);
+                    passageList = DbHelper.getInstance().searchPassage(0, 15, null);
                     Log.d("列表", passageList.toString());
                     passageAdapter adapter = new passageAdapter(getActivity(), passageList);
                     recyclerView.setAdapter(adapter);
