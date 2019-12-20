@@ -114,8 +114,8 @@ public class Places extends AppCompatActivity implements
                             .title("我的位置").snippet(amapLocation.getAddress());//记录当前位置markOption
 
                     startMarker = new Marker(myLocation);
-                    startMarker.setSnippet(amapLocation.getAddress());
-                    ToastUtil.show(Places.this,  startMarker.getSnippet());
+                    //startMarker.setSnippet(amapLocation.getAddress());
+                    ToastUtil.show(Places.this,  startMarker.getTitle());
                     deactivate();//定位成功就停止定位
 
                     LinearLayout list;
@@ -251,6 +251,14 @@ public class Places extends AppCompatActivity implements
         if(trip_Marker_list.size()<1)
             ToastUtil.show(Places.this, "您未选择任何景点！");
         else{
+            LinearLayout list;
+            LinearLayout option;
+            Button aPlan;
+            mode = 1;
+            list=(LinearLayout)findViewById(R.id.interest_list);
+            list.setVisibility(View.VISIBLE);
+            option=(LinearLayout)findViewById(R.id.option_list);
+            option.setVisibility(View.GONE);
             planTrip();
         }
     }
@@ -630,7 +638,7 @@ public class Places extends AppCompatActivity implements
 
                     if (poiItems != null && poiItems.size() > 0) {
                         aMap.clear();// 清理之前的图标
-                        aMap.addMarker(myLocation);//加上当前定位
+                        startMarker = aMap.addMarker(myLocation);//加上当前定位
                         PoiOverlay poiOverlay = new PoiOverlay(aMap, poiItems);
                         poiOverlay.removeFromMap();
                         poiOverlay.addToMap();
@@ -664,9 +672,7 @@ public class Places extends AppCompatActivity implements
      */
     @Override
     public void onClick(View v) {
-        LinearLayout list;
-        LinearLayout option;
-        Button aPlan;
+
         switch (v.getId()) {
             /**
              * 点击下一页按钮
@@ -678,13 +684,6 @@ public class Places extends AppCompatActivity implements
              * 点击一键规划按钮
              */
             case R.id.plan:
-                mode = 1;
-                list=(LinearLayout)findViewById(R.id.interest_list);
-                list.setVisibility(View.VISIBLE);
-                option=(LinearLayout)findViewById(R.id.option_list);
-                option.setVisibility(View.VISIBLE);
-                aPlan = (Button)findViewById(R.id.plan);
-                aPlan.setVisibility(View.VISIBLE);
                 planButton();
                 break;
             default:
