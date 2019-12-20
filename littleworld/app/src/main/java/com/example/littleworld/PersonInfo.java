@@ -6,5 +6,5 @@ public class PersonInfo {
     String name="";
     String intro="";
     String sex="" ;
-    byte[] img;
+    String img;
 }
