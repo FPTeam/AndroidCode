@@ -91,8 +91,9 @@ public class DbHelper{
     public void insertUser(String name,String password)//注册新用户插login表
     {
         ContentValues cv = new ContentValues();
-        cv.put("Name", name);
+        cv.put("Name", name);          //这是登录名,不是用户名
         cv.put("Password", password);
+        cv.put("DisplayedName", name); //默认显示的账户名为登录名
         //userid自动生成
         long i=db.insert("login",null,cv);
         if(i!=-1)
@@ -160,7 +161,7 @@ public class DbHelper{
     /*******添加和更改用户的性别、头像图片、个人介绍等信息*******/
     //  传参说明：用户号userid，用户信息UserInfo，性别：Sex，头像图片链接：head
     //  注册时用户号和用户名已经插入到user表，所以其余信息都是更新时补充添加进去的
-    public void insertUserInfo(Integer userid, String UserName, String UserInfo, String Sex, String head)//添加或更改用户信息
+    public void insertUserInfo(Integer userid, String UserName, String UserInfo, String Sex, byte[] head)//添加或更改用户信息
     {
         ContentValues cv = new ContentValues();
         if(UserName!=null)
@@ -308,7 +309,7 @@ public class DbHelper{
             info0.name = curcity.getString(1);
             info0.intro = curcity.getString(2);
             info0.sex = curcity.getString(3);
-            info0.img = curcity.getString(4);
+            info0.img = curcity.getBlob(4);
 
             Log.d("用户名", info0.name);
             if(info0.intro == null)
@@ -320,8 +321,8 @@ public class DbHelper{
             Log.d("性别", info0.sex);
             if(info0.img == null)
                 Log.d("头像链接", "无");
-            else
-                Log.d("头像链接", info0.img);
+            //else
+                //Log.d("头像链接", info0.img);
         }
         curcity.close();
         return info0;

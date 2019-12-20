@@ -20,7 +20,7 @@ public class LogoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 去除标题
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.logo);
 
         progressBar = (ProgressBar) findViewById(R.id.pgBar);

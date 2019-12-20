@@ -34,10 +34,12 @@ import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 
 public class RegActivity extends AppCompatActivity {
@@ -136,9 +138,18 @@ public class RegActivity extends AppCompatActivity {
                         } else {
                             /**注册成功**/
                             DbHelper.getInstance().insertUser(username, password);
+                            //头像的获取方式,默认或者自己上传
+                            if(bitmap == null){
+                                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_sculp);
+                            }
+                            ByteArrayOutputStream os = new ByteArrayOutputStream();
+                            Bitmap newBitmap = PictureProcessing.compressScale(bitmap);
+                            newBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+
                             int userid = DbHelper.getInstance().testUser(username, password);
+                            DbHelper.getInstance().insertUserInfo(userid,username, "","男",os.toByteArray());
                             if (userid != -1) {
-                                String ingPath = SaveFile(fileDir);
+                                //String ingPath = SaveFile(fileDir);
                                 toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
