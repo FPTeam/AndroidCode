@@ -11,6 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.littleworld.Entity.ProfileViewPager;
+import com.example.littleworld.Entity.ProfileViewPager;
+import com.example.littleworld.Entity.passage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
@@ -27,6 +32,7 @@ public class ProfileFragment extends Fragment {
     private TextView userIntro_text; //用户介绍
     private View view;
     static ProfileViewPager pvp;
+    private List<passage> passageList = new ArrayList<>();
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -64,24 +70,14 @@ public class ProfileFragment extends Fragment {
                 // 显示动态部分的fragment layout
                 view=inflater.inflate(R.layout.profile_fragment_posts, container, false);
                 pvp.setObjectForPosition(view,0);
-
-                // 添加按钮事件
-                // 示例：返回按钮，可删除
-                Button button_test = view.findViewById(R.id.backTest);
-                button_test.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getActivity().finish();
-                    }
-                });
-
-                // 示例：显示文字，可删除
-                detail_text = view.findViewById(R.id.detail_info);
-                String text0 = "";
-                for (int i = 0; i < 100; i++) {
-                    text0 += "动态" + "\n";
-                }
-                detail_text.setText(text0);
+                
+                final RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(layoutManager);
+                passageList = DbHelper.getInstance().searchownPassage(0, 5, Integer.toString(userId));
+                Log.d("列表", passageList.toString());
+                passageAdapter adapter = new passageAdapter(getActivity(), passageList);
+                recyclerView.setAdapter(adapter);
 
                 break;
             case 1:
