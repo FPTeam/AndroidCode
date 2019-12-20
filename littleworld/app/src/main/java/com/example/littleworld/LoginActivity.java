@@ -98,7 +98,6 @@ public class LoginActivity extends AppCompatActivity {
 /** 获得实例对象 **/
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         checkInitStatus(sp);
-
         login.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,15 +193,12 @@ public class LoginActivity extends AppCompatActivity {
     private void checkInitStatus(SharedPreferences sp) {
         un.setText(sp.getString("USERNAME", ""));
         pw.setText(sp.getString("PASSWORD", ""));
-        if((sp.getString("USERNAME", null) != null) && (sp.getString("PASSWORD", null) != null)){
-            if((sp.getString("USERNAME", null).length() > 0) && (sp.getString("PASSWORD", null).length() > 0)){
-                //跳转界面
-                Intent intent = new Intent(LoginActivity.this, LogoActivity.class);
-                intent.putExtra("USERNAME",sp.getString("USERNAME", null));
-                intent.putExtra("PASSWORD",sp.getString("PASSWORD", null));
-                LoginActivity.this.startActivity(intent);
-            }
-
+        if((sp.getString("USERNAME", null) != "") && (sp.getString("PASSWORD", null) != "")){
+            //跳转界面
+            Intent intent = new Intent(LoginActivity.this, LogoActivity.class);
+            intent.putExtra("USERNAME",sp.getString("USERNAME", null));
+            intent.putExtra("PASSWORD",sp.getString("PASSWORD", "FUCK!!"));
+            LoginActivity.this.startActivity(intent);
         }
     }
 

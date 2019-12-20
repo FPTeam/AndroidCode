@@ -34,12 +34,10 @@ import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 
 public class RegActivity extends AppCompatActivity {
@@ -116,6 +114,7 @@ public class RegActivity extends AppCompatActivity {
                 String username = un.getText().toString();
                 String password = pw.getText().toString();
                 String password1 = pw1.getText().toString();
+                String imgPath = SaveFile(fileDir);//头像
                 Toast toast;
                 String msg = "注册成功!";
                 if(username.length()<5){
@@ -137,15 +136,9 @@ public class RegActivity extends AppCompatActivity {
                         } else {
                             /**注册成功**/
                             DbHelper.getInstance().insertUser(username, password);
-                            //头像的获取方式,默认或者自己上传
-                            if(bitmap == null){
-                                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_sculp);
-                            }
-                            String imgPath = SaveFile(fileDir);
                             int userid = DbHelper.getInstance().testUser(username, password);
-                            DbHelper.getInstance().insertUserInfo(userid,username, "","男",imgPath);
                             if (userid != -1) {
-                                //String ingPath = SaveFile(fileDir);
+                                String ingPath = SaveFile(fileDir);
                                 toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
@@ -310,7 +303,7 @@ public class RegActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
-            return fileDir + "/IMG_"+ fileName + ".jpg";
+            return fileDir + "IMG_"+ fileName + ".jpg";
         }
     }
 

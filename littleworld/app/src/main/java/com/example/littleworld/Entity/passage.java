@@ -71,7 +71,7 @@ public class passage {
     }
 
     public void setHeadpath(String Headpath) {
-        this.Headpath = Headpath;
+        Headpath = Headpath;
     }
 
     public String getPostPlace() {

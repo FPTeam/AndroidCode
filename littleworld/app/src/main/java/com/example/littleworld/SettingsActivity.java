@@ -91,19 +91,12 @@ public class SettingsActivity extends Fragment {
         PersonInfo myInfo = DbHelper.getInstance().getUserInfo(DbHelper.getInstance().getUserId());
         TextView userName = layout.findViewById(R.id.username);
         TextView introduction = layout.findViewById(R.id.introduction);
-        ImageView head = layout.findViewById(R.id.sculpture);
-
-        byte[] bytes = myInfo.img;
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-        //设置头像
-        head.setImageBitmap(bitmap);
-        //设置用户名
         userName.setText(myInfo.name);
-        //设置介绍
-        if(myInfo.intro == "" || myInfo.intro == null)
-            introduction.setText("暂无介绍");
-        else
+
+        if(myInfo.intro != "")
             introduction.setText(myInfo.intro);
+        else
+            introduction.setText("暂无介绍");
 
         /* 跳转至个人主页 */
         ImageButton btn_sculpture = layout.findViewById(R.id.sculpture);

@@ -91,9 +91,8 @@ public class DbHelper{
     public void insertUser(String name,String password)//注册新用户插login表
     {
         ContentValues cv = new ContentValues();
-        cv.put("Name", name);          //这是登录名,不是用户名
+        cv.put("Name", name);
         cv.put("Password", password);
-        cv.put("DisplayedName", name); //默认显示的账户名为登录名
         //userid自动生成
         long i=db.insert("login",null,cv);
         if(i!=-1)
@@ -180,57 +179,7 @@ public class DbHelper{
         }
     }
 
-    /*******获取个人动态信息，可根据特定用户查询*******/
-    //    传参说明：偏移量offset，一次返回文章的数量row
-    // DbHelper.getInstance().searchownPassage(0, 5, Integer.toString（userid）);
-    //    返回值：动态信息的List
-
-    public List<passage> searchownPassage(int offset, int row, String userid){
-        List<passage> passageinfo=new ArrayList<>();
-
-        String table = "passage";//表名
-        String[] columns = null;//返回的列名，null返回所有列
-        String selection = null;//SQL WHERE子句（不包括WHERE本身），null返回所有行
-        String[] selectionArgs = null;
-        String groupBy = null;//分组过滤器
-        String having = null;
-        String orderBy = "PostTime DESC";//排序
-        String limit =offset+","+row;//查询的偏移量和返回的行数
-        selection = "UserId=?";
-        selectionArgs =new String[]{userid};
-
-
-        Cursor curpassage= db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
-        while(curpassage.moveToNext())
-        {
-            passage passage= new passage();
-            userid=Integer.toString(curpassage.getInt(1));
-            Cursor curuser= db.rawQuery("select * from user where UserId=?",new String[]{userid});
-            if(curuser.getCount()!=0)//查找用户名和用户头像并添加
-            {
-                curuser.moveToNext();
-                passage.setName(curuser.getString(1));
-                passage.setHead(curuser.getString(4));
-            }
-
-            /*添加文章信息*/
-            passage.setPassageid(curpassage.getInt(0));
-            passage.setUserid(curpassage.getInt(1));
-            passage.setContent(curpassage.getString(2 ));
-            passage.setImgpath(curpassage.getString(3));
-            passage.setPostTime(curpassage.getString(4));
-            passage.setChangeTime(curpassage.getString(5));
-            passage.setPostPlace(curpassage.getString(6));
-            passage.setLikeNumber(curpassage.getInt(7));
-            passage.setCommentNumber(curpassage.getInt(8));
-            passage.setCollectNumber(curpassage.getInt(9));
-            passageinfo.add(passage);
-        }
-        Log.d("列表", passageinfo.toString());
-        return passageinfo;
-    }
-
-    /*******获取全部动态信息，可根据特定用户查询*******/
+    /*******获取动态信息，可根据特定用户查询*******/
     //    传参说明：偏移量offset，一次返回文章的数量row
     //    调用时最好设row为常量，offset每次都要加上row
     //    例如：DbHelper.getInstance().allPassage(0,5,null);
@@ -266,13 +215,13 @@ public class DbHelper{
         while(curpassage.moveToNext())
         {
             passage passage= new passage();
-            userid=Integer.toString(curpassage.getInt(1));
+            userid=curpassage.getString(1);
             Cursor curuser= db.rawQuery("select * from user where UserId=?",new String[]{userid});
             if(curuser.getCount()!=0)//查找用户名和用户头像并添加
             {
                 curuser.moveToNext();
                 passage.setName(curuser.getString(1));
-                passage.setHeadpath(curuser.getString(4));
+                //passage.setHead(curuser.getString(4));
             }
 
             /*添加文章信息*/
@@ -292,88 +241,6 @@ public class DbHelper{
         return passageinfo;
     }
 
-    /*******查找点赞表*******/
-    /*使用说明：Boolean check=DbHelper.getInstance().checkliked(userid, passageid);
-                if(check)
-            DbHelper.getInstance().insertliked(userid, passageid);
-                else
-                        DbHelper.getInstance().deleteliked(userid, passageid);
-                        */
-    //  传参说明：用户号userid，文章号passageid
-    //返回真表明还没有记录，可添加，返回假表明已点赞
-    public boolean checkliked(Integer userid, Integer passageid)
-    {
-        Cursor curchecklike= db.rawQuery("select * from liked where LikePassageId=?",new String[]{String.valueOf(passageid)});
-        while(curchecklike.moveToNext())
-        {
-            if(userid==curchecklike.getInt(0))
-                return false;
-        }
-        return true;
-    }
-    /*******查找收藏表*******/
-    public boolean ifCollect(int userid,int passageid)
-    {
-        Cursor cursor = db.rawQuery("select * from collect where PassageId=?and CollectUserId=?",new String[]{Integer.toString(passageid),Integer.toString(userid)});
-        if(cursor.getCount()!=0) {
-            return true;
-        }
-        return false;
-    }
-
-    /*******添加点赞表*******/
-    //  传参说明：用户号userid，文章号passageid
-    public void insertliked(Integer userid, Integer passageid)//添加或更改用户信息
-    {
-        ContentValues cv = new ContentValues();
-        cv.put("LikeUserId", userid);
-        cv.put("LikePassageId", passageid);
-        long p=db.insert("liked",null,cv);
-        if(p!=-1)
-        {
-            Log.d("insert liked!","haha");
-        }
-    }
-    /*******添加收藏表*******/
-    public void insertCollect(int userid,int passageid)
-    {
-        ContentValues cv = new ContentValues();
-        cv.put("CollectPassageId", passageid);
-        cv.put("CollectUserId", userid);
-        //userid自动生成
-        long i=db.insert("collect",null,cv);
-        if(i!=-1)
-        {
-            Log.d("insert collect!","haha");
-        }
-    }
-
-    /*******删除点赞表*******/
-    //  传参说明：用户号userid，文章号passageid
-    public void deleteliked(Integer userid, Integer passageid)
-    {
-        long p=db.delete("liked","LikeUserId = ? and LikePassageId =?",
-                new String[]{String.valueOf(userid),String.valueOf(passageid)});
-        if(p!=-1)
-        {
-            Log.d("delete liked!","haha");
-        }
-    }
-    /*******删除收藏表*******/
-    public void deletecollect(int userid, int passageid)
-    {
-        ContentValues cv = new ContentValues();
-        cv.put("CollectUserId", userid);
-        cv.put("CollectPassageId", passageid);
-        long p=db.delete("collect","CollectUserId = ? and CollectPassageId =?",
-                new String[]{String.valueOf(userid),String.valueOf(passageid)});
-        if(p!=-1)
-        {
-            Log.d("delete collect!","haha");
-        }
-    }
-
-    
     /*******获取文章省份*******/
     //    传参说明：用户号userid
     public int[] getProvices(Integer userid){
@@ -453,8 +320,8 @@ public class DbHelper{
             Log.d("性别", info0.sex);
             if(info0.img == null)
                 Log.d("头像链接", "无");
-            //else
-                //Log.d("头像链接", info0.img);
+            else
+                Log.d("头像链接", info0.img);
         }
         curcity.close();
         return info0;

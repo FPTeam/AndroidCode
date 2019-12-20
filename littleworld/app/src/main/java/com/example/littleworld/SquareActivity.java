@@ -70,10 +70,10 @@ public class SquareActivity extends Fragment {
         final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        passageList = DbHelper.getInstance().searchPassage(0, 5, null);
-        Log.d("列表", passageList.toString());
-        passageAdapter adapter = new passageAdapter(getActivity(), passageList);
-        recyclerView.setAdapter(adapter);
+//        passageList = DbHelper.getInstance().searchPassage(0, 5, null);
+//        Log.d("列表", passageList.toString());
+//        passageAdapter adapter = new passageAdapter(getActivity(), passageList);
+//        recyclerView.setAdapter(adapter);
 
        
         return layout;
