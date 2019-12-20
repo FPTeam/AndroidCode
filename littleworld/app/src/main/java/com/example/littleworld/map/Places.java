@@ -114,6 +114,8 @@ public class Places extends AppCompatActivity implements
                             .title("我的位置").snippet(amapLocation.getAddress());//记录当前位置markOption
 
                     startMarker = new Marker(myLocation);
+                    startMarker.setSnippet(amapLocation.getAddress());
+                    ToastUtil.show(Places.this,  startMarker.getSnippet());
                     deactivate();//定位成功就停止定位
 
                     LinearLayout list;
