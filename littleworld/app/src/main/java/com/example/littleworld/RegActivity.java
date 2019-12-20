@@ -116,7 +116,6 @@ public class RegActivity extends AppCompatActivity {
                 String username = un.getText().toString();
                 String password = pw.getText().toString();
                 String password1 = pw1.getText().toString();
-                String imgPath = SaveFile(fileDir);//头像
                 Toast toast;
                 String msg = "注册成功!";
                 if(username.length()<5){
@@ -142,12 +141,9 @@ public class RegActivity extends AppCompatActivity {
                             if(bitmap == null){
                                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_sculp);
                             }
-                            ByteArrayOutputStream os = new ByteArrayOutputStream();
-                            Bitmap newBitmap = PictureProcessing.compressScale(bitmap);
-                            newBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
-
+                            String imgPath = SaveFile(fileDir);
                             int userid = DbHelper.getInstance().testUser(username, password);
-                            DbHelper.getInstance().insertUserInfo(userid,username, "","男",os.toByteArray());
+                            DbHelper.getInstance().insertUserInfo(userid,username, "","男",imgPath);
                             if (userid != -1) {
                                 //String ingPath = SaveFile(fileDir);
                                 toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
@@ -314,7 +310,7 @@ public class RegActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
-            return fileDir + "IMG_"+ fileName + ".jpg";
+            return fileDir + "/IMG_"+ fileName + ".jpg";
         }
     }
 
