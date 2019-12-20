@@ -97,9 +97,6 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
         holder.likeNum.setText(passage.getLikeNumber());//取出点赞个数
         holder.tag.setText(passage.getTag());//取出标签
         holder.location_info.setText(passage.getPostPlace());//取出地点信息
-        byte[] bytes = passage.getImgpath();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-        holder.note_img.setImageBitmap(bitmap);
 
          Glide
                 .with(this.context)
