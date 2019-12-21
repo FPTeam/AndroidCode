@@ -98,62 +98,6 @@ public class RegActivity extends AppCompatActivity {
         });
 
         // 返回至登录界面
-        /*ImageButton backBtn=findViewById(R.id.back_btn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RegActivity.this.finish();
-            }
-        });
-        //注册信息添加至数据库
-        regBtn=(Button)findViewById(R.id.infoConfirm);
-        regBtn.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view) {
-                EditText un = findViewById(R.id.regName);
-                EditText pw = findViewById(R.id.regPwd);
-                EditText pw1 = findViewById(R.id.regPwdAgain);
-                String username = un.getText().toString();
-                String password = pw.getText().toString();
-                String password1 = pw1.getText().toString();
-                Toast toast;
-                boolean rep=DbHelper.getInstance().repUser(username);
-                if(rep) {
-                    toast = Toast.makeText(getApplicationContext(), "该用户名已被占用！", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                } else {
-                    if (!password.equals(password1)) {
-                        toast = Toast.makeText(getApplicationContext(), "密码不一致", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    } else {
-                            DbHelper.getInstance().insertUser(username, password);
-                            //头像的获取方式,默认或者自己上传
-                            if(bitmap == null){
-                                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_sculp);
-                            }
-                            String imgPath = SaveFile(fileDir);
-                            int userid = DbHelper.getInstance().testUser(username, password);
-                            DbHelper.getInstance().insertUserInfo(userid,username, "","男",imgPath);
-                            if (userid != -1) {
-                                //String ingPath = SaveFile(fileDir);
-                                toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-                                new Handler().postDelayed(new Runnable() {
-                                    public void run() {
-                                //Intent  intent=new Intent(RegActivity.this, LoginActivity.class);
-                               // startActivity(intent);
-                                        RegActivity.this.finish();
-                                    }
-                                }, 1000);
-                            }
-                        }
-                    }
-                }
-        });*/
-        // 返回至登录界面
         ImageButton backBtn=findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,40 +116,52 @@ public class RegActivity extends AppCompatActivity {
                 String username = un.getText().toString();
                 String password = pw.getText().toString();
                 String password1 = pw1.getText().toString();
-                boolean rep=DbHelper.getInstance().repUser(username);
-                if(rep)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(), "该用户名已被占用", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                Toast toast;
+                String msg = "注册失败!";
+                if(username.length()<2){
+                    msg = "用户名太短";
+                }else if(username.length()>30){
+                    msg = "用户名太长";
+                }else if(password.length()<6){
+                    msg = "密码太短";
                 }
-                else {
-                    if (!password.equals(password1)) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "密码不一致", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+                else if(password.length()>30){
+                    msg = "密码太长";
+                }else{
+                    boolean rep=DbHelper.getInstance().repUser(username);
+                    if(rep) {
+                        msg = "该用户名已经注册过了!";
                     } else {
-                        DbHelper.getInstance().insertUser(username, password);
-                        //头像的获取方式,默认或者自己上传
-                        if(bitmap == null) {
-                            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_sculp);
-                        }
-                        String imgPath = SaveFile(fileDir);
-                        int userid = DbHelper.getInstance().testUser(username, password);
-                        if (userid != -1) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            new Handler().postDelayed(new Runnable() {
-                                public void run() {
+                        if (!password.equals(password1)) {
+                            msg = "密码不一致";
+                        } else {
+                            /**注册成功**/
+                            DbHelper.getInstance().insertUser(username, password);
+                            //头像的获取方式,默认或者自己上传
+                            if(bitmap == null){
+                                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_sculp);
+                            }
+                            String imgPath = SaveFile(fileDir);
+                            int userid = DbHelper.getInstance().testUser(username, password);
+                            DbHelper.getInstance().insertUserInfo(userid,null, null,"女",imgPath);
+                            if (userid != -1) {
+                                //String ingPath = SaveFile(fileDir);
+                                msg = "注册成功！";
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
                                 /*Intent  intent=new Intent(RegActivity.this, LoginActivity.class);
                                 startActivity(intent);*/
-                                    RegActivity.this.finish();
-                                }
-                            }, 2000);
+                                        RegActivity.this.finish();
+                                    }
+                                }, 1000);
+                            }
                         }
                     }
                 }
+                toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+
             }
         });
 
