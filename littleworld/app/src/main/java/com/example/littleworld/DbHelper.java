@@ -93,7 +93,6 @@ public class DbHelper{
         ContentValues cv = new ContentValues();
         cv.put("Name", name);          //这是登录名,不是用户名
         cv.put("Password", password);
-        cv.put("DisplayedName", name); //默认显示的账户名为登录名
         //userid自动生成
         long i=db.insert("login",null,cv);
         if(i!=-1)
