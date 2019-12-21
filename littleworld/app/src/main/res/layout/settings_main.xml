@@ -31,15 +31,14 @@
         android:layout_marginTop="50dp"
         android:background="#FFFFFF" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/sculpture"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="60dp"
-        android:contentDescription="@android:string/untitled"
         android:scaleType="fitCenter"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/default_sculp"  />
 
     <ImageButton
         android:id="@+id/editInfoEnter"

@@ -35,6 +35,12 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.maps2d.model.BitmapDescriptor;
+import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -95,11 +101,14 @@ public class SettingsActivity extends Fragment {
         TextView introduction = layout.findViewById(R.id.introduction);
         ImageView head = layout.findViewById(R.id.sculpture);
 
-        String bytes = myInfo.img;
-        //Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-        //设置头像
 
-        //head.setImageBitmap(bytes);
+        //设置头像
+        Glide
+                .with(layout)
+                .load(myInfo.img)//加载头像路径
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
+                .into(head);
+
         //设置用户名
         userName.setText(myInfo.name);
         //设置介绍
@@ -109,7 +118,7 @@ public class SettingsActivity extends Fragment {
             introduction.setText(myInfo.intro);
 
         /* 跳转至个人主页 */
-        ImageButton btn_sculpture = layout.findViewById(R.id.sculpture);
+        ImageView btn_sculpture = layout.findViewById(R.id.sculpture);
         btn_sculpture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
