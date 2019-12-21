@@ -101,13 +101,14 @@ public class SettingsActivity extends Fragment {
         TextView introduction = layout.findViewById(R.id.introduction);
         ImageView head = layout.findViewById(R.id.sculpture);
 
-
-        //设置头像
-        Glide
-                .with(layout)
-                .load(myInfo.img)//加载头像路径
-                .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
-                .into(head);
+        if(myInfo.img!=null) {
+            //设置头像
+            Glide
+                    .with(layout)
+                    .load(myInfo.img)//加载头像路径
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
+                    .into(head);
+        }
 
         //设置用户名
         userName.setText(myInfo.name);
