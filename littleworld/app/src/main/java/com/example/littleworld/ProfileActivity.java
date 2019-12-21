@@ -63,13 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
             Glide
                     .with(getApplicationContext())
                     .load(myInfo.img)//加载头像路径
-                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
+                   // .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
                     .into(head);
-            /*
-            Glide.with(getApplicationContext())
-                    .load(myInfo.img)
-                    .apply(RequestOptions.bitmapTransform(new CropSquareTransformation(this))
-                    .into(head);*/
         }
 
 
