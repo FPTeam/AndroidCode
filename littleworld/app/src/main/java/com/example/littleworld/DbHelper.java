@@ -363,6 +363,7 @@ public class DbHelper{
         }
     }
 
+    /**  这个函数是为了服务下面那个函数的,作用:换回用户总的通知条数  **/
     public int getNoticeAmount(int RecUserId){
         int amount = 0;
         Cursor cursor = db.rawQuery("select * from message where RecUserId=?",new String[]{Integer.toString(RecUserId)});
@@ -385,9 +386,9 @@ public class DbHelper{
         cursor.moveToFirst();
         //amount 表示消息数量
         for(; i<amount; i++){
-            name = "1";
-            image = "1";
-            meg = "1";
+            name = "";
+            image = "";
+            meg = "";
             sendUserId = cursor.getInt(0);
             meg = cursor.getString(2);
             Cursor cursor2 = db.rawQuery("select * from user where UserId=?",new String[]{Integer.toString(sendUserId)});
@@ -397,7 +398,6 @@ public class DbHelper{
                 image = cursor2.getString(4);
 
                 noticeInfo.setName(name);
-
                 noticeInfo.setMeg(meg);
                 noticeInfo.setImage(image);
             }
@@ -507,8 +507,7 @@ public class DbHelper{
         return name;*/
     }
 
-    public void insertUserInfo(){}//注册新用户插info表（包括图片、...）
-    //...此处添加表的操作函数
+
     public void closeDb()
     {
         db.close();
