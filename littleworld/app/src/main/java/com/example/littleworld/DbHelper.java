@@ -338,6 +338,21 @@ public class DbHelper{
         }
     }
 
+    /******* 添加通知表  created by ttl *******/
+    public void insertMessage(int sendUserId,int recUserId, String msg, String sendTime)
+    {
+        ContentValues cv = new ContentValues();
+        cv.put("SendUserId", sendUserId);
+        cv.put("RecUserId", recUserId);
+        cv.put("Message", msg);
+        cv.put("SendTime", sendTime);
+        long i=db.insert("message",null,cv);
+        if(i!=-1)
+        {
+            Log.d("insert message!","!!!!!");
+        }
+    }
+
     /*******删除点赞表*******/
     //  传参说明：用户号userid，文章号passageid
     public void deleteliked(Integer userid, Integer passageid)

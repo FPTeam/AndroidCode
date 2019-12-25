@@ -27,7 +27,10 @@ import com.example.littleworld.LoginActivity;
 import com.example.littleworld.ProfileActivity;
 import com.example.littleworld.R;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 
 public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageAdapterHolder>  {
 
@@ -153,6 +156,12 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
                 /*
                 * 这里放数据库插入的语言
                 * */
+                /*
+                没有更改passage表,点赞了应该更改数据库然后再从数据库取得,,下同
+                 */
+                int sendUserId = DbHelper.getInstance().getUserId();
+                int recUserId = passage.getUserid();
+                DbHelper.getInstance().insertMessage(sendUserId, recUserId, "给你点了个赞!", getTime());
 
             }
         });
@@ -175,7 +184,9 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
                 /*
                 * 这里和数据库插入有关
                 * */
-
+                int sendUserId = DbHelper.getInstance().getUserId();
+                int recUserId = passage.getUserid();
+                DbHelper.getInstance().insertMessage(sendUserId, recUserId, "收藏了你的美文!", getTime());
             }
         });
 
@@ -183,7 +194,14 @@ public class passageAdapter extends RecyclerView.Adapter<passageAdapter.passageA
 
     }
 
-    
+    public String getTime(){
+        //***添加时间
+        SimpleDateFormat nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//格式
+        nowtime.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));// 中国北京时间，东八区
+        Date date = new Date(System.currentTimeMillis());//当前设备的时间
+        String timestr = nowtime.format(date);//转换为字符串
+        return timestr;
+    }
 
     @Override
     public int getItemCount() {
