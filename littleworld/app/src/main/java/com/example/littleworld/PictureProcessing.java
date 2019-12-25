@@ -10,7 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import static com.example.littleworld.util.ToastUtil.TAG;
 
-//这个类是用来压缩图片的
+/**这个类是用来压缩图片的  created by ttl */
+/**  目前未被使用  */
 public class PictureProcessing {
 
     public static Bitmap compressImage(Bitmap bitmap) {

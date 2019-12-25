@@ -68,9 +68,9 @@ public class ReleaseDynamicsActivity extends Fragment {
     private ImageView picture;
 
     private Uri imageUri;
-    //图片
+    /**图片*/
     private Bitmap bitmap;
-    //保存的文件路径
+    /**保存的文件路径*/
     private File fileDir;
 
     private View layout;
@@ -162,45 +162,35 @@ public class ReleaseDynamicsActivity extends Fragment {
             }
         });
 
-/*
-        // 返回上一个界面
-        ImageButton backBtn=layout.findViewById(R.id.new_note_ret);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ReleaseDynamicsActivity.this.finish();
-            }
-        });
-*/
 
-        //创建存放图片的文件
+        /** 创建存放图片的文件夹 */
         String DATABASE_PATH=getActivity().getApplicationContext().getFilesDir().toString()+"/IMAGE";
         fileDir = new File(DATABASE_PATH);//和LoginActivity里的数据库一个路径
         // 如果目录不存在，创建这个目录
         if (!fileDir.exists())
             fileDir.mkdir();
 
-
+        /*
         //图片文件存SD卡里
-       /* File sdDir = Environment.getExternalStorageDirectory();
+       File sdDir = Environment.getExternalStorageDirectory();
         fileDir = new File(sdDir.getPath() + "/IMAGE");
         if (!fileDir.exists()) {
             fileDir.mkdir();
-        }
-*/
+        }*/
 
         final Button noteSend = layout.findViewById(R.id.note_send);
         noteSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String imgPath;
-                if(bitmap != null)
+                if(bitmap != null)   //没有图片则路径设置为null
                     imgPath = SaveFile(fileDir);
                 else
                     imgPath = null;
-//                if (bitmap != null && !bitmap.isRecycled()) {
-//                    bitmap.recycle();
-//                }
+                /*
+                if (bitmap != null && !bitmap.isRecycled()) {
+                    bitmap.recycle();
+                }*/
 
                 final EditText input_notes = layout.findViewById(R.id.input_notes);
                 final String inputNotes = input_notes.getText().toString();
@@ -210,17 +200,17 @@ public class ReleaseDynamicsActivity extends Fragment {
                 nowtime.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));// 中国北京时间，东八区
                 Date date = new Date(System.currentTimeMillis());//当前设备的时间
                 String timestr = nowtime.format(date);//转换为字符串
-
-                int passageId = DbHelper.getInstance().insertPassage( DbHelper.getInstance().getUserId(),inputNotes,imgPath,timestr,null,location);
-                input_notes.setText("");
+                int userId = DbHelper.getInstance().getUserId();
+                DbHelper.getInstance().insertPassage( userId,inputNotes,imgPath,timestr,null,location);
                 Intent intent = new Intent(getActivity(), NavigationActivity.class);
                 startActivity(intent);
-//                ReleaseDynamicsActivity.this.finish();
+
             }
         });
         return layout;
     }
 
+    /** 点击+号时弹出选项*/
     private void changeIcon(View view) {
         if (popupWindow == null) {
             popupView = View.inflate(getActivity(), R.layout.bottompopup_camera_album, null);
@@ -278,17 +268,15 @@ public class ReleaseDynamicsActivity extends Fragment {
         popupWindow.showAtLocation(getActivity().findViewById(R.id.add_pictures), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         popupView.startAnimation(animation);
     }
-    /**
-     * 设置手机屏幕亮度变暗
-     */
+
+    /**设置手机屏幕亮度变暗*/
     private void lightoff() {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = 0.3f;
         getActivity().getWindow().setAttributes(lp);
     }
-    /**
-     * 设置手机屏幕亮度显示正常
-     */
+
+    /**设置手机屏幕亮度显示正常*/
     private void lighton() {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = 1f;
