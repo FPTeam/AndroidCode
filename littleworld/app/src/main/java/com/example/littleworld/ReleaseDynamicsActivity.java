@@ -193,7 +193,11 @@ public class ReleaseDynamicsActivity extends Fragment {
         noteSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String imgPath = SaveFile(fileDir);
+                String imgPath;
+                if(bitmap != null)
+                    imgPath = SaveFile(fileDir);
+                else
+                    imgPath = null;
 //                if (bitmap != null && !bitmap.isRecycled()) {
 //                    bitmap.recycle();
 //                }
