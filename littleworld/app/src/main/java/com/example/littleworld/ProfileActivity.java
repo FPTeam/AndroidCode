@@ -44,10 +44,15 @@ public class ProfileActivity extends AppCompatActivity {
         userId = intent.getIntExtra("user_id",-1);
         isOwner = intent.getIntExtra("is_owner",-1);
         String s = String.valueOf(userId);
-        if(isOwner==1)
-            ToastUtil.show(getApplicationContext(),"您正在访问自己的主页");
-        else
+
+        if(isOwner==0&&DbHelper.getInstance().getUserId()!=userId)
             ToastUtil.show(getApplicationContext(),"您正在访问userid="+s+"的主页");
+
+        else
+        {
+            ToastUtil.show(getApplicationContext(),"您正在访问自己的主页");
+            isOwner=1;
+        }
 
         PersonInfo myInfo = DbHelper.getInstance().getUserInfo(userId);//查用户信息
 

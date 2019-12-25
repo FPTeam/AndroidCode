@@ -10,9 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.littleworld.R;
 
 import java.io.IOException;
@@ -50,13 +47,7 @@ public class NoticeAdapter extends ArrayAdapter<Notice> {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag(); // 重新获取ViewHolder
         }
-        //Bitmap bit = BitmapFactory.decodeFile(notice.getImage());
-        //viewHolder.noticeImage.setImageBitmap(bit);
-//        Glide
-//                .with(this.getContext())
-//                .load(notice.getImage())//加载头像路径
-//                .apply(RequestOptions.bitmapTransform(new CircleCrop()))//圆形
-//                .into(ViewHolder.noticeImage);
+
         Bitmap bit = returnBitMap(notice.getImage());
         viewHolder.noticeImage.setImageBitmap(bit);
         viewHolder.noticeName.setText(notice.getName());

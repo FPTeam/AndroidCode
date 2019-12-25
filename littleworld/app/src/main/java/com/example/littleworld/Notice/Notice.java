@@ -5,6 +5,11 @@ public class Notice {
     private String meg;
     private String image;
 
+    public Notice() {
+        this.name = "";
+        this.meg = "";
+        this.image = "";
+    }
     public Notice(String name, String meg, String image) {
         this.name = name;
         this.meg = meg;

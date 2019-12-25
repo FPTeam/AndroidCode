@@ -1,23 +1,14 @@
 package com.example.littleworld;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.littleworld.Entity.passage;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import com.example.littleworld.Notice.Notice;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.littleworld.Notice.Notice;
 
 //后期对数据库的操作请在此类中添加函数
 public class DbHelper{
@@ -372,7 +363,50 @@ public class DbHelper{
         }
     }
 
-    
+    public int getNoticeAmount(int RecUserId){
+        int amount = 0;
+        Cursor cursor = db.rawQuery("select * from message where RecUserId=?",new String[]{Integer.toString(RecUserId)});
+        while(cursor.moveToNext()) {
+            amount++;
+        }
+        return amount;
+    }
+    /*******搜索message通知表   created by ttl *******/
+    public Notice getMessage(int RecUserId, int amount)
+    {
+        int i= 0;
+        int sendUserId;
+        String name;
+        String image;
+        String meg;
+//        Notice[] noticeInfo = new Notice[amount];
+        Notice noticeInfo = new Notice();
+        Cursor cursor = db.rawQuery("select * from message where RecUserId=?",new String[]{Integer.toString(RecUserId)});
+        cursor.moveToFirst();
+        //amount 表示消息数量
+        for(; i<amount; i++){
+            name = "1";
+            image = "1";
+            meg = "1";
+            sendUserId = cursor.getInt(0);
+            meg = cursor.getString(2);
+            Cursor cursor2 = db.rawQuery("select * from user where UserId=?",new String[]{Integer.toString(sendUserId)});
+            if(cursor2.getCount()!=0){
+                cursor2.moveToFirst();
+                name = cursor2.getString(1);
+                image = cursor2.getString(4);
+
+                noticeInfo.setName(name);
+
+                noticeInfo.setMeg(meg);
+                noticeInfo.setImage(image);
+            }
+        }
+
+        cursor.close();
+        return noticeInfo;
+    }
+
     /*******获取文章省份*******/
     //    传参说明：用户号userid
     public int[] getProvices(Integer userid){
