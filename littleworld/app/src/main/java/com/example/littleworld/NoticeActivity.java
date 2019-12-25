@@ -12,7 +12,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+这个页面是不是没用到?  新页面是不是以 NewMegActivity.java 为主的? 请知道情况的回复我!谢谢!!   唐天龙
+**/
 /* 通知的Activity */
 public class NoticeActivity extends Fragment {
 
