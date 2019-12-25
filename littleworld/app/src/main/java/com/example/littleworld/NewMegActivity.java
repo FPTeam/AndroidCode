@@ -42,27 +42,29 @@ public class NewMegActivity extends Fragment {
         return layout;
     }
 
+    String s = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576836279108&di=fb5764a8ca3c623d1bab186a52db4acb&imgtype=0&src=http%3A%2F%2Fpic3.zhimg.com%2F50%2Fv2-4b98cf7fcde6bdad4b6c189473afd7d7_hd.jpg";
+
     private void initNotices() {
         for (int i = 0; i < 2; i++) {
-            Notice apple = new Notice("Apple", R.drawable.dir1);
+            Notice apple = new Notice("Apple","Apple", s);
             noticeList.add(apple);
-            Notice banana = new Notice("Banana", R.drawable.dir1);
+            Notice banana = new Notice("Apple","Banana",s);
             noticeList.add(banana);
-            Notice orange = new Notice("Orange", R.drawable.dir1);
+            Notice orange = new Notice("Apple","Orange", s);
             noticeList.add(orange);
-            Notice watermelon = new Notice("Watermelon", R.drawable.dir1);
+            Notice watermelon = new Notice("Apple","Watermelon",s);
             noticeList.add(watermelon);
-            Notice pear = new Notice("Pear", R.drawable.dir1);
+            Notice pear = new Notice("Apple","Pear",s);
             noticeList.add(pear);
-            Notice grape = new Notice("Grape", R.drawable.dir1);
+            Notice grape = new Notice("Apple","Grape",s);
             noticeList.add(grape);
-            Notice pineapple = new Notice("Pineapple", R.drawable.dir1);
+            Notice pineapple = new Notice("Apple","Pineapple", s);
             noticeList.add(pineapple);
-            Notice strawberry = new Notice("Strawberry", R.drawable.dir1);
+            Notice strawberry = new Notice("Apple","Strawberry", s);
             noticeList.add(strawberry);
-            Notice cherry = new Notice("Cherry", R.drawable.dir1);
+            Notice cherry = new Notice("Apple","Cherry", s);
             noticeList.add(cherry);
-            Notice mango = new Notice("Mango", R.drawable.dir1);
+            Notice mango = new Notice("Apple","Mango", s);
             noticeList.add(mango);
         }
     }

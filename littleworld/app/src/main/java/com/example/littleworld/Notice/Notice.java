@@ -1,20 +1,37 @@
 package com.example.littleworld.Notice;
 
 public class Notice {
+    private String name;
     private String meg;
+    private String image;
 
-    private int image;
-
-    public Notice(String meg, int image) {
+    public Notice(String name, String meg, String image) {
+        this.name = name;
         this.meg = meg;
         this.image = image;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setMeg(String meg){
+        this.meg = meg;
+    }
+
+    public void setImage(String image){
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getMeg() {
         return meg;
     }
 
-    public int getImage() {
+    public String  getImage() {
         return image;
     }
 }
