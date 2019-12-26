@@ -78,6 +78,15 @@ public class DbHelper{
         return false;
     }
 
+    /*修改用户名*/
+    /* if  (DbHelper.getInstance().repUser(新用户名))
+             提示新用户名已被占用
+       else{
+            DbHelper.getInstance().insertUserInfo(id, 新用户名,null,null,null);
+            DbHelper.getInstance().UpdateLogin(id,新用户名,null);
+            }
+     */
+
     /*******注册新用户*******/
     public void insertUser(String name,String password)//注册新用户插login表
     {
@@ -106,17 +115,19 @@ public class DbHelper{
         return false;
     }
 
-    /*******修改密码*******/
-    //    传参说明：用户号userid，要修改的用户密码password
-    public void UpdateLogin(Integer userid,String password)
+    /*******修改用户名或密码*******/
+    //    传参说明：用户号userid，要修改的用户名name，要修改的用户密码password
+    public void UpdateLogin(Integer userid,String name,String password)
     {
         ContentValues cv = new ContentValues();
-        cv.put("Password", password);
-        String[] args={String.valueOf(userid)};
-        long p=db.update("login",cv,"userid=?",args);
+        if(name!=null)
+            cv.put("Name", name);
+        if(password!=null)
+            cv.put("Password", password);
+        long p=db.update("login",cv,"userid=?",new String[]{String.valueOf(userid)});
         if(p!=-1)
         {
-            Log.d("update user password!","haha");
+            Log.d("update login!","haha");
         }
     }
 
@@ -151,6 +162,7 @@ public class DbHelper{
     /*******添加和更改用户的性别、头像图片、个人介绍等信息*******/
     //  传参说明：用户号userid，用户信息UserInfo，性别：Sex，头像图片链接：head
     //  注册时用户号和用户名已经插入到user表，所以其余信息都是更新时补充添加进去的
+    // 修改用户名时 insertUserInfo(userid, UserName,null,null null)/
     public void insertUserInfo(Integer userid, String UserName, String UserInfo, String Sex, String head)//添加或更改用户信息
     {
         ContentValues cv = new ContentValues();
@@ -223,10 +235,10 @@ public class DbHelper{
     /*******获取全部动态信息，可根据特定用户查询*******/
     //    传参说明：偏移量offset，一次返回文章的数量row
     //    调用时最好设row为常量，offset每次都要加上row
-    //    例如：DbHelper.getInstance().allPassage(0,5,null);
-    //          DbHelper.getInstance().allPassage(5,5,null);
-    //          DbHelper.getInstance().allPassage(10,5,null);
-    //          DbHelper.getInstance().allPassage(15,5,null);
+    //    例如：DbHelper.getInstance().searchPassage(0,5,null);
+    //          DbHelper.getInstance().searchPassage(5,5,null);
+    //          DbHelper.getInstance().searchPassage(10,5,null);
+    //          DbHelper.getInstance().searchPassage(15,5,null);
     //    返回值：动态信息的List
     public List<passage> searchPassage(int offset, int row, String username){
         List<passage> passageinfo=new ArrayList<>();
@@ -388,38 +400,36 @@ public class DbHelper{
         return amount;
     }
     /*******搜索message通知表   created by ttl *******/
-    public Notice getMessage(int RecUserId, int amount)
+    public List<Notice> getMessage(int RecUserId)
     {
-        int i= 0;
+        List<Notice> noticeInfoList=new ArrayList<>();
         int sendUserId;
-        String name;
-        String image;
         String meg;
-//        Notice[] noticeInfo = new Notice[amount];
-        Notice noticeInfo = new Notice();
+
         Cursor cursor = db.rawQuery("select * from message where RecUserId=?",new String[]{Integer.toString(RecUserId)});
-        cursor.moveToFirst();
-        //amount 表示消息数量
-        for(; i<amount; i++){
-            name = "";
-            image = "";
-            meg = "";
+
+        while(cursor.moveToNext())
+        {
+            Notice noticeInfo= new Notice();
             sendUserId = cursor.getInt(0);
             meg = cursor.getString(2);
+
             Cursor cursor2 = db.rawQuery("select * from user where UserId=?",new String[]{Integer.toString(sendUserId)});
-            if(cursor2.getCount()!=0){
-                cursor2.moveToFirst();
-                name = cursor2.getString(1);
-                image = cursor2.getString(4);
-
-                noticeInfo.setName(name);
-                noticeInfo.setMeg(meg);
-                noticeInfo.setImage(image);
+            if(cursor2.getCount()!=0)//查找用户名和用户头像并添加
+            {
+                cursor2.moveToNext();
+                noticeInfo.setName(cursor2.getString(1));
+                noticeInfo.setImage(cursor2.getString(4));
             }
-        }
 
+            /*添加私信信息*/
+            noticeInfo.setMeg(meg);
+            noticeInfoList.add(noticeInfo);
+        }
         cursor.close();
-        return noticeInfo;
+
+        Log.d("私信列表", noticeInfoList.toString());
+        return noticeInfoList;
     }
 
     /*******获取文章省份*******/

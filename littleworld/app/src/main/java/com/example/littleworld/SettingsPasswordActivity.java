@@ -34,7 +34,7 @@ public class SettingsPasswordActivity extends AppCompatActivity{
                 String oldPassword = editTextOld.getText().toString();
                 String newPassword = editTextNew.getText().toString();
                 if(TestPassword(oldPassword,newPassword) == 1){
-                    DbHelper.getInstance().UpdateLogin(DbHelper.getInstance().getUserId(),newPassword);
+                    DbHelper.getInstance().UpdateLogin(DbHelper.getInstance().getUserId(),null,newPassword);
                     Toast.makeText(getApplicationContext(), "修改成功!", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         public void run() {

@@ -50,7 +50,9 @@ public class NewMegActivity extends Fragment {
         String image;
         int id = DbHelper.getInstance().getUserId();
         int amount = DbHelper.getInstance().getNoticeAmount(id);
-        if(amount > 0){
+        noticeList=DbHelper.getInstance().getMessage(id);
+
+       /*if(amount > 0){
             Notice notices = DbHelper.getInstance().getMessage(id,amount);
             name = notices.getName();
             meg = notices.getMeg();
@@ -78,7 +80,7 @@ public class NewMegActivity extends Fragment {
                 Notice mango = new Notice("Apple","Mango", s);
                 noticeList.add(mango);
             }
-        }
+       }*/
 
 
 
