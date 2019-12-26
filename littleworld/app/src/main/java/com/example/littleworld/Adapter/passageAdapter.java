@@ -2,8 +2,6 @@ package com.example.littleworld.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.littleworld.BottomMenu.NavigationActivity;
 import com.example.littleworld.DbHelper;
 import com.example.littleworld.Entity.passage;
-import com.example.littleworld.LoginActivity;
 import com.example.littleworld.ProfileActivity;
 import com.example.littleworld.R;
-
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;

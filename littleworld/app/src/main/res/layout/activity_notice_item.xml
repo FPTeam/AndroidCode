@@ -1,27 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:gravity="clip_vertical"
+    android:background="#FFFFFFFF"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/notice_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
 
-    <TextView
-        android:id="@+id/notice_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp" />
 
-    <TextView
-        android:id="@+id/notice_meg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp" />
+        <ImageButton
+            android:id="@+id/notice_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:background="#FFFFFFFF"
+            android:layout_weight="25" />
+
+
+        <TextView
+            android:id="@+id/notice_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/notice_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/notice_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_marginRight="000dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp" />
+    </FrameLayout>
 
 </LinearLayout>
-<!--通知页面的布局-->
-<!--created by ttl-->
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/notice_image"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="80dp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/notice_name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:layout_marginLeft="10dp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/notice_msg"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:layout_marginLeft="10dp" />-->
+
+<!--</LinearLayout>-->
+<!--&lt;!&ndash;通知页面的布局&ndash;&gt;-->
+<!--&lt;!&ndash;created by ttl&ndash;&gt;-->

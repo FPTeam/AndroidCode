@@ -390,46 +390,32 @@ public class DbHelper{
         }
     }
 
-    /**  这个函数是为了服务下面那个函数的,作用:换回用户总的通知条数  **/
-    public int getNoticeAmount(int RecUserId){
-        int amount = 0;
-        Cursor cursor = db.rawQuery("select * from message where RecUserId=?",new String[]{Integer.toString(RecUserId)});
-        while(cursor.moveToNext()) {
-            amount++;
-        }
-        return amount;
-    }
-    /*******搜索message通知表   created by ttl *******/
-    public List<Notice> getMessage(int RecUserId)
+
+    /*******获得通知表相关的数据 message 通知表   created by ttl *******/
+    public List<Notice> getMessage(int offset, int row, int recUserId)
     {
-        List<Notice> noticeInfoList=new ArrayList<>();
-        int sendUserId;
-        String meg;
-
-        Cursor cursor = db.rawQuery("select * from message where RecUserId=?",new String[]{Integer.toString(RecUserId)});
-
-        while(cursor.moveToNext())
+        List<Notice> noticeInfo = new ArrayList<>();
+        String RecUserId = Integer.toString(recUserId);
+        //Cursor cm= db.rawQuery("select * from message where RecUserId=?",new String[]{RecUserId});
+        Cursor cm= db.query("message", null, "RecUserId=?", new String[]{RecUserId}, null, null, "SendTime DESC");
+        while(cm.moveToNext())
         {
-            Notice noticeInfo= new Notice();
-            sendUserId = cursor.getInt(0);
-            meg = cursor.getString(2);
-
-            Cursor cursor2 = db.rawQuery("select * from user where UserId=?",new String[]{Integer.toString(sendUserId)});
-            if(cursor2.getCount()!=0)//查找用户名和用户头像并添加
+            Notice notice= new Notice();
+            String SendUserid = Integer.toString(cm.getInt(0));
+            Cursor cu= db.rawQuery("select * from user where UserId=?",new String[]{SendUserid});
+            if(cu.getCount()!=0)//查找用户名和用户头像并添加
             {
-                cursor2.moveToNext();
-                noticeInfo.setName(cursor2.getString(1));
-                noticeInfo.setImage(cursor2.getString(4));
+                cu.moveToNext();
+                notice.setName(cu.getString(1));
+                notice.setImage(cu.getString(4));
             }
-
-            /*添加私信信息*/
-            noticeInfo.setMeg(meg);
-            noticeInfoList.add(noticeInfo);
+            notice.setMsg(cm.getString(2));
+            notice.setSendUserId(cm.getInt(0));
+            notice.setTime(cm.getString(3));
+            noticeInfo.add(notice);
         }
-        cursor.close();
-
-        Log.d("私信列表", noticeInfoList.toString());
-        return noticeInfoList;
+        Log.d("私信列表", noticeInfo.toString());
+        return noticeInfo;
     }
 
     /*******获取文章省份*******/
