@@ -34,26 +34,48 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/nameView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="120dp"
+        android:padding="10dp"
+        android:gravity="left"
+        android:text="昵称:"
+        android:layout_marginLeft="20dp"
+        android:textAlignment="center"
+        android:textColor="#80000000"
+        android:textSize="20sp" />
     <EditText
         android:id="@+id/editInfoUserName"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="120dp"
         android:autoText="false"
         android:ems="10"
-        android:hint="禁止修改用户名哦!!!"
         android:inputType="textPersonName"
         android:textColor="#80000000"
         android:textSize="18sp" />
+    <TextView
+        android:id="@+id/pswView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:gravity="left"
+        android:text="介绍:"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="200dp"
+        android:textAlignment="center"
+        android:textColor="#80000000"
+        android:textSize="20sp" />
     <EditText
         android:id="@+id/editTextIntroduction"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="200dp"
         android:ems="10"
-        android:hint="新介绍"
         android:inputType="textPersonName"
         android:textColor="#80000000"
         android:textSize="18sp"
@@ -69,28 +91,20 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="550dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/app_icon" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginTop="550dp"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:srcCompat="@mipmap/app_icon" />-->
 
-    <TextView
-        android:id="@+id/editInfoSex"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="500dp"
-        android:padding="10dp"
-        android:text="性别"
-        android:textAlignment="center"
-        android:textColor="#80000000"
-        android:textSize="20sp" />
+
 
 </FrameLayout>
-<!--换头像-->
-<!--性别的显示界面-->
+
+<!--换头像 没有设置-->
+<!--改性别  没有设置  -->
 
 <!--created by ttl-->

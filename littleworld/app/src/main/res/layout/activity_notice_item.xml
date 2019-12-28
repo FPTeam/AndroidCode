@@ -36,6 +36,15 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/notice_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_marginRight="000dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/notice_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,42 +52,9 @@
             android:layout_marginTop="40dp"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/notice_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_marginRight="000dp"
-            android:layout_marginTop="40dp"
-            android:textSize="18sp" />
+
     </FrameLayout>
 
 </LinearLayout>
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/notice_image"-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="80dp" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/notice_name"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_vertical"-->
-<!--        android:layout_marginLeft="10dp" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/notice_msg"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_vertical"-->
-<!--        android:layout_marginLeft="10dp" />-->
-
-<!--</LinearLayout>-->
-<!--&lt;!&ndash;通知页面的布局&ndash;&gt;-->
-<!--&lt;!&ndash;created by ttl&ndash;&gt;-->
+<!--通知页面每个元素的布局-->

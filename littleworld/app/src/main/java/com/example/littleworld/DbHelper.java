@@ -8,7 +8,6 @@ import com.example.littleworld.Entity.passage;
 import com.example.littleworld.Notice.Notice;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.littleworld.Notice.Notice;
 
 //后期对数据库的操作请在此类中添加函数
 public class DbHelper{
@@ -44,11 +43,6 @@ public class DbHelper{
         return cursor;
     }
 
-    //获取用户表中指定userId的数据
-    public Cursor getUserBook(int userId){
-        Cursor cursor = db.query("user",null,"UserId=?",new String[]{Integer.toString(userId)},null,null,null);
-        return cursor;
-    }
 
     /*******登陆时验证用户名和密码*******/
     public int testUser(String username,String password)//验证用户名和密码
@@ -115,7 +109,7 @@ public class DbHelper{
         return false;
     }
 
-    /*******修改用户名或密码*******/
+    /*******修改登陆账号或密码*******/
     //    传参说明：用户号userid，要修改的用户名name，要修改的用户密码password
     public void UpdateLogin(Integer userid,String name,String password)
     {
@@ -180,6 +174,33 @@ public class DbHelper{
         {
             Log.d("insert user info!","haha");
         }
+    }
+
+    public PersonInfo getUserInfo(int id){//获取用户名、头像、性别、介绍等
+        //id = 190002;
+        PersonInfo info0 = new PersonInfo();
+        Cursor curcity = db.rawQuery("select * from user where UserId=?",new String[]{String.valueOf(id)});
+        while(curcity.moveToNext()) {
+            info0.name = curcity.getString(1);
+            info0.intro = curcity.getString(2);
+            info0.sex = curcity.getString(3);
+            info0.img = curcity.getString(4);
+
+            Log.d("用户名", info0.name);
+            if(info0.intro == null)
+                Log.d("自我介绍", "无");
+            else
+                Log.d("自我介绍", info0.intro);
+            if(info0.sex==null)
+                info0.sex = "保密";
+            Log.d("性别", info0.sex);
+            if(info0.img == null)
+                Log.d("头像链接", "无");
+            //else
+            //Log.d("头像链接", info0.img);
+        }
+        curcity.close();
+        return info0;
     }
 
     /*******获取个人动态信息，可根据特定用户查询*******/
@@ -477,46 +498,6 @@ public class DbHelper{
         return provinces;
     }
 
-    public PersonInfo getUserInfo(int id){//获取用户名、头像、性别、介绍等
-        //id = 190002;
-        PersonInfo info0 = new PersonInfo();
-        Cursor curcity = db.rawQuery("select * from user where UserId=?",new String[]{String.valueOf(id)});
-        while(curcity.moveToNext()) {
-            info0.name = curcity.getString(1);
-            info0.intro = curcity.getString(2);
-            info0.sex = curcity.getString(3);
-            info0.img = curcity.getString(4);
-
-            Log.d("用户名", info0.name);
-            if(info0.intro == null)
-                Log.d("自我介绍", "无");
-            else
-                Log.d("自我介绍", info0.intro);
-            if(info0.sex==null)
-                info0.sex = "保密";
-            Log.d("性别", info0.sex);
-            if(info0.img == null)
-                Log.d("头像链接", "无");
-            //else
-                //Log.d("头像链接", info0.img);
-        }
-        curcity.close();
-        return info0;
-        /*
-
-        String name = "";
-        //Cursor info = db.rawQuery("select * from user where UserId=?",new String[]{String.valueOf(id)});
-        Cursor info = db.rawQuery("select * from passage where UserId=?",new String[]{String.valueOf(id)});
-        if(info.getCount()!=0)
-        {
-
-            info.getString(1);
-           //Log.d("用户信息",name);
-            Log.d("总列数",String.valueOf(info.getColumnCount()));
-        }
-        info.close();
-        return name;*/
-    }
 
 
     public void closeDb()
@@ -524,19 +505,4 @@ public class DbHelper{
         db.close();
     }
 
-    /*
-    //    传参说明：用户号userid，原用户密码password
-    public boolean testPassword(Integer userid,String password)//验证密码
-    {
-        Cursor login3 = db.rawQuery("select userid from login where UserId=?and Password=?",new String[]{String.valueOf(userid),password});
-        if(login3.getCount()!=0)
-        {
-            login3.moveToNext();
-            return true;
-        }
-        login3.close();
-        return false;
-    }
-
-     */
 }
