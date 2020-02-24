@@ -59,7 +59,7 @@
             android:name="com.amap.api.v2.apikey"
             android:value="c81a9de35e36f1e46e5bd59dbb2ff67c" />
 
-        <activity android:name=".MaskActivity" /> <!-- 跟拍照相关的内容提供器 -->
+        <!-- 跟拍照相关的内容提供器 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.littleworld.BottomMenu.NavigationActivity.fileprovider"

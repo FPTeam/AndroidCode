@@ -34,15 +34,13 @@ public class NavigationActivity extends AppCompatActivity {
         mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.tongzhi));
         mytabs.addTab(mytabs.newTab().setIcon(R.mipmap.shezhi2));
         mytabs.setTabIconTint(getResources().getColorStateList(R.color.changeable_color));
-        mytabs.getTabAt(1).select();
+        mytabs.getTabAt(0).select();            //下标应该从1开始
 
         //       给ViewPager创建适配器，将Title和Fragment添加进ViewPager中
         mViewPager = findViewById(R.id.mypager);
-        //        关联mytabs和viewPager
-        //自定义的Adapter继承自FragmentPagerAdapter
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new NavigationPagerAdapter(fragmentManager,mytabs.getTabCount(),mViewPager,userId));
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mytabs));
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mytabs));    //联动viewpager和tab
 
         mytabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

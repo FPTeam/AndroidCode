@@ -34,9 +34,6 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
      * @return 特定的Fragment
      */
     public Fragment getItem(int position) {
-        //return NavigationFragment.newInstance(position,pvp);
-//        Fragment fragment = new FollowFragment();
- //       Fragment fragment = new NavigationFragment();
         switch (position)
         {
             case 0: //关注

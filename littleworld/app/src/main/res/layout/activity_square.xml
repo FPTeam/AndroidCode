@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,12 +8,10 @@
     android:orientation="vertical"
     tools:context=".SquareActivity">
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#33cccc">
-
         <SearchView
             android:id="@+id/searchView_s"
             android:layout_width="match_parent"
@@ -29,110 +27,136 @@
             android:submitBackground="@null" />
     </FrameLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/img_changer"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="35dip"
-        android:layout_gravity="bottom"
-        android:background="#FFFFFFFF"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:weightSum="10">
-
-        <TextView
-            android:id="@+id/tv_pager_title"
-            android:layout_width="0dp"
-            android:layout_height="35dip"
-            android:layout_weight="8"
-            android:gravity="center_vertical"
-            android:paddingLeft="8dip"
-            android:text="title" />
-        <!--用来动态添加轮播小点-->
-
-        <LinearLayout
-            android:id="@+id/lineLayout_dot"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="2"
-            android:gravity="center|right"
-            android:orientation="horizontal"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFFFF"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/places"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/places1" />
-
-        <ImageView
-            android:id="@+id/hotels"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/hotel2" />
-
-        <ImageView
-            android:id="@+id/more"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/more1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#FFFFFFFF"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        >
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="附近景点"
-            android:textAlignment="center" />
+            app:contentScrim="#33CCCC"
+            app:layout_scrollFlags="scroll"
+            >
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="173dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="附近酒店"
-            android:textAlignment="center" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/img_changer"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="109dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="更多"
-            android:layout_marginRight="20dp"
-            android:textAlignment="center" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="210dp"
+                android:background="#FFFFFFFF"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                >
 
-     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    
-</LinearLayout>
+                <TextView
+                    android:id="@+id/tv_pager_title"
+                    android:layout_width="0dp"
+                    android:layout_height="35dip"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dip"
+                    android:text="title" />
+                <!--用来动态添加轮播小点-->
+
+                <LinearLayout
+                    android:id="@+id/lineLayout_dot"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="2"
+                    android:gravity="center|right"
+                    android:orientation="horizontal"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="250dp"
+                android:background="#FFFFFFFF"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:id="@+id/places"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/places1" />
+
+                <ImageView
+                    android:id="@+id/hotels"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/hotel2" />
+
+                <ImageView
+                    android:id="@+id/more"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/more1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="300dp"
+                android:background="#FFFFFFFF"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="147dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="附近景点"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="173dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="附近酒店"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="109dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="更多"
+                    android:layout_marginRight="20dp"
+                    android:textAlignment="center" />
+            </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+]
+     <androidx.core.widget.NestedScrollView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_marginTop="10dp"
+         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/recycler_view"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             >
+         </androidx.recyclerview.widget.RecyclerView>
+     </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

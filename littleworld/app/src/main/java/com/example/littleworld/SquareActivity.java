@@ -25,6 +25,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.littleworld.Adapter.SquarePagerAdapter;
 import com.example.littleworld.Adapter.passageAdapter;
 import com.example.littleworld.Entity.passage;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,38 +37,44 @@ public class SquareActivity extends Fragment {
     View layout;
     int userId;
 
-    private ImageView places;//景点按钮
-    private ImageView hotels;//酒店按钮
-    private ImageView more;//其他按钮
+    private ImageView places;   //景点按钮
+    private ImageView hotels;   //酒店按钮
+    private ImageView more;     //其他按钮
 
-    private List<ImageView> mImageList;//轮播的图片集合
-    private String[] mImageTitles;//标题集合
-    private int previousPosition = 0;//前一个被选中的position
-    private List<View> mDots;//小点
-    private List<passage> passageList = new ArrayList<>();
+    private List<ImageView> mImageList; //轮播的图片集合
+    private String[] mImageTitles;      //标题集合
+    private int previousPosition = 0;   //前一个被选中的position
+    private RecyclerView recyclerView;
 
-    private boolean isStop = false;//线程是否停止
-    private static int PAGER_TIOME = 5000;//间隔时间
+    private List<passage> passageList = new ArrayList<>();      //文章列表
 
-    // 在values文件假下创建了pager_image_ids.xml文件，并定义了4张轮播图对应的id，用于点击事件
+    private boolean isStop = false;         //线程是否停止
+    private static int PAGER_TIOME = 5000;  //间隔时间
+
+    // 在values文件夹下创建了pager_image_ids.xml文件，并定义了4张轮播图对应的id，用于点击事件
     private int[] imgae_ids = new int[]{R.id.pager_image1, R.id.pager_image2, R.id.pager_image3};
 
     public SquareActivity(int userId){
         super();
         this.userId = userId;
     }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         layout = inflater.inflate(R.layout.activity_square, container, false);
+        recyclerView = layout.findViewById(R.id.recycler_view);
+
+        CollapsingToolbarLayout collapsingToolbarLayout = layout.findViewById(R.id.collapsing_bar);
+        collapsingToolbarLayout.setTitle("广场");
+
         init();
-        
         
         /*
         显示全部动态
         * */
-        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
+//        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         passageList = DbHelper.getInstance().searchPassage(0, 15, null);
@@ -75,25 +82,21 @@ public class SquareActivity extends Fragment {
         passageAdapter adapter = new passageAdapter(getActivity(), passageList);
         recyclerView.setAdapter(adapter);
 
-       
         return layout;
     }
 
-    /**
-     * 第一步、初始化控件
-     */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    //初始化控件
     public void init() {
-        mViewPager = (ViewPager) layout.findViewById(R.id.img_changer);
-        mTvPagerTitle = (TextView) layout.findViewById(R.id.tv_pager_title);
+        mViewPager = layout.findViewById(R.id.img_changer);
+        mTvPagerTitle = layout.findViewById(R.id.tv_pager_title);
 
         initData();//初始化数据
         initView();//初始化View，设置适配器
         autoPlayView();//开启线程，自动播放
 
-        places = (ImageView) layout.findViewById(R.id.places);
-        hotels = (ImageView) layout.findViewById(R.id.hotels);
-        more = (ImageView) layout.findViewById(R.id.more);
+        places = layout.findViewById(R.id.places);
+        hotels = layout.findViewById(R.id.hotels);
+        more =  layout.findViewById(R.id.more);
 
         places.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,10 +123,7 @@ public class SquareActivity extends Fragment {
         });
     }
 
-    /**
-     * 第二步、初始化数据（图片、标题、点击事件）
-     */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    //初始化数据
     public void initData() {
         //初始化标题列表和图片
         mImageTitles = new String[]{"编辑推荐", "热门景点", "日常活动"};
@@ -134,15 +134,11 @@ public class SquareActivity extends Fragment {
         ImageView iv;
         for (int i = 0; i < 3; i++) {
             iv = new ImageView(getActivity());
-            iv.setBackgroundResource(imageRess[i]);//设置图片
-            iv.setId(imgae_ids[i]);//顺便给图片设置id
+            iv.setBackgroundResource(imageRess[i]);     //设置图片
+            iv.setId(imgae_ids[i]);                     //设置id
             iv.setOnClickListener(new pagerImageOnClick());//设置图片点击事件
             mImageList.add(iv);
         }
-
-        //添加轮播点
-//        LinearLayout linearLayoutDots = (LinearLayout) getActivity().findViewById(R.id.lineLayout_dot);
-//        mDots = addDots(linearLayoutDots, fromResToDrawable(getActivity(), R.drawable.change_points), mImageList.size());//其中fromResToDrawable()方法是我自定义的，目的是将资源文件转成Drawable
     }
 
     //图片点击事件
@@ -164,11 +160,10 @@ public class SquareActivity extends Fragment {
         }
     }
 
-    /**
-     * 第三步、给PagerViw设置适配器，并实现自动轮播功能
-     */
+
+    //自动轮播
     public void initView() {
-        SquarePagerAdapter viewPagerAdapter = new SquarePagerAdapter(mImageList, mViewPager);
+        SquarePagerAdapter viewPagerAdapter = new SquarePagerAdapter(mImageList, mViewPager);   //自定义适配器
         mViewPager.setAdapter(viewPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -182,16 +177,7 @@ public class SquareActivity extends Fragment {
                 int newPosition = position % mImageList.size();
                 // 把当前选中的点给切换了, 还有描述信息也切换
                 mTvPagerTitle.setText(mImageTitles[newPosition]);//图片下面设置显示文本
-                /*
-                //设置轮播点
-                LinearLayout.LayoutParams newDotParams = (LinearLayout.LayoutParams) mDots.get(newPosition).getLayoutParams();
-                newDotParams.width = 24;
-                newDotParams.height = 24;
 
-                LinearLayout.LayoutParams oldDotParams = (LinearLayout.LayoutParams) mDots.get(previousPosition).getLayoutParams();
-                oldDotParams.width = 16;
-                oldDotParams.height = 16;
-                */
                 // 把当前的索引赋值给前一个索引变量, 方便下一次再切换.
                 previousPosition = newPosition;
 
@@ -254,46 +240,4 @@ public class SquareActivity extends Fragment {
         return context.getResources().getDrawable(resId);
     }
 
-
-    /**
-     * 动态添加一个点
-     *
-     * @param linearLayout 添加到LinearLayout布局
-     * @param backgount    设置
-     * @return
-     *
-     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-     public int addDot(final LinearLayout linearLayout, Drawable backgount) {
-     final View dot = new View(getActivity());
-     LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-     ViewGroup.LayoutParams.WRAP_CONTENT);
-     dotParams.width = 16;
-     dotParams.height = 16;
-     dotParams.setMargins(4, 0, 4, 0);
-     dot.setLayoutParams(dotParams);
-     dot.setBackground(backgount);
-     dot.setId(View.generateViewId());
-     linearLayout.addView(dot);
-     return dot.getId();
-     }
-
-     /**
-      * 添加多个轮播小点到横向线性布局
-      *
-      * @param linearLayout
-     * @param backgount
-     * @param number
-     * @return
-     *
-     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-     public List<View> addDots(final LinearLayout linearLayout, Drawable backgount, int number) {
-     List<View> dots = new ArrayList<>();
-     for (int i = 0; i < number; i++) {
-     int dotId = addDot(linearLayout, backgount);
-     dots.add(getActivity().findViewById(dotId));
-     }
-     return dots;
-     }*/
 }

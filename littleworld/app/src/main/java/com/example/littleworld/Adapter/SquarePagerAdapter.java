@@ -18,7 +18,6 @@ public class SquarePagerAdapter extends PagerAdapter {
      * @param images
      * @param viewPager
      */
-
     public SquarePagerAdapter(List<ImageView> images, ViewPager viewPager) {
         this.images = images;
         this.viewPager = viewPager;
@@ -49,7 +48,6 @@ public class SquarePagerAdapter extends PagerAdapter {
         // 把position对应位置的ImageView添加到ViewPager中
         ImageView iv = images.get(position % images.size());
         viewPager.addView(iv);
-        // 把当前添加ImageView返回回去.
         return iv;
     }
 
@@ -61,6 +59,5 @@ public class SquarePagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         // 把ImageView从ViewPager中移除掉
         viewPager.removeView(images.get(position % images.size()));
-
     }
 }

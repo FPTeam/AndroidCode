@@ -21,16 +21,17 @@ public class LogoActivity extends Activity {
         super.onCreate(savedInstanceState);
         // 去除标题
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.logo);
+        setContentView(R.layout.logo_new);
 
-        progressBar = (ProgressBar) findViewById(R.id.pgBar);
-        backButton = (Button) findViewById(R.id.btn_back);
-        progressBar.setMax(3000);
+       // progressBar = (ProgressBar) findViewById(R.id.pgBar);
+        // backButton = (Button) findViewById(R.id.btn_back);
+        //progressBar.setMax(3000);
 
         Intent intentIn = getIntent();
         String username = intentIn.getStringExtra("USERNAME");
         String password = intentIn.getStringExtra("PASSWORD");
         int i=DbHelper.getInstance().testUser(username,password);
+
         if(i==-1)
         {
             Toast toast = Toast.makeText(getApplicationContext(), "用户名/密码错误！", Toast.LENGTH_SHORT);
@@ -53,13 +54,13 @@ public class LogoActivity extends Activity {
             startActivity(intent);
         }
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-
-            }
-        });
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//
+//            }
+//        });
 
     }
 
